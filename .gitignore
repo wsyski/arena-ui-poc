@@ -1,0 +1,32 @@
+# IntelliJ project files
+.idea
+*.iml
+out
+gen
+
+# Sass
+.sass-cache/
+*.css.map
+
+# node
+node_modules/
+**/npm-debug.log
+
+coverage/
+**/.DS_Store
+velocity.log
+
+target/
+src/main/webapp/dist
+src/main/angular/**/*.js
+.gitignore
+.idea/atlassian-ide-plugin.xml
+.idea/dbnavigator.xml
+.idea/encodings.xml
+.idea/misc.xml
+.idea/modules.xml
+.idea/php.xml
+.idea/poc-0.iml
+.idea/sbt.xml
+.idea/workspace.xml
+package-lock.json
