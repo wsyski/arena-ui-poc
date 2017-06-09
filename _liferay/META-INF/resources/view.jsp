@@ -5,4 +5,11 @@
     Liferay.SPA.excludedPaths.push("/");
 </aui:script>
 
-<jsp:include page="index.html" />
+<app-todo id="<portlet:namespace/>">Loading...</app-todo>
+
+<script type="text/javascript">
+  document.addEventListener('DOMContentLoaded', function () {
+    console.log("DOMContentLoaded");
+    Main.RunApplication("<portlet:namespace/>");
+  }, false);
+</script>

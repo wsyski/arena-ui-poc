@@ -1,6 +1,9 @@
-///<reference path="../../typings/index.d.ts"/>
-
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
-import {AppModule} from "./app.module";
+import {createAppModule} from "./app.module";
 
-platformBrowserDynamic().bootstrapModule(AppModule);
+export function RunApplication(portletNamespace: string) {
+    platformBrowserDynamic()
+        .bootstrapModule(createAppModule(portletNamespace))
+        .then(success => console.log(`Bootstrap success`))
+        .catch(err => console.error(err));
+}

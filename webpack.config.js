@@ -7,13 +7,15 @@ module.exports = {
   bail: true,
   entry: {
     // NOTE: entry settings will be overridden when invoked from gulp
-    'main'  : ['./src/app/main.ts'],
+    'main'  : ['./src/app/main.ts']
   },
   output: {
     filename: '[name].js',
     // NOTE: path will be overridden when invoked from gulp
     path : path.resolve('./build'),
     devtoolModuleFilenameTemplate: '[resource-path]',
+    libraryTarget: 'var',
+    library: 'Main'
   },
   plugins: [
     new webpack.DllReferencePlugin({
