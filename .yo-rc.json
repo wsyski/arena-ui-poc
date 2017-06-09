@@ -1,0 +1,13 @@
+{
+  "generator-jetray": {
+    "portletName": "com.axiell.arena.poc-0",
+    "portletTitle": "Poc 0",
+    "portletCategory": "poc",
+    "framework": "Angular",
+    "buildsys": "npm",
+    "portletInstanceable": "false",
+    "appFile": "index.html",
+    "portletPath": "com.axiell.arena.poc-0",
+    "portletNameCleaned": "com_axiell_arena_poc-0"
+  }
+}
