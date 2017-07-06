@@ -53,7 +53,7 @@ gulp.task('globals', function () {
  * Copy Angular runtime and portlet loader.
  */
 gulp.task("install-ng-runtime",function() {
-   return gulp.src(['ng_runtime/*.js'])
+   return gulp.src(['ng-runtime/*.js'])
       .pipe(gulp.dest(config.build_dir));
 });
 
@@ -105,7 +105,7 @@ var liferay_config = {
 	dist              : config.dist_dir,
 	auto_register_css : false,
 	auto_register_js  : true,
-  jsnames           : ['/portlet_loader.js'],
+  jsnames           : ['*/ax-util.js'],
 	gogo_port         : 11311
 };
 

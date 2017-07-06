@@ -6,6 +6,7 @@
     <title>Poc 0</title>
     <link rel="stylesheet" href="aui.css">
     <base href="/">
+    <script src="build/ax-util.js"></script>
 </head>
 <body>
 
@@ -17,6 +18,12 @@
         </div>
     </div>
 </div>
+<script type="text/javascript">
+  AxUtil.scriptLoader.loadAll(["build/shim.js", "build/zone.js", "build/ng-runtime.dll.js", "build/main.js"],function () {
+    Main.RunApplication("portletId0");
+  });
+</script>
+
 <div class="portlet-content">
     <h2 class="portlet-title-text">Poc portletId1</h2>
     <div class=" portlet-content-container">
@@ -27,21 +34,9 @@
 </div>
 
 <script type="text/javascript">
-  if (window.__ng_runtime_loaded__) {
-    console.log("Bypassing injection of Angular framework runtime in portlet id=com.axiell.arena.poc-0");
-  } else {
-    window.__ng_runtime_loaded__ = true;
-    console.log("Injecting Angular framework runtime in portlet id=com.axiell.arena.poc-0");
-    document.write("<script defer id='ngshim' src='build/shim.js'><\/script>");
-    document.write("<script defer id='ngzone' src='build/zone.js'><\/script>");
-    document.write("<script defer id='ngruntimeloader' src='build/ng_runtime.dll.js'><\/script>");
-  }
-  document.write("<script defer src='build/main.js'><\/script>");
-  document.addEventListener('DOMContentLoaded', function () {
-    console.log("DOMContentLoaded");
-    Main.RunApplication("portletId0");
+  AxUtil.scriptLoader.loadAll(["build/shim.js", "build/zone.js", "build/ng-runtime.dll.js", "build/main.js"],function () {
     Main.RunApplication("portletId1");
-  }, false);
+  });
 </script>
 
 </body>
