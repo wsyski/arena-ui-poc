@@ -12,6 +12,7 @@
     "deploy": "gulp deploy",
     "build": "gulp build",
     "start": "http-server -d",
+    "watch": "gulp watch",
     "postinstall": "typings install"
   },
   "dependencies": {

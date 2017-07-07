@@ -44,7 +44,7 @@ gulp.task("uglify", function () {
 *  Install global scripts needed by Angular
 */
 gulp.task('globals', function () {
-    return gulp.src(['globals/*.js'])
+    return gulp.src(['globals/ax-util.js','node_modules/core-js/client/shim.js','node_modules/zone.js/dist/zone.js'])
       .pipe(gulp.dest(config.build_dir))
 });
 
