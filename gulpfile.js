@@ -1,5 +1,4 @@
-const buildsys = 'npm';
-var config = require('./gulp-config')[buildsys];
+var config = require('./gulp-config');
 
 var gulp = require('gulp'),
     webpack = require('webpack'),

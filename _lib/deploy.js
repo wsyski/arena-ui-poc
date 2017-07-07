@@ -7,9 +7,9 @@ module.exports = function (gulp, liferay_config) {
 	  var through = require('through2').obj;
 	  var GogoDeployer = require('./gogo_deploy').GogoDeployer;
 
-	  var yo_options = require('../.yo-rc.json');
-	  var osgi_name = yo_options['generator-jetray'].portletName;
-	  var jar_name = yo_options['generator-jetray'].portletName + '.jar';
+	  var bundle_options = require('../bundle.json');
+	  var osgi_name = bundle_options['options'].portletName;
+	  var jar_name = bundle_options['options'].jarName + '.jar';
 	  
 	  return gulp.src(path.join(liferay_config.dist,jar_name))
 	

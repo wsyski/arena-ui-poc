@@ -13,9 +13,9 @@ module.exports = function (gulp, liferay_config) {
 
 	const JAR_PREFIX = "META-INF/resources/";
 	
-	var yo_options = require('../.yo-rc.json'); 
-	yo_options['generator-jetray'].now = '' + Date.now();
-	var jar_name = yo_options['generator-jetray'].portletName + '.jar';
+	var bundle_options = require('../bundle.json');
+	bundle_options['options'].now = '' + Date.now();
+	var jar_name = bundle_options['options'].jarName + '.jar';
 	var jsnames = [], cssnames = [];
 	var saved_files = [];
 	var propertiesXml;
@@ -96,7 +96,7 @@ module.exports = function (gulp, liferay_config) {
 	return gulp.src(liferay_config.inputs)
 		.pipe(rename(function (path) {path.dirname = JAR_PREFIX + path.dirname;}))
 		.pipe(addsrc(['_liferay/*INF/**/*','_liferay/*content/**/*']))
-		.pipe(replace({ patterns: [ {json: yo_options['generator-jetray'] }]}))
+		.pipe(replace({ patterns: [ {json: bundle_options['options'] }]}))
 		.pipe(through(function(file, enc, cb) {
 				  var f = path.parse(file.path);
 				  var basename = f.name + f.ext;
