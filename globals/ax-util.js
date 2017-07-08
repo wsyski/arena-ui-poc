@@ -89,7 +89,7 @@
     };
   }
 
-  exports.scriptLoader = new ScriptLoader();
+  exports.scriptLoader = exports.scriptLoader || new ScriptLoader();
 
 }(window.AxUtil = window.AxUtil || {}));
 
