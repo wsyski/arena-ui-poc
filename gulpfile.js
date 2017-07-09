@@ -26,8 +26,8 @@ gulp.task('clean', function () {
 /*
  * Copy main html into build directory.
  */
-gulp.task("dev-resources", function () {
-    return gulp.src(['dev-resources/*'])
+gulp.task("resources", function () {
+    return gulp.src([])
         .pipe(gulp.dest(config.build_dir));
 });
 
@@ -44,7 +44,7 @@ gulp.task("uglify", function () {
 *  Install global scripts needed by Angular
 */
 gulp.task('globals', function () {
-    return gulp.src(['globals/ax-util.js','node_modules/core-js/client/shim.js','node_modules/zone.js/dist/zone.js'])
+    return gulp.src(['globals/ax-util.js','globals/zone.js','node_modules/core-js/client/shim.js'])
       .pipe(gulp.dest(config.build_dir))
 });
 
@@ -82,7 +82,7 @@ gulp.task('app_aot', function () {
   Development build
 */ 
 gulp.task("build", function () {
-    sequence('clean',['dev-resources','install-ng-runtime','globals','app']) (function (err) {
+    sequence('clean',['resources','install-ng-runtime','globals','app']) (function (err) {
       if (err) console.log(err);
     });
 });
@@ -91,7 +91,7 @@ gulp.task("build", function () {
   Production build
 */
 gulp.task("prod", function () {
-    sequence('clean',['install-ng-runtime','globals','app_aot'],'uglify') (function (err) {
+    sequence('clean',['resources','install-ng-runtime','globals','app_aot'],'uglify') (function (err) {
       if (err) console.log(err);
     });
 });

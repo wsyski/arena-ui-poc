@@ -11,7 +11,7 @@
     "compile": "gulp compile",
     "deploy": "gulp deploy",
     "build": "gulp build",
-    "start": "http-server build -d -c-1 -o",
+    "start": "http-server public -d -c-1 -o",
     "watch": "gulp watch",
     "postinstall": "typings install"
   },
