@@ -1,10 +1,10 @@
 {
-  "name": "com.axiell.arena.poc-0",
+  "name": "arena-ui-poc",
   "version": "1.0.0",
   "private": true,
-  "description": "Javascript Angular Portlet for Liferay 7/DXP",
+  "description": "Arena UI POC",
   "author": {
-    "name": "JetRay Tools"
+    "name": "Wojciech Syski"
   },
   "scripts": {
     "clean": "gulp clean",
@@ -47,7 +47,7 @@
     "raw-loader": "^0.5.1",
     "through2": "^2.0.1",
     "ts-loader": "^2.2.2",
-    "typescript": "^2.3.4",
+    "typescript": "^2.4.1",
     "typings": "^2.1.1",
     "vinyl-named": "^1.1.0",
     "webpack": "^3.1.0",
