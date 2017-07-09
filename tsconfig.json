@@ -12,7 +12,6 @@
     "suppressImplicitAnyIndexErrors": true
   },
   "files": [
-    "src/app/app.module.ts",
-    "src/app/main.ts"
+    "src/main.ts"
   ]
 }

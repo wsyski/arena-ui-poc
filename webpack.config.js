@@ -1,13 +1,13 @@
 var webpack = require('webpack');
 var path = require('path');
 
-const appRoot = path.resolve('./src/app');
+const appRoot = path.resolve('./src');
 
 module.exports = {
   bail: true,
   entry: {
     // NOTE: entry settings will be overridden when invoked from gulp
-    'main'  : ['./src/app/main.ts']
+    'main'  : ['./src/main.ts']
   },
   output: {
     filename: '[name].js',

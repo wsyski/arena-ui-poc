@@ -11,7 +11,7 @@
 <body>
 
 <div class="portlet-content">
-    <h2 class="portlet-title-text">Poc portletId0</h2>
+    <h2 class="portlet-title-text">Todo portletId0</h2>
     <div class=" portlet-content-container">
         <div class="portlet-body">
             <app-todo id="portletId0">Loading...</app-todo>
@@ -20,12 +20,12 @@
 </div>
 <script type="text/javascript">
   AxUtil.scriptLoader.loadAll(["build/shim.js", "build/zone.js", "build/ng-runtime-dll.js", "build/main.js"],function () {
-    Main.RunApplication("portletId0");
+    Main.RunAppTodo("portletId0");
   });
 </script>
 
 <div class="portlet-content">
-    <h2 class="portlet-title-text">Poc portletId1</h2>
+    <h2 class="portlet-title-text">Todo portletId1</h2>
     <div class=" portlet-content-container">
         <div class="portlet-body">
             <app-todo id="portletId1">Loading...</app-todo>
@@ -35,7 +35,37 @@
 
 <script type="text/javascript">
   AxUtil.scriptLoader.loadAll(["build/shim.js", "build/zone.js", "build/ng-runtime-dll.js", "build/main.js"],function () {
-    Main.RunApplication("portletId1");
+    Main.RunAppTodo("portletId1");
+  });
+</script>
+
+<div class="portlet-content">
+    <h2 class="portlet-title-text">Heroes portletId2</h2>
+    <div class=" portlet-content-container">
+        <div class="portlet-body">
+            <app-heroes id="portletId2">Loading...</app-heroes>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+  AxUtil.scriptLoader.loadAll(["build/shim.js", "build/zone.js", "build/ng-runtime-dll.js", "build/main.js"],function () {
+    Main.RunAppHeroes("portletId2");
+  });
+</script>
+
+<div class="portlet-content">
+    <h2 class="portlet-title-text">Heroes portletId3</h2>
+    <div class=" portlet-content-container">
+        <div class="portlet-body">
+            <app-heroes id="portletId3">Loading...</app-heroes>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+  AxUtil.scriptLoader.loadAll(["build/shim.js", "build/zone.js", "build/ng-runtime-dll.js", "build/main.js"],function () {
+    Main.RunAppHeroes("portletId3");
   });
 </script>
 
