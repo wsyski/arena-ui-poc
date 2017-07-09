@@ -1,11 +1,13 @@
 {
   "options": {
-    "jarName": "poc",
-    "portletName": "com.axiell.arena.poc-0",
-    "portletTitle": "Poc 0",
-    "portletCategory": "poc",
-    "portletInstanceable": "true",
-    "portletPath": "com.axiell.arena.poc-0",
-    "portletNameCleaned": "com_axiell_arena_poc-0"
+    "jarName": "arena-ui-poc",
+    "bundleName": "Arena UI POC",
+    "bundleSymbolicName": "com.axiell.arena-ui-poc",
+    "bundleDescription": "Arena UI Proof of Concept",
+    "bundlePath": "arena-ui-poc",
+    "portletName": "com_axiell_arena_ui_poc_todo",
+    "portletTitle": "Todo",
+    "portletCategory": "category.arena_ui_poc",
+    "portletInstanceable": "true"
   }
 }
