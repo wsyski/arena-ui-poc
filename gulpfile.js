@@ -1,6 +1,8 @@
 var config = require('./gulp-config');
 
 var gulp = require('gulp'),
+    replace = require('gulp-replace');
+    gulpif  = require( 'gulp-if' ),
     webpack = require('webpack'),
     gulp_webpack = require('webpack-stream'),
     clean = require('gulp-clean'),
@@ -44,7 +46,8 @@ gulp.task("uglify", function () {
 *  Install global scripts needed by Angular
 */
 gulp.task('globals', function () {
-    return gulp.src(['globals/ax-util.js','globals/zone.js','node_modules/core-js/client/shim.js'])
+    return gulp.src(['globals/ax-util.js','node_modules/zone.js/dist/zone.js','node_modules/core-js/client/shim.js'])
+      .pipe( gulpif( /zone\.js$/, replace( /&& define\.amd/, '&& define.amdxxx' ) ) )
       .pipe(gulp.dest(config.build_dir))
 });
 
