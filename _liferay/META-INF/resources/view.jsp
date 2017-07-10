@@ -4,6 +4,6 @@
 
 <script type="text/javascript">
   AxUtil.scriptLoader.loadAll(["/o/@@bundlePath/shim.js", "/o/@@bundlePath/zone.js", "/o/@@bundlePath/ng-runtime-dll.js", "/o/@@bundlePath/main.js"],function () {
-    Main.RunApp_<%= portletDisplay.getId() %>("<portlet:namespace/>");
+    Main.RunApp_<%= portletDisplay.getPortletName() %>("<portlet:namespace/>");
   });
 </script>

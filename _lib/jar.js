@@ -25,7 +25,7 @@ module.exports = function (gulp, liferay_config) {
 	};
 	
 	var isPropertiesXml = function(file) {
-		if (path.basename(file.path) == 'service_defn.xml') return true;
+		if (path.basename(file.path).match(/component-.+\.xml/)) return true;
 		return false;
 	};
 	
@@ -102,7 +102,10 @@ module.exports = function (gulp, liferay_config) {
 				  var basename = f.name + f.ext;
 				  var gulppath = clean(path.relative(file.base, file.path));
 				  gulppath = gulppath.substring(JAR_PREFIX.length);
-				  if (basename != 'service_defn.xml') {
+				  if (basename.match(/component-.+\.xml/)) {
+            propertiesXml = file;
+          }
+				  else {
 					  if (f.ext == '.js') {
 						  jsnames.push('/' + gulppath);
 					  }
@@ -114,8 +117,6 @@ module.exports = function (gulp, liferay_config) {
 					  } else {
 						  saved_files.push(file);
 					  }
-				  } else {
-					  propertiesXml = file;
 				  }
 				  cb();
 			  },
