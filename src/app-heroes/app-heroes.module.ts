@@ -15,6 +15,7 @@ import { HeroSearchComponent } from './hero-search.component';
 import {HeroesComponent} from "./heroes.component";
 import {HeroDetailComponent} from "./hero-detail.component";
 import {DashboardComponent} from "./dashboard.component";
+import {RouterModule} from "@angular/router";
 
 export function createAppHeroesModule( portletNamespace: string ) {
     @NgModule({
