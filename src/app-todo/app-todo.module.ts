@@ -10,7 +10,7 @@ import {StaffListComponent} from "./staff/components/staff-list.component";
 import {FormsModule} from "@angular/forms";
 import {HttpModule} from "@angular/http";
 import {UIRouterModule} from "@uirouter/angular";
-import {uiRouterConfigFn} from "./app-todo.routerconfig";
+import {uiRouterConfigFn} from "./app-todo.routing";
 import {AppConfig} from "../app.config";
 
 let tasksState = { name: 'tasks', url: '/tasks',  component: TaskListComponent }; 
@@ -40,12 +40,12 @@ export function createAppTodoModule(portletNamespace: string) {
     class AppTodoModule {
         constructor(
             private resolver: ComponentFactoryResolver,
-            private AppTodoConfig: AppConfig
+            private appConfig: AppConfig
         ) { }
 
         ngDoBootstrap(appRef: ApplicationRef) {
             const factory = this.resolver.resolveComponentFactory(AppTodoComponent);
-            (<any>factory).factory.selector = "app-com-axiell-arena-ui-poc-todo#" + this.AppTodoConfig.portletNamespace;
+            (<any>factory).factory.selector = "app-com-axiell-arena-ui-poc-todo#" + this.appConfig.portletNamespace;
             appRef.bootstrap(factory);
         }
     }

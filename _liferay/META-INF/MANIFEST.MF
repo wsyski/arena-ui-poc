@@ -18,7 +18,7 @@ Require-Capability: osgi.extender;filter:="(&(osgi.extender=jsp.taglib
  ortlet))",osgi.extender;filter:="(&(osgi.extender=jsp.taglib)(uri=htt
  p://liferay.com/tld/ui))",osgi.ee;filter:="(&(osgi.ee=JavaSE)(version
  =1.8))"
-Service-Component: OSGI-INF/component-heroes.xml,OSGI-INF/component-to
- do.xml
+Service-Component: OSGI-INF/component-github.xml,OSGI-INF/component-he
+ roes.xml,OSGI-INF/component-todo.xml
 Tool: Bnd-3.1.0.201512181341
 Web-ContextPath: /@@bundlePath

@@ -2,20 +2,18 @@ import { NgModule, ApplicationRef, ComponentFactoryResolver } from '@angular/cor
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import { APP_BASE_HREF } from '@angular/common';
 
 import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDataService } from './in-memory-data.service';
 
 import {AppHeroesComponent} from './app-heroes.component';
 import { AppConfig } from '../app.config';
-import { AppHeroesRoutingModule } from './app-heroes-routing.module';
+import { AppHeroesRoutingModule } from './app-heroes.routing';
 import { HeroService } from './hero.service';
 import { HeroSearchComponent } from './hero-search.component';
 import {HeroesComponent} from "./heroes.component";
 import {HeroDetailComponent} from "./hero-detail.component";
 import {DashboardComponent} from "./dashboard.component";
-import {RouterModule} from "@angular/router";
 
 export function createAppHeroesModule( portletNamespace: string ) {
     @NgModule({
