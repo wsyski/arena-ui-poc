@@ -1,44 +1,42 @@
 module.exports = function (gulp, liferay_config) {
   return function () {
-
-    //console.log('Construction of Liferay JAR begins ...');
-
+    console.log('Construction of Liferay JAR begins ...');
     const zip = require('gulp-zip');
     const rename = require('gulp-rename');
     const replace = require('gulp-replace-task');
     const addsrc = require('gulp-add-src');
     const path = require('path');
     const xml2js = require('xml2js');
-    var through = require('through2').obj;
+    let through = require('through2').obj;
 
     const JAR_PREFIX = "META-INF/resources/";
 
-    var bundle_options = require('../bundle.json');
+    let bundle_options = require('../bundle.json');
     bundle_options['options'].now = '' + Date.now();
-    var jar_name = bundle_options['options'].jarName + '.jar';
-    var jsnames = [], cssnames = [];
-    var saved_files = [];
-    var osgi_components = [];
+    let jar_name = bundle_options['options'].jarName + '.jar';
+    let jsnames = [], cssnames = [];
+    let saved_files = [];
+    let osgi_components = [];
 
-    var clean = function (dirpath) {
+    let clean = function (dirpath) {
       return dirpath.replace(/\\/g, "/");
     };
 
-    var isOsgiComponent = function (fileName) {
+    let isOsgiComponent = function (fileName) {
       return fileName.match(/component-.+\.xml$/);
     };
 
-    var buildProperty = function (valuesArr, tagname) {
+    let buildProperty = function (valuesArr, tagname) {
       if (valuesArr.length === 0) return null;
-      var _valuesArr = valuesArr.map(function (jsFile) {
+      let _valuesArr = valuesArr.map(function (jsFile) {
         if (jsFile.charAt(0) === '*') {
           return jsFile.substring(1)
         } else {
           return jsFile
         }
       });
-      var prop = {};
-      var attrs = {
+      let prop = {};
+      let attrs = {
         name: tagname,
         type: 'String'
       };
@@ -51,22 +49,22 @@ module.exports = function (gulp, liferay_config) {
       return prop;
     };
 
-    var updateProperties = function (osgi_component, stream, cb, liferay_config) {
-      var xmlstr = osgi_component.contents.toString();
-      var parser = new xml2js.Parser({async: false});
+    let updateProperties = function (osgi_component, stream, cb, liferay_config) {
+      let xmlstr = osgi_component.contents.toString();
+      let parser = new xml2js.Parser({async: false});
       xml2js.parseString(xmlstr, function (err, result) {
         if (err) {
           throw err;
         } else {
-          var properties = result['scr:component']['property'];
+          let properties = result['scr:component']['property'];
 
-          var prop = null;
+          let prop = null;
 
           if (liferay_config.auto_register_js) {
 
-            var jsFiles = liferay_config.jsnames || jsnames;
+            let jsFiles = liferay_config.jsnames || jsnames;
 
-            var jsHeaders = jsFiles.filter(function (jsFile) {
+            let jsHeaders = jsFiles.filter(function (jsFile) {
               return jsFile.charAt(0) == '*';
             });
             if (jsHeaders.length) {
@@ -74,7 +72,7 @@ module.exports = function (gulp, liferay_config) {
               if (prop) properties.push(prop);
             }
 
-            var jsFooters = jsFiles.filter(function (jsFile) {
+            let jsFooters = jsFiles.filter(function (jsFile) {
               return jsFile.charAt(0) != '*';
             });
             if (jsFooters.length) {
@@ -89,11 +87,10 @@ module.exports = function (gulp, liferay_config) {
           }
           if (prop) properties.push(prop);
 
-          var builder = new xml2js.Builder();
-          var xml = builder.buildObject(result);
+          let builder = new xml2js.Builder();
+          let xml = builder.buildObject(result);
           osgi_component.contents = new Buffer(xml.toString());
           stream.push(osgi_component);
-          console.log('Construction of Liferay JAR completes.');
         }
       });
     };
