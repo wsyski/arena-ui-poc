@@ -7,31 +7,34 @@ import { APP_BASE_HREF } from '@angular/common';
 import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDataService } from './in-memory-data.service';
 
-import { AppHeroesComponent } from './app-heroes.component';
+import {AppHeroesComponent} from './app-heroes.component';
 import { AppConfig } from '../app.config';
-import { AppRoutingModule, routedComponents } from './app-heroes-routing.module';
+import { AppHeroesRoutingModule } from './app-heroes-routing.module';
 import { HeroService } from './hero.service';
 import { HeroSearchComponent } from './hero-search.component';
+import {HeroesComponent} from "./heroes.component";
+import {HeroDetailComponent} from "./hero-detail.component";
+import {DashboardComponent} from "./dashboard.component";
 
 export function createAppHeroesModule( portletNamespace: string ) {
-    @NgModule( {
+    @NgModule({
         imports: [
             BrowserModule,
             FormsModule,
-            AppRoutingModule,
             HttpModule,
-            InMemoryWebApiModule.forRoot( InMemoryDataService, { delay: 600 })
+            InMemoryWebApiModule.forRoot(InMemoryDataService),
+            AppHeroesRoutingModule
         ],
         declarations: [
             AppHeroesComponent,
-            HeroSearchComponent,
-            routedComponents
+            DashboardComponent,
+            HeroDetailComponent,
+            HeroesComponent,
+            HeroSearchComponent
         ],
         providers: [
             { provide: AppConfig, useFactory: () => new AppConfig( portletNamespace ) },
-            HeroService,
-            {provide: APP_BASE_HREF, useValue : '/' }
-        ],
+            HeroService ],
         entryComponents: [AppHeroesComponent]
     })
     class AppHeroesModule {
