@@ -65,7 +65,7 @@ module.exports = function (gulp, liferay_config) {
             let jsFiles = liferay_config.jsnames || jsnames;
 
             let jsHeaders = jsFiles.filter(function (jsFile) {
-              return jsFile.charAt(0) == '*';
+              return jsFile.charAt(0) === '*';
             });
             if (jsHeaders.length) {
               prop = buildProperty(jsHeaders, 'com.liferay.portlet.header-portlet-javascript');
@@ -73,7 +73,7 @@ module.exports = function (gulp, liferay_config) {
             }
 
             let jsFooters = jsFiles.filter(function (jsFile) {
-              return jsFile.charAt(0) != '*';
+              return jsFile.charAt(0) !== '*';
             });
             if (jsFooters.length) {
               prop = buildProperty(jsFooters, 'com.liferay.portlet.footer-portlet-javascript');
