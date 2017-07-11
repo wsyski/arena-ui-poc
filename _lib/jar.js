@@ -29,9 +29,9 @@ module.exports = function (gulp, liferay_config) {
     };
 
     var buildProperty = function (valuesArr, tagname) {
-      if (valuesArr.length == 0) return null;
+      if (valuesArr.length === 0) return null;
       var _valuesArr = valuesArr.map(function (jsFile) {
-        if (jsFile.charAt(0) == '*') {
+        if (jsFile.charAt(0) === '*') {
           return jsFile.substring(1)
         } else {
           return jsFile
@@ -43,7 +43,7 @@ module.exports = function (gulp, liferay_config) {
         type: 'String'
       };
       prop.$ = attrs;
-      if (_valuesArr.length == 1) {
+      if (_valuesArr.length === 1) {
         attrs.value = _valuesArr[0];
         return prop;
       }
@@ -105,12 +105,12 @@ module.exports = function (gulp, liferay_config) {
       .pipe(addsrc(['_liferay/*INF/**/*', '_liferay/*content/**/*']))
       .pipe(replace({patterns: [{json: bundle_options['options']}]}))
       .pipe(through(function (file, enc, cb) {
-        var f = path.parse(file.path);
-        var basename = f.name + f.ext;
+        let f = path.parse(file.path);
+        let basename = f.name + f.ext;
         if (isOsgiComponent(basename)) {
           osgi_components.push(file);
         } else {
-          var gulppath = clean(path.relative(file.base, file.path));
+          let gulppath = clean(path.relative(file.base, file.path));
           gulppath = gulppath.substring(JAR_PREFIX.length);
           if (f.ext === '.js') {
             jsnames.push('/' + gulppath);
@@ -126,16 +126,16 @@ module.exports = function (gulp, liferay_config) {
         }
         cb();
       }, function (cb) {
-        for (var i in saved_files) {
-          this.push(saved_files[i])
-        }
-        for (var i in osgi_components) {
+        saved_files.forEach((saved_file) => {
+          this.push(saved_file)
+        });
+        osgi_components.forEach((osgi_component) => {
           if (liferay_config.auto_register_js || liferay_config.auto_register_css) {
-            updateProperties(osgi_components[i], this, cb, liferay_config);
+            updateProperties(osgi_component, this, cb, liferay_config);
           } else {
-            this.push(osgi_components[i]);
+            this.push(osgi_component);
           }
-        }
+        });
         cb();
       }))
       .pipe(zip(jar_name))
