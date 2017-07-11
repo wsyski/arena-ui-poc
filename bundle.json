@@ -4,12 +4,12 @@
     "bundleName": "Arena UI POC",
     "bundleSymbolicName": "com.axiell.arena-ui-poc",
     "bundleDescription": "Arena UI Proof of Concept",
-    "bundlePath": "arena-ui-poc",
+    "bundlePath": "com.axiell.arena-ui-poc",
     "portletCategory": "category.arena_ui_poc",
-    "portletName_heroes": "com_axiell_arena_ui_poc_heroes",
+    "portletName_heroes": "com.axiell.arena_ui_poc.heroes",
     "portletTitle_heroes": "Heroes",
     "portletInstanceable_heroes": "true",
-    "portletName_todo": "com_axiell_arena_ui_poc_todo",
+    "portletName_todo": "com.axiell.arena_ui_poc.todo",
     "portletTitle_todo": "Todo",
     "portletInstanceable_todo": "true"
   }

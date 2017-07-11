@@ -45,7 +45,7 @@ export function createAppTodoModule(portletNamespace: string) {
 
         ngDoBootstrap(appRef: ApplicationRef) {
             const factory = this.resolver.resolveComponentFactory(AppTodoComponent);
-            (<any>factory).factory.selector = "app-todo#" + this.AppTodoConfig.portletNamespace;
+            (<any>factory).factory.selector = "app-com-axiell-arena-ui-poc-todo#" + this.AppTodoConfig.portletNamespace;
             appRef.bootstrap(factory);
         }
     }

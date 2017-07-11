@@ -1,7 +1,7 @@
 import {Component, OnInit} from "@angular/core";
 
 @Component({
-    selector: "app-todo",
+    selector: "app-com-axiell-arena-ui-poc-todo",
     templateUrl: "./app-todo.html"
 })
 export class AppTodoComponent implements OnInit {

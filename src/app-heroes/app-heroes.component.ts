@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { AppConfig } from '../app.config';
 
 @Component( {
-    selector: 'app-heroes',
+    selector: 'app-com-axiell-arena-ui-poc-heroes',
     template: `
     <h1>{{title}}</h1>
     <div class="header-bar"></div>

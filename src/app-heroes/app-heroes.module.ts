@@ -42,7 +42,7 @@ export function createAppHeroesModule( portletNamespace: string ) {
 
         ngDoBootstrap(appRef: ApplicationRef) {
             const factory = this.resolver.resolveComponentFactory(AppHeroesComponent);
-            (<any>factory).factory.selector = "app-heroes#" + this.appConfig.portletNamespace;
+            (<any>factory).factory.selector = "app-com-axiell-arena-ui-poc-heroes#" + this.appConfig.portletNamespace;
             appRef.bootstrap(factory);
         }
     }
