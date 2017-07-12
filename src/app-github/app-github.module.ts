@@ -13,13 +13,16 @@ import {RepoBrowserComponent} from "./github/repo-browser/repo-browser.component
 import {RepoListComponent} from "./github/repo-list/repo-list.component";
 import {RepoDetailComponent} from "./github/repo-detail/repo-detail.component";
 import {ContactComponent} from "./contact/contact.component";
-import {AppConfig} from "../app.config";
+import {AppConfig} from "../common/app-config";
+import {NotFoundComponent} from "../not-found.component";
+import {AlwaysDenyGuard} from "../common/always-deny-guard";
 
 export function createAppGithubModule(portletNamespace: string) {
     @NgModule({
         declarations: [
             AppGithubComponent,
             AboutComponent,
+            NotFoundComponent,
             RepoBrowserComponent,
             RepoListComponent,
             RepoDetailComponent,
@@ -35,6 +38,7 @@ export function createAppGithubModule(portletNamespace: string) {
         ],
         providers: [
             {provide: AppConfig, useFactory: () => new AppConfig(portletNamespace)},
+            AlwaysDenyGuard,
             GithubService
         ],
         entryComponents: [AppGithubComponent]

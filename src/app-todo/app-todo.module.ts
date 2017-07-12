@@ -10,8 +10,8 @@ import {StaffListComponent} from "./staff/components/staff-list.component";
 import {FormsModule} from "@angular/forms";
 import {HttpModule} from "@angular/http";
 import {UIRouterModule} from "@uirouter/angular";
-import {uiRouterConfigFn} from "./app-todo.routing";
-import {AppConfig} from "../app.config";
+import {uiRouterConfigFn} from "./app-todo.routes";
+import {AppConfig} from "../common/app-config";
 
 let tasksState = { name: 'tasks', url: '/tasks',  component: TaskListComponent }; 
 let aboutState = { name: 'about', url: '/about',  component: AboutComponent };
