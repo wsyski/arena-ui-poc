@@ -7,6 +7,9 @@
     <link rel="stylesheet" href="aui.css">
     <base href="/">
     <script src="build/ax-util.js"></script>
+    <script type="text/javascript">
+        var bundleSymbolicName="com.axiell.arena-ui-poc";
+    </script>
 </head>
 <body>
 
@@ -22,7 +25,7 @@
 
 <script type="text/javascript">
   AxUtil.scriptLoader.loadAll(["build/shim.js", "build/zone.js", "build/ng-runtime-dll.js", "build/main.js"],function () {
-    Main.RunApp_com_axiell_arena_ui_poc_github("portletId0");
+    window["AxMain_" + bundleSymbolicName.replace(/[-\.]/g, '_')].RunApp_com_axiell_arena_ui_poc_github("portletId0");
   });
 </script>
 
@@ -37,7 +40,7 @@
 
 <script type="text/javascript">
   AxUtil.scriptLoader.loadAll(["build/shim.js", "build/zone.js", "build/ng-runtime-dll.js", "build/main.js"],function () {
-    Main.RunApp_com_axiell_arena_ui_poc_heroes("portletId1");
+    window["AxMain_" + bundleSymbolicName.replace(/[-\.]/g, '_')].RunApp_com_axiell_arena_ui_poc_heroes("portletId1");
   });
 </script>
 
@@ -51,7 +54,7 @@
 </div>
 <script type="text/javascript">
   AxUtil.scriptLoader.loadAll(["build/shim.js", "build/zone.js", "build/ng-runtime-dll.js", "build/main.js"],function () {
-    Main.RunApp_com_axiell_arena_ui_poc_todo("portletId2");
+    window["AxMain_" + bundleSymbolicName.replace(/[-\.]/g, '_')].RunApp_com_axiell_arena_ui_poc_todo("portletId2");
   });
 </script>
 
