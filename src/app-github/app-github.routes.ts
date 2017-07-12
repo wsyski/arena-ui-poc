@@ -6,7 +6,7 @@ import {RepoBrowserComponent} from "./github/repo-browser/repo-browser.component
 import {RepoListComponent} from "./github/repo-list/repo-list.component";
 import {RepoDetailComponent} from "./github/repo-detail/repo-detail.component";
 import {ContactComponent} from "./contact/contact.component";
-import {NotFoundComponent} from "../not-found.component";
+import {NotFoundComponent} from "../common/not-found.component";
 import {AlwaysDenyGuard} from "../common/always-deny-guard";
 
 export const rootRouterConfig: Routes = [

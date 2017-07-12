@@ -5,7 +5,7 @@ import {DashboardComponent} from "./dashboard.component";
 import {HeroesComponent} from "./heroes.component";
 import {HeroDetailComponent} from "./hero-detail.component";
 import {AlwaysDenyGuard} from "../common/always-deny-guard";
-import {NotFoundComponent} from "../not-found.component";
+import {NotFoundComponent} from "../common/not-found.component";
 
 const routes: Routes = [
     {path: '', pathMatch: 'full',component: DashboardComponent},

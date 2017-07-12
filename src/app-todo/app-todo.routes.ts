@@ -1,23 +1,22 @@
-import {UIRouter,StateDeclaration} from "@uirouter/angular";
-import {Injector, Injectable} from "@angular/core";
+import {NgModule} from "@angular/core";
+import {RouterModule, Routes} from "@angular/router";
 
-export function uiRouterConfigFn(router: UIRouter, injector: Injector) {
+import {AlwaysDenyGuard} from "../common/always-deny-guard";
+import {NotFoundComponent} from "../common/not-found.component";
+import {StaffListComponent} from "./staff/components/staff-list.component";
+import {TaskListComponent} from "./todo/components/task-list.component";
+import {AboutComponent} from "./about/components/about.component";
 
-  // If no URL matches, and we don't already have a current state,
-  // then go to the `tasks` state by default. This function is 
-  // intended to handle the case where a saved bookmark targets some
-  // other portlet on the page with a hashed URL, as well as the 
-  // default state ('')
-  //  
-  // In that initial loading case, we want this portlet to go to its home state
-  // but in subsequent cases where this portlet has moved to an active state we
-  // want it to stay where it is in terms of state upon receipt of an unknown url.
-  router.urlService.rules.otherwise(function(_router,_url) {
-    let currentState = router.stateService.current.name;
-    if (!currentState) {
-      router.stateService.go('tasks',null,{location:false});
-    }
-    return;
-  });
-  
+const routes: Routes = [
+  {path: '', pathMatch: 'full',component: TaskListComponent},
+  {path: 'about', component: AboutComponent},
+  {path: 'staff', component: StaffListComponent},
+  {path: '**', component: NotFoundComponent, canActivate: [AlwaysDenyGuard]}
+];
+
+@NgModule({
+  imports: [RouterModule.forRoot(routes, {useHash: true})],
+  exports: [RouterModule]
+})
+export class AppTodoRoutingModule {
 }

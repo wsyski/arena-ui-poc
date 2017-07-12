@@ -14,7 +14,7 @@ import {RepoListComponent} from "./github/repo-list/repo-list.component";
 import {RepoDetailComponent} from "./github/repo-detail/repo-detail.component";
 import {ContactComponent} from "./contact/contact.component";
 import {AppConfig} from "../common/app-config";
-import {NotFoundComponent} from "../not-found.component";
+import {NotFoundComponent} from "../common/not-found.component";
 import {AlwaysDenyGuard} from "../common/always-deny-guard";
 
 export function createAppGithubModule(portletNamespace: string) {

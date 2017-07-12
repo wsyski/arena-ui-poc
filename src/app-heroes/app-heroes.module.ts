@@ -1,7 +1,6 @@
 import { NgModule, ApplicationRef, ComponentFactoryResolver } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
 
 import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDataService } from './in-memory-data.service';
@@ -14,8 +13,9 @@ import { HeroSearchComponent } from './hero-search.component';
 import {HeroesComponent} from "./heroes.component";
 import {HeroDetailComponent} from "./hero-detail.component";
 import {DashboardComponent} from "./dashboard.component";
-import {NotFoundComponent} from "../not-found.component";
+import {NotFoundComponent} from "../common/not-found.component";
 import {AlwaysDenyGuard} from "../common/always-deny-guard";
+import {HttpModule} from "@angular/http";
 
 export function createAppHeroesModule( portletNamespace: string ) {
     @NgModule({

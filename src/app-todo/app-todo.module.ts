@@ -9,13 +9,10 @@ import {StaffListComponent} from "./staff/components/staff-list.component";
 
 import {FormsModule} from "@angular/forms";
 import {HttpModule} from "@angular/http";
-import {UIRouterModule} from "@uirouter/angular";
-import {uiRouterConfigFn} from "./app-todo.routes";
 import {AppConfig} from "../common/app-config";
-
-let tasksState = { name: 'tasks', url: '/tasks',  component: TaskListComponent }; 
-let aboutState = { name: 'about', url: '/about',  component: AboutComponent };
-let staffState = { name: 'staff', url: '/staff',  component: StaffListComponent };
+import {AppTodoRoutingModule} from "./app-todo.routes";
+import {NotFoundComponent} from "../common/not-found.component";
+import {AlwaysDenyGuard} from "../common/always-deny-guard";
 
 export function createAppTodoModule(portletNamespace: string) {
     @NgModule({
@@ -23,9 +20,7 @@ export function createAppTodoModule(portletNamespace: string) {
             BrowserModule,
             FormsModule,
             HttpModule,
-            UIRouterModule.forRoot({ states: [ tasksState, aboutState, staffState ],
-                config: uiRouterConfigFn,
-                useHash: true })
+            AppTodoRoutingModule
         ],
         declarations: [
             AppTodoComponent,
@@ -33,8 +28,9 @@ export function createAppTodoModule(portletNamespace: string) {
             TaskListComponent,
             AboutComponent,
             StaffListComponent,
+            NotFoundComponent
         ],
-        providers: [{ provide: AppConfig, useFactory: () => new AppConfig(portletNamespace) }],
+        providers: [{ provide: AppConfig, useFactory: () => new AppConfig(portletNamespace) }, AlwaysDenyGuard],
         entryComponents: [AppTodoComponent]
     })
     class AppTodoModule {
