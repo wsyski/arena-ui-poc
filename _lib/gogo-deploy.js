@@ -1,13 +1,13 @@
 'use strict';
 
-var _ = require('lodash');
-var GogoShell = require('gogo-shell');
-var os = require('os');
-var path = require('path');
+let _ = require('lodash');
+let GogoShell = require('gogo-shell');
+let os = require('os');
+let path = require('path');
 
-var REGEX_WIN = /^win/;
+let REGEX_WIN = /^win/;
 
-var GogoDeployer = function(config) {
+let GogoDeployer = function(config) {
 	GogoShell.call(this, config);
 
 	config = config || {};
@@ -17,12 +17,12 @@ var GogoDeployer = function(config) {
 
 GogoDeployer.prototype = _.create(GogoShell.prototype, {
 	
-	deploy: function(bundlePath,bundleName) {
-		var instance = this;
+	deploy: function(bundlePath,bundleSymbolicName) {
+		let instance = this;
 
 		return this.connect(this.connectConfig)
 			.then(function() {
-				return instance._getBundleStatusByBundleName(bundleName);
+				return instance._getBundleStatusByBundleName(bundleSymbolicName);
 			})
 			.then(function(data) {
 				if (data.length) {
@@ -34,7 +34,7 @@ GogoDeployer.prototype = _.create(GogoShell.prototype, {
 			})
 			.then(function(data) {
 				if (data.indexOf('Bundle ID') > -1) {
-					var bundleId = instance._getBundleIdFromResponse(data);
+					let bundleId = instance._getBundleIdFromResponse(data);
 					return instance._startBundle(bundleId);
 				}
 
@@ -46,13 +46,13 @@ GogoDeployer.prototype = _.create(GogoShell.prototype, {
 		return this.sendCommand('update', bundleId, this._formatBundleURL(bundlePath));
 	},
 
-	_getBundleStatusByBundleName: function(bundleName) {
-		return this.sendCommand('lb -u -s | grep', bundleName)
+	_getBundleStatusByBundleName: function(bundleSymbolicName) {
+		return this.sendCommand('lb -u -s | grep', bundleSymbolicName)
 			.then(function(data) {
 				return _.reduce(data.split('\n'), function(result, item, index) {
-					var fields = item.split('|');
+					let fields = item.split('|');
 
-					if (fields.length == 4) {
+					if (fields.length === 4) {
 						result.push({
 							id: _.trim(fields[0]),
 							level: _.trim(fields[2]),
@@ -78,7 +78,7 @@ GogoDeployer.prototype = _.create(GogoShell.prototype, {
 	},
 
 	_getBundleIdFromResponse: function(response) {
-		var match = response.match(/Bundle\sID:\s*([0-9]+)/);
+		let match = response.match(/Bundle\sID:\s*([0-9]+)/);
 		return match ? match[1] : 0;
 	},
 

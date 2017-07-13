@@ -5,13 +5,13 @@ module.exports = function (gulp, liferay_config) {
 	  
 	  const path = require('path');
 	  var through = require('through2').obj;
-	  var GogoDeployer = require('./gogo_deploy').GogoDeployer;
+	  var GogoDeployer = require('./gogo-deploy').GogoDeployer;
 
-	  var bundle_options = require('../bundle.json');
-	  var osgi_name = bundle_options['options'].bundleName;
-	  var jar_name = bundle_options['options'].jarName + '.jar';
+	  var bundleOptions = require('../bundle.json');
+	  var bundleSymbolicName = bundleOptions['options'].bundleSymbolicName;
+	  var jarName = bundleOptions['options'].jarName + '.jar';
 	  
-	  return gulp.src(path.join(liferay_config.dist,jar_name))
+	  return gulp.src(path.join(liferay_config.dist,jarName))
 	
 		.pipe(through(function(file, enc, cb) {
 			var config = {host: '127.0.0.1', port: liferay_config.gogo_port};
@@ -21,7 +21,7 @@ module.exports = function (gulp, liferay_config) {
 		       gogoDeployer.destroy();
 			   cb();
 	        });
-	        gogoDeployer.deploy(file.path,osgi_name)
+	        gogoDeployer.deploy(file.path,bundleSymbolicName)
 	          .then(function(data) {
 		         if (data) console.log(data); 
 		         else console.log('Finished--no msg available');
