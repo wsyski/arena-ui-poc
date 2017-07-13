@@ -11,7 +11,8 @@
     "compile": "gulp compile",
     "deploy": "gulp deploy",
     "build": "gulp build",
-    "start": "http-server public -d -c-1 -o",
+    "http-server": "http-server build -d -c-1 -o",
+    "webpack-dev-server": "gulp webpack-dev-server",
     "watch": "gulp watch",
     "postinstall": "typings install"
   },
@@ -43,6 +44,7 @@
     "gulp-replace-task": "^0.11.0",
     "gulp-sequence": "^0.4.6",
     "gulp-uglify": "^2.1.2",
+    "gulp-util": "^3.0.8",
     "gulp-zip": "^3.2.0",
     "ngc-webpack": "^1.2.0",
     "raw-loader": "^0.5.1",
@@ -51,7 +53,8 @@
     "typescript": "^2.4.1",
     "typings": "^2.1.1",
     "vinyl-named": "^1.1.0",
-    "webpack": "^3.1.0",
+    "webpack": "^3.2.0",
+    "webpack-dev-server": "^2.5.1",
     "webpack-stream": "^3.2.0",
     "xml2js": "^0.4.17"
   }

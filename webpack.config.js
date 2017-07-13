@@ -3,9 +3,9 @@ let path = require('path');
 
 const appRoot = path.resolve('./src');
 
-let bundle_options = require('./bundle.json');
-let bundle_symbolic_name = bundle_options['options'].bundleSymbolicName;
-let webpack_entry = `AxMain_${bundle_symbolic_name.replace(/[-\.]/g, '_')}`;
+let bundleOptions = require('./bundle.json');
+let bundleSymbolicName = bundleOptions['options'].bundleSymbolicName;
+let webpackEntry = `AxMain_${bundleSymbolicName.replace(/[-\.]/g, '_')}`;
 
 module.exports = {
   bail: true,
@@ -18,13 +18,16 @@ module.exports = {
     path: path.resolve('./build'),
     devtoolModuleFilenameTemplate: '[resource-path]',
     libraryTarget: 'var',
-    library: webpack_entry
+    library: webpackEntry
   },
   plugins: [new webpack.DllReferencePlugin({
     context: '.',
     manifest: require(path.join(__dirname, 'ng-runtime', 'ng-runtime-manifest.json'))
   }), // suppress Typescript warnings when building Angular into vendor package
     //new webpack.ContextReplacementPlugin(/angular(\\|\/)core(\\|\/)(esm(\\|\/)src|src)(\\|\/)linker/,appRoot),
+    new webpack.LoaderOptionsPlugin({
+      debug: true
+    }),
     new webpack.ContextReplacementPlugin(/angular(\\|\/)core(\\|\/)@angular/, appRoot),],
   resolve: {
     extensions: ['*', '.ts', '.js']

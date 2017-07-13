@@ -1,15 +1,16 @@
 module.exports = function (gulp, liferay_config) {
   return function () {
-    console.log('Construction of Liferay JAR begins ...');
     const zip = require('gulp-zip');
+    const gutil = require('gulp-util');
     const rename = require('gulp-rename');
     const replace = require('gulp-replace-task');
     const addsrc = require('gulp-add-src');
     const path = require('path');
     const xml2js = require('xml2js');
-    let through = require('through2').obj;
-
+    const through = require('through2').obj;
     const JAR_PREFIX = "META-INF/resources/";
+
+    gutil.log('Construction of Liferay JAR begins ...');
 
     let bundle_options = require('../bundle.json');
     bundle_options['options'].now = '' + Date.now();
@@ -24,6 +25,10 @@ module.exports = function (gulp, liferay_config) {
 
     let isOsgiComponent = function (fileName) {
       return fileName.match(/component-.+\.xml$/);
+    };
+
+    let isDevResource = function (fileName) {
+      return fileName.match(/index\.html|aui\.css|favicon\.ico/);
     };
 
     let buildProperty = function (valuesArr, tagname) {
@@ -104,7 +109,9 @@ module.exports = function (gulp, liferay_config) {
       .pipe(through(function (file, enc, cb) {
         let f = path.parse(file.path);
         let basename = f.name + f.ext;
-        if (isOsgiComponent(basename)) {
+        if (isDevResource(basename)) {
+          gutil.log("Skipping file: " + basename);
+        } else if (isOsgiComponent(basename)) {
           osgi_components.push(file);
         } else {
           let gulppath = clean(path.relative(file.base, file.path));

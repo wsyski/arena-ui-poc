@@ -1,129 +1,129 @@
-var config = require('./gulp-config');
+let config = require('./gulp-config');
 
-var gulp = require('gulp'),
-    replace = require('gulp-replace');
-    gulpif  = require( 'gulp-if' ),
-    webpack = require('webpack'),
-    gulp_webpack = require('webpack-stream'),
-    clean = require('gulp-clean'),
-    uglify = require('gulp-uglify'),
-    sequence = require('gulp-sequence'),
-    named = require('vinyl-named'),
-    rename = require('gulp-rename');
-    
-var webpack_config = require('./webpack.config'),
-    webpack_config_aot = require('./webpack.config.aot');
-    
+const gulp = require('gulp');
+const replace = require('gulp-replace');
+const webpackDevServer = require('webpack-dev-server');
+const gutil = require('gulp-util');
+const gulpif = require('gulp-if');
+const webpack = require('webpack');
+const webpackStream = require('webpack-stream');
+const clean = require('gulp-clean');
+const uglify = require('gulp-uglify');
+const rename = require('gulp-rename');
+const sequence = require('gulp-sequence');
+const named = require('vinyl-named');
+
+const webpackConfig = require('./webpack.config');
+const webpackConfig_aot = require('./webpack.config.aot');
+
 /*
  * Clean working directories
  */
 gulp.task('clean', function () {
-    return gulp.src([config.build_dir,
-                     config.dist_dir,
-                     config.ngc_dir,
-                     config.aot_dir], {read: false})
-        .pipe(clean({force:true}));
+  return gulp.src([config.build_dir, config.dist_dir, config.ngc_dir, config.aot_dir], {read: false})
+    .pipe(clean({force: true}));
 });
 
 /*
  * Copy main html into build directory.
  */
-gulp.task("resources", function () {
-    return gulp.src([])
-        .pipe(gulp.dest(config.build_dir));
+gulp.task("dev-resources", function () {
+  return gulp.src([config.dev_resources_dir + '/index.html', config.dev_resources_dir + '/favicon.ico',
+    config.dev_resources_dir + '/aui.css'])
+    .pipe(gulp.dest(config.build_dir));
 });
 
 /*
-  Minification
-*/
+ Minification
+ */
 gulp.task("uglify", function () {
-    return gulp.src([config.build_dir + '/main.js'])
-      .pipe(uglify())
-      .pipe(gulp.dest(config.build_dir));
+  return gulp.src([config.build_dir + '/main.js'])
+    .pipe(uglify())
+    .pipe(gulp.dest(config.build_dir));
 });
 
 /*
-*  Install global scripts needed by Angular
-*/
+ *  Install global scripts needed by Angular
+ */
 gulp.task('globals', function () {
-    return gulp.src(['globals/ax-util.js','node_modules/zone.js/dist/zone.js','node_modules/core-js/client/shim.js'])
-      .pipe( gulpif( /zone\.js$/, replace( /&& define\.amd/, '&& define.amdxxx' ) ) )
-      .pipe(gulp.dest(config.build_dir))
+  return gulp.src(['globals/ax-util.js', 'node_modules/zone.js/dist/zone.js', 'node_modules/core-js/client/shim.js'])
+    .pipe(gulpif(/zone\.js$/, replace(/&& define\.amd/, '&& define.amdxxx')))
+    .pipe(gulp.dest(config.build_dir))
 });
 
 /*
  * Copy Angular runtime and portlet loader.
  */
-gulp.task("install-ng-runtime",function() {
-   return gulp.src(['ng-runtime/*.js'])
-      .pipe(gulp.dest(config.build_dir));
+gulp.task("install-ng-runtime", function () {
+  return gulp.src(['ng-runtime/*.js'])
+    .pipe(gulp.dest(config.build_dir));
 });
 
 /*
  * Build the application for development-mode
  */
 gulp.task('app', function () {
-    return gulp.src(['./src/main.ts'])
-    // see docs for webpack-stream; allows us to use the webpack bundle name(s)
+  return gulp.src(['./src/main.ts'])
+  // see docs for webpack-stream; allows us to use the webpack bundle name(s)
     .pipe(named())
-    .pipe(gulp_webpack(webpack_config,webpack))
+    .pipe(webpackStream(webpackConfig, webpack))
     .pipe(gulp.dest(config.build_dir));
-}); 
-
-/*
- * Build the application for production-mode
- */ 
-gulp.task('app_aot', function () {
-    return gulp.src(['./src/main_aot.ts']) //,'./src/vendor_aot.ts'])
-    // see docs for webpack-stream; allows us to use the webpack bundle name(s)
-    .pipe(named())
-    .pipe(gulp_webpack(webpack_config_aot,webpack))
-    .pipe(gulp.dest(config.build_dir));
-});  
- 
-/*
-  Development build
-*/ 
-gulp.task("build", function () {
-    sequence('clean',['resources','install-ng-runtime','globals','app']) (function (err) {
-      if (err) console.log(err);
-    });
 });
 
 /*
-  Production build
-*/
+ * Build the application for production-mode
+ */
+gulp.task('app_aot', function () {
+  return gulp.src(['./src/main_aot.ts']) //,'./src/vendor_aot.ts'])
+  // see docs for webpack-stream; allows us to use the webpack bundle name(s)
+    .pipe(named())
+    .pipe(webpackStream(webpackConfig_aot, webpack))
+    .pipe(gulp.dest(config.build_dir));
+});
+
+/*
+ Development build
+ */
+gulp.task("build", function () {
+  sequence('clean', ['dev-resources', 'install-ng-runtime', 'globals', 'app'])(function (err) {
+    if (err) gutil.log(err);
+  });
+});
+
+/*
+ Production build
+ */
 gulp.task("prod", function () {
-    sequence('clean',['resources','install-ng-runtime','globals','app_aot'],'uglify') (function (err) {
-      if (err) console.log(err);
-    });
+  sequence('clean', ['install-ng-runtime', 'globals', 'app_aot'], 'uglify')(function (err) {
+    if (err) gutil.log(err);
+  });
 });
 
 /*
  A configuration object to control operations of the Liferay-related gulp tasks (jar & deploy)
-*/
-var liferay_config = {
-	inputs            : [ config.build_dir + '/**/*' ],
-	dist              : config.dist_dir,
-	auto_register_css : false,
-	auto_register_js  : true,
-  jsnames           : ['*/ax-util.js'],
-	gogo_port         : 11311
+ */
+let liferay_config = {
+  inputs: [config.build_dir + '/**/*'],
+  dist: config.dist_dir,
+  auto_register_css: false,
+  auto_register_js: true,
+  jsnames: ['*/ax-util.js'],
+  gogo_port: 11311
 };
 
 /*
-  Liferay JAR creation and deployment tasks
-  configure the 'jar' and 'deploy' tasks based on npm/gradle environment
-*/
-config.setupJarDeploy(gulp,liferay_config);
+ Liferay JAR creation and deployment tasks
+ configure the 'jar' and 'deploy' tasks based on npm/gradle environment
+ */
+config.setupJarDeploy(gulp, liferay_config);
 
 /*
  * Use webpack to watch for changes in application files.
  * then rebuild contents into the DXP JAR & re-deploy.
  */
-    
+
 function showWebpackSummary(stats) {
-  console.log('[webpack-watch]\n' + stats.toString({
+  gutil.log('[webpack-watch]\n' + stats.toString({
       colors: true,
       hash: true,
       timings: true,
@@ -137,27 +137,42 @@ function showWebpackSummary(stats) {
       reasons: false,
       source: false,
       errorDetails: true
-  }));
-}  
-  
+    }));
+}
+
 gulp.task('watch', (cb) => {
-  
+
   gulp.watch([config.build_dir + "/main.js"]).on('change', function (e) {
-    console.log('Application has been updated. Re-deploying...');
+    gutil.log('Application has been updated. Re-deploying...');
     sequence('deploy')(function (err) {
-      if (err) console.log(err);
+      if (err) gutil.log(err);
     });
   });
-  
-  const webpackconfig = Object.create(require('./webpack.config.js'));
-  webpackconfig.watch = true;
-  webpackconfig.cache = true;
-  webpackconfig.bail = false;
-  
-  webpack(webpackconfig, function(error, stats) {
+  let localWebpackConfig = Object.create(webpackConfig);
+  localWebpackConfig.watch = true;
+  localWebpackConfig.cache = true;
+  localWebpackConfig.bail = false;
+
+  webpack(localWebpackConfig, function (error, stats) {
     if (error) {
-      console.log('[webpack]' + error.toString());
+      gutil.log('[webpack]' + error.toString());
     }
     showWebpackSummary(stats);
+  });
+});
+
+gulp.task("webpack-dev-server", function (cb) {
+  let localWebpackConfig = Object.create(webpackConfig);
+  localWebpackConfig.devtool = "eval";
+
+  // Start a webpack-dev-server
+  new webpackDevServer(webpack(localWebpackConfig), {
+    contentBase: webpackConfig.output.path,
+    stats: {
+      colors: true
+    }
+  }).listen(8081, "localhost", function (err) {
+    if (err) throw new gutil.PluginError("webpack-dev-server", err);
+    gutil.log("[webpack-dev-server]", "http://localhost:8080/webpack-dev-server/index.html");
   });
 });
