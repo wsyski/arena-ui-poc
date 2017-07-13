@@ -1,5 +1,4 @@
-let config = require('./gulp-config');
-
+const config = require('./gulp-config');
 const gulp = require('gulp');
 const replace = require('gulp-replace');
 const webpackDevServer = require('webpack-dev-server');
