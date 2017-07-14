@@ -12,7 +12,6 @@
       "dom"
     ],
     "noImplicitAny": false,
-    "rootDir": "./src",
     "suppressImplicitAnyIndexErrors": true
   },
   "files": [

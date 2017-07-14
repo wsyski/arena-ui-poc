@@ -14,7 +14,7 @@ import {AppTodoRoutingModule} from "./app-todo.routes";
 import {NotFoundComponent} from "../common/not-found.component";
 import {AlwaysDenyGuard} from "../common/always-deny-guard";
 
-export function createAppTodoModule(portletNamespace: string) {
+export const AppTodoModule = (portletNamespace: string) => {
     @NgModule({
         imports: [
             BrowserModule,
