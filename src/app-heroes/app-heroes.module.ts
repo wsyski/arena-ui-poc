@@ -54,4 +54,4 @@ export const AppHeroesModule = (portletNamespace: string) => {
     }
 
     return AppHeroesModule;
-}
+};

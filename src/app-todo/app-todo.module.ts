@@ -47,4 +47,4 @@ export const AppTodoModule = (portletNamespace: string) => {
     }
 
     return AppTodoModule;
-}
+};

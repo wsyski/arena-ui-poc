@@ -56,4 +56,4 @@ export const AppGithubModule = (portletNamespace: string) => {
     }
 
     return AppGithubModule;
-}
+};
