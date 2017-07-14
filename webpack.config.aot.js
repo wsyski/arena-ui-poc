@@ -24,7 +24,7 @@ module.exports = {
     //new webpack.ContextReplacementPlugin(/angular(\\|\/)core(\\|\/)(esm(\\|\/)src|src)(\\|\/)linker/,appRoot),
     new webpack.ContextReplacementPlugin(/angular(\\|\/)core(\\|\/)@angular/,appRoot),
     // invoke Angular AOT compiler
-    new NgcWebpack.NgcWebpackPlugin({tsConfig: path.join(__dirname,'tsconfig_aot.json')}),
+    new NgcWebpack.NgcWebpackPlugin({tsConfig: path.join(__dirname,'tsconfig-aot.json')}),
   ],
   resolve: {
     extensions: ['*','.ts', '.js']

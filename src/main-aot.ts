@@ -2,7 +2,7 @@
 
 import { platformBrowser }    from '@angular/platform-browser';
 import {enableProdMode} from '@angular/core';
-import { AppModuleNgFactory } from '../aot/src/app/app.module.ngfactory';
+import { AppTodoModuleNgFactory } from '../aot/src/app-todo/app-todo.module.ngfactory';
 
 enableProdMode();
-platformBrowser().bootstrapModuleFactory(AppModuleNgFactory);
+platformBrowser().bootstrapModuleFactory(AppTodoModuleNgFactory);
