@@ -11,7 +11,7 @@
 
     switch (document.readyState) {
       case 'loading':
-        document.addEventListener('DOMContentLoaded', _domReadyHandler, false);
+        document.addEventListener('DOMContentLoaded', domReadyHandler, false);
         break;
       case 'interactive':
       case 'complete':
@@ -19,8 +19,8 @@
         runPortlet(portletName, portletNamespace);
     }
 
-    function _domReadyHandler() {
-      document.removeEventListener('DOMContentLoaded', _domReadyHandler, false);
+    function domReadyHandler() {
+      document.removeEventListener('DOMContentLoaded', domReadyHandler, false);
       runPortlet(portletName, portletNamespace);
     }
   });
