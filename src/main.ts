@@ -1,26 +1,39 @@
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import {platformBrowserDynamic} from "@angular/platform-browser-dynamic";
 import {AppGithubModule} from "./app-github/app-github.module";
 import {AppHeroesModule} from "./app-heroes/app-heroes.module";
 import {AppTodoModule} from "./app-todo/app-todo.module";
 
-export function RunApp_com_axiell_arena_ui_poc_github(portletNamespace: string) {
-    platformBrowserDynamic()
-        .bootstrapModule(AppGithubModule(portletNamespace))
-        .then(success => console.log(`Bootstrap Github success`))
-        .catch(err => console.error(err));
-}
+const getPortletShortName=(portletName: string) => {
+    let lastIndexOfDot = portletName.lastIndexOf('.');
+    let lastIndexOfUnderscore = portletName.lastIndexOf('_');
+    let startIndex = Math.max(lastIndexOfDot,lastIndexOfUnderscore);
+    return portletName.substring(startIndex + 1);
+};
 
-export function RunApp_com_axiell_arena_ui_poc_heroes(portletNamespace: string) {
-    platformBrowserDynamic()
-        .bootstrapModule(AppHeroesModule(portletNamespace))
-        .then(success => console.log(`Bootstrap Heroes success`))
-        .catch(err => console.error(err));
-}
+export const runPortlet = (portletName: string, portletNamespace: string) => {
+    let portletShortName = getPortletShortName(portletName);
+    let appModule;
+    switch (portletShortName) {
+        case "github":
+            appModule = AppGithubModule(portletNamespace);
+            break;
+        case "heroes":
+            appModule = AppHeroesModule(portletNamespace);
+            break;
+        case "todo":
+            appModule = AppTodoModule(portletNamespace);
+            break;
+        default:
+            console.log(`Invalid portlet short name: ${portletShortName}`)
 
-export function RunApp_com_axiell_arena_ui_poc_todo(portletNamespace: string) {
+    }
     platformBrowserDynamic()
-        .bootstrapModule(AppTodoModule(portletNamespace))
-        .then(success => console.log(`Bootstrap Todo success`))
+        .bootstrapModule(appModule)
+        .then(success => console.log(`Bootstraped for portlet short name: ${portletShortName}`))
         .catch(err => console.error(err));
-}
+};
+
+
+
+
 

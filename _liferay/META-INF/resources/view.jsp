@@ -4,6 +4,24 @@
 
 <script type="text/javascript">
   AxUtil.scriptLoader.loadAll(["/o/@@bundlePath/shim.js", "/o/@@bundlePath/zone.js",  "/o/@@bundlePath/ng-runtime-dll.js", "/o/@@bundlePath/main.js"], function () {
-    window["AxMain_" + "@@bundleSymbolicName".replace(/[-\.]/g, '_')].RunApp_<%= portletDisplay.getPortletName().replaceAll("[-\\.]","_") %>("<portlet:namespace/>");
+    var bundleSymbolicName = "@@bundleSymbolicName";
+    var portletName = "<%= portletDisplay.getPortletName()%>";
+    var portletNamespace = "<portlet:namespace/>";
+    var runPortlet = window["AxMain_" + bundleSymbolicName.replace(/[-\.]/g, '_')].runPortlet;
+
+    switch (document.readyState) {
+      case 'loading':
+        document.addEventListener('DOMContentLoaded', _domReadyHandler, false);
+        break;
+      case 'interactive':
+      case 'complete':
+      default:
+        runPortlet(portletName, portletNamespace);
+    }
+
+    function _domReadyHandler() {
+      document.removeEventListener('DOMContentLoaded', _domReadyHandler, false);
+      runPortlet(portletName, portletNamespace);
+    }
   });
 </script>
