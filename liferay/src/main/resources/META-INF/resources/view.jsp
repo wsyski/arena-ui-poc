@@ -1,4 +1,4 @@
-<%@ include file="/init.jsp" %>
+<%@ include file="./init.jsp" %>
 
 <app-<%= portletDisplay.getPortletName().replaceAll("[_\\.]","-") %> id="<portlet:namespace/>">Loading...</app-<%= portletDisplay.getPortletName().replaceAll("[_\\.]","-") %>>
 
