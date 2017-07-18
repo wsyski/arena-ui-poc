@@ -7,13 +7,13 @@
     "bundlePath": "com.axiell.arena-ui-poc",
     "portletCategory": "category.arena_ui_poc",
     "portletName_github": "com.axiell.arena_ui_poc.github",
-    "portletTitle_github": "Github",
+    "portletTitle_github": "Github Portlet",
     "portletInstanceable_github": "true",
     "portletName_heroes": "com.axiell.arena_ui_poc.heroes",
-    "portletTitle_heroes": "Heroes",
+    "portletTitle_heroes": "Heroes Portlet",
     "portletInstanceable_heroes": "true",
     "portletName_todo": "com.axiell.arena_ui_poc.todo",
-    "portletTitle_todo": "Todo",
+    "portletTitle_todo": "Todo Portlet",
     "portletInstanceable_todo": "true"
   }
 }

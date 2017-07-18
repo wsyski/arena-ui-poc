@@ -12,10 +12,10 @@ import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
 
 @Component(
-        configurationPid = "com.axiell.arena_ui_poc.todo.TodoPortletConfiguration",
+        configurationPid = ArenaUIPortletKeys.TODO_PORTLET_CONFIGURATION,
         configurationPolicy = ConfigurationPolicy.OPTIONAL, immediate = true,
         property = {
-                "javax.portlet.name=" + ArenaUIPortletKeys.TODO_PORTLET
+                "javax.portlet.name=" + ArenaUIPortletKeys.TODO_PORTLET_NAME
         },
         service = ConfigurationAction.class
 )

@@ -1,9 +1,10 @@
 package com.axiell.arena_ui_poc.todo;
 
 import aQute.bnd.annotation.metatype.Meta;
+import com.axiell.arena_ui_poc.ArenaUIPortletKeys;
 
 @Meta.OCD(
-	id = "com.axiell.arena_ui_poc.todo.TodoPortletConfiguration"
+	id = ArenaUIPortletKeys.TODO_PORTLET_CONFIGURATION
 )
 public interface TodoPortletConfiguration {
 

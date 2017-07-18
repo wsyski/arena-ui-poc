@@ -1,5 +1,9 @@
+Bundle-SymbolicName: com.axiell.arena-ui-poc
 Bundle-Description: Arena POC
 Bundle-Version: 1.0.0
+
+Web-ContextPath: /com.axiell.arena-ui-poc
+
 -jsp: *.jsp,*.jspf
 -metatype: *
 -plugin.bundle: com.liferay.ant.bnd.resource.bundle.ResourceBundleLoaderAnalyzerPlugin

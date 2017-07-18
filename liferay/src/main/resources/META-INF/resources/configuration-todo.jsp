@@ -5,17 +5,17 @@
 <%@page	import="com.axiell.arena_ui_poc.todo.TodoPortletConfiguration" %>
 
 <%
-	TodoPortletConfiguration portletTodoConfiguration =
+	TodoPortletConfiguration portletConfiguration =
 			(TodoPortletConfiguration)renderRequest.getAttribute(TodoPortletConfiguration.class.getName());
 
 	String fontFamily = StringPool.BLANK;
 	String fontColor = StringPool.BLANK;
 	String fontSize = StringPool.BLANK;
 
-	if (Validator.isNotNull(portletTodoConfiguration)) {
-		fontFamily = portletPreferences.getValue("fontFamily", portletTodoConfiguration.fontFamily());
-		fontColor = portletPreferences.getValue("fontColor", portletTodoConfiguration.fontColor());
-		fontSize = portletPreferences.getValue("fontSize",String.valueOf(portletTodoConfiguration.fontSize()));
+	if (Validator.isNotNull(portletConfiguration)) {
+		fontFamily = portletPreferences.getValue("fontFamily", portletConfiguration.fontFamily());
+		fontColor = portletPreferences.getValue("fontColor", portletConfiguration.fontColor());
+		fontSize = portletPreferences.getValue("fontSize",String.valueOf(portletConfiguration.fontSize()));
 	}
 %>
 
