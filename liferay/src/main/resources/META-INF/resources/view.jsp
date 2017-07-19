@@ -1,5 +1,8 @@
 <%@ include file="./init.jsp" %>
 
+<portlet:resourceURL id="/portlet/translations" var="translations" />
+<% System.out.println("translations: "+translations); %>
+
 <app-<%= portletDisplay.getPortletName().replaceAll("[_\\.]","-") %> id="<portlet:namespace/>">Loading...</app-<%= portletDisplay.getPortletName().replaceAll("[_\\.]","-") %>>
 
 <script type="text/javascript">
