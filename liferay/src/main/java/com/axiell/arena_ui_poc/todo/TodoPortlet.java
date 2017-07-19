@@ -13,6 +13,7 @@ import javax.portlet.Portlet;
                 "com.liferay.portlet.display-category=" + ArenaUIPortletKeys.DISPLAY_CATEGORY,
                 "com.liferay.portlet.instanceable=true",
                 "com.liferay.portlet.header-portlet-javascript=/ax-util.js",
+                "com.liferay.portlet.single-page-application=false",
                 "javax.portlet.display-name=" + ArenaUIPortletKeys.TODO_PORTLET_DISPLAY_NAME,
                 "javax.portlet.init-param.config-template=" + ArenaUIPortletKeys.TODO_PORTLET_CONFIG_TEMPLATE,
                 "javax.portlet.init-param.view-template=" + ArenaUIPortletKeys.VIEW_TEMPLATE,
