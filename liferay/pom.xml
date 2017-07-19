@@ -81,6 +81,35 @@
 				</configuration>
 			</plugin>
 			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>build-helper-maven-plugin</artifactId>
+				<version>3.0.0</version>
+				<executions>
+					<execution>
+						<id>add-resource</id>
+						<phase>generate-resources</phase>
+						<goals>
+							<goal>add-resource</goal>
+						</goals>
+						<configuration>
+							<resources>
+								<resource>
+									<directory>${project.basedir}/../build</directory>
+									<targetPath>${project.build.outputDirectory}/META-INF/resources</targetPath>
+									<includes>
+										<include>**/ax-util.js</include>
+										<include>**/main.js</include>
+										<include>**/ng-runtime-dll.js</include>
+                                        <include>**/shim.js</include>
+                                        <include>**/zone.js</include>
+									</includes>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
 				<groupId>biz.aQute.bnd</groupId>
 				<artifactId>bnd-maven-plugin</artifactId>
 				<version>3.2.0</version>
