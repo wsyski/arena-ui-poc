@@ -4,6 +4,7 @@ const replace = require('gulp-replace');
 const webpackDevServer = require('webpack-dev-server');
 const gutil = require('gulp-util');
 const gulpif = require('gulp-if');
+const path = require('path');
 const webpack = require('webpack');
 const webpackStream = require('webpack-stream');
 const clean = require('gulp-clean');
@@ -19,7 +20,7 @@ const webpackConfig_aot = require('./webpack.config.aot');
  * Clean working directories
  */
 gulp.task('clean', function () {
-  return gulp.src([config.build_dir, config.dist_dir, config.ngc_dir, config.aot_dir], {read: false})
+  return gulp.src([config.build_dir, config.ngc_dir, config.aot_dir], {read: false})
     .pipe(clean({force: true}));
 });
 
@@ -102,11 +103,8 @@ gulp.task("prod", function () {
  A configuration object to control operations of the Liferay-related gulp tasks (jar & deploy)
  */
 let liferay_config = {
-  inputs: [config.build_dir + '/**/*'],
-  dist: config.dist_dir,
-  auto_register_css: false,
-  auto_register_js: true,
-  jsnames: ['*/ax-util.js'],
+  maven_dir: config.liferay_dir,
+  jar_file: path.join(config.liferay_dir, 'target', 'arena-ui-poc-1.0.0.jar'),
   gogo_port: 11311
 };
 
