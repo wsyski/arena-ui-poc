@@ -17,7 +17,7 @@ import {AppConfig} from "../common/app-config";
 import {NotFoundComponent} from "../common/not-found.component";
 import {AlwaysDenyGuard} from "../common/always-deny-guard";
 
-export const AppGithubModule = (portletNamespace: string) => {
+export const AppGithubModule = (portletName: string, portletNamespace: string, translationsUrl: string, preferencesUrl: string) => {
     @NgModule({
         declarations: [
             AppGithubComponent,
@@ -37,20 +37,21 @@ export const AppGithubModule = (portletNamespace: string) => {
             RouterModule.forRoot(rootRouterConfig, {useHash: true})
         ],
         providers: [
-            {provide: AppConfig, useFactory: () => new AppConfig(portletNamespace)},
+            {
+                provide: AppConfig,
+                useValue: new AppConfig(portletName, portletNamespace, translationsUrl, preferencesUrl)
+            },
             AlwaysDenyGuard,
             GithubService
         ],
         entryComponents: [AppGithubComponent]
     })
     class AppGithubModule {
-        constructor(private resolver: ComponentFactoryResolver,
-                    private appConfig: AppConfig) {
-        }
+        constructor(private resolver: ComponentFactoryResolver, private appConfig: AppConfig) {}
 
         ngDoBootstrap(appRef: ApplicationRef) {
             const factory = this.resolver.resolveComponentFactory(AppGithubComponent);
-            (<any>factory).factory.selector = "app-com-axiell-arena-ui-poc-github#" + this.appConfig.portletNamespace;
+            (<any>factory).factory.selector = this.appConfig.appSelector();
             appRef.bootstrap(factory);
         }
     }

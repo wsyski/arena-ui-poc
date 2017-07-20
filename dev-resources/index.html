@@ -4,7 +4,7 @@
     <meta charset=UTF-8>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Arena UI POC</title>
-    <link rel="stylesheet" href="aui.css">
+    <link rel="stylesheet" href="css/aui.css">
     <base href="/">
     <script src="ax-util.js"></script>
     <script type="text/javascript">
@@ -25,7 +25,9 @@
 
 <script type="text/javascript">
   AxUtil.scriptLoader.loadAll(["shim.js", "zone.js", "ng-runtime-dll.js", "main.js"], function () {
-    var portletName = bundleSymbolicName + ".github";
+    var translationsUrl = "/json/translations.json";
+    var preferencesUrl = "/json/preferences-github.json";
+    var portletName = "com_axiell_arena_ui_poc_github";
     var portletNamespace = "portletId0";
     var runPortlet = window["AxMain_" + bundleSymbolicName.replace(/[-\.]/g, '_')].runPortlet;
 
@@ -41,7 +43,7 @@
 
     function domReadyHandler() {
       document.removeEventListener('DOMContentLoaded', domReadyHandler, false);
-      runPortlet(portletName, portletNamespace);
+      runPortlet(portletName, portletNamespace, translationsUrl, preferencesUrl);
     }
   });
 </script>
@@ -57,7 +59,9 @@
 
 <script type="text/javascript">
   AxUtil.scriptLoader.loadAll(["shim.js", "zone.js", "ng-runtime-dll.js", "main.js"], function () {
-    var portletName = bundleSymbolicName + ".heroes";
+    var translationsUrl = "/json/translations.json";
+    var preferencesUrl = "/json/preferences-heroes.json";
+    var portletName = "com_axiell_arena_ui_poc_heroes";
     var portletNamespace = "portletId1";
     var runPortlet = window["AxMain_" + bundleSymbolicName.replace(/[-\.]/g, '_')].runPortlet;
 
@@ -68,12 +72,12 @@
       case 'interactive':
       case 'complete':
       default:
-        runPortlet(portletName, portletNamespace);
+        runPortlet(portletName, portletNamespace, translationsUrl, preferencesUrl);
     }
 
     function domReadyHandler() {
       document.removeEventListener('DOMContentLoaded', domReadyHandler, false);
-      runPortlet(portletName, portletNamespace);
+      runPortlet(portletName, portletNamespace, translationsUrl, preferencesUrl);
     }
   });
 </script>
@@ -88,7 +92,9 @@
 </div>
 <script type="text/javascript">
   AxUtil.scriptLoader.loadAll(["shim.js", "zone.js", "ng-runtime-dll.js", "main.js"], function () {
-    var portletName = bundleSymbolicName + ".todo";
+    var translationsUrl = "/json/translations.json";
+    var preferencesUrl = "/json/preferences-todo.json";
+    var portletName = "com_axiell_arena_ui_poc_todo";
     var portletNamespace = "portletId2";
     var runPortlet = window["AxMain_" + bundleSymbolicName.replace(/[-\.]/g, '_')].runPortlet;
 
@@ -104,7 +110,7 @@
 
     function domReadyHandler() {
       document.removeEventListener('DOMContentLoaded', domReadyHandler, false);
-      runPortlet(portletName, portletNamespace);
+      runPortlet(portletName, portletNamespace, translationsUrl, preferencesUrl);
     }
 
   });

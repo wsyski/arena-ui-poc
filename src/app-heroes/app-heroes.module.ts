@@ -17,7 +17,7 @@ import {NotFoundComponent} from "../common/not-found.component";
 import {AlwaysDenyGuard} from "../common/always-deny-guard";
 import {HttpModule} from "@angular/http";
 
-export const AppHeroesModule = (portletNamespace: string) => {
+export const AppHeroesModule = (portletName: string, portletNamespace: string, translationsUrl: string, preferencesUrl: string) => {
     @NgModule({
         imports: [
             BrowserModule,
@@ -35,7 +35,10 @@ export const AppHeroesModule = (portletNamespace: string) => {
             NotFoundComponent
         ],
         providers: [
-            { provide: AppConfig, useFactory: () => new AppConfig( portletNamespace ) },
+            {
+                provide: AppConfig,
+                useValue: new AppConfig(portletName, portletNamespace, translationsUrl, preferencesUrl)
+            },
             AlwaysDenyGuard,
             HeroService ],
         entryComponents: [AppHeroesComponent]
@@ -48,7 +51,7 @@ export const AppHeroesModule = (portletNamespace: string) => {
 
         ngDoBootstrap(appRef: ApplicationRef) {
             const factory = this.resolver.resolveComponentFactory(AppHeroesComponent);
-            (<any>factory).factory.selector = "app-com-axiell-arena-ui-poc-heroes#" + this.appConfig.portletNamespace;
+            (<any>factory).factory.selector = this.appConfig.appSelector();
             appRef.bootstrap(factory);
         }
     }

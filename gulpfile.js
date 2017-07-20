@@ -28,7 +28,7 @@ gulp.task('clean', function () {
  */
 gulp.task("dev-resources", function () {
   return gulp.src([config.dev_resources_dir + '/index.html', config.dev_resources_dir + '/favicon.ico',
-    config.dev_resources_dir + '/aui.css'])
+    config.dev_resources_dir + '/css/*',config.dev_resources_dir + '/json/*'], {base: config.dev_resources_dir})
     .pipe(gulp.dest(config.build_dir));
 });
 

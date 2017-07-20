@@ -14,7 +14,7 @@ import {AppTodoRoutingModule} from "./app-todo.routes";
 import {NotFoundComponent} from "../common/not-found.component";
 import {AlwaysDenyGuard} from "../common/always-deny-guard";
 
-export const AppTodoModule = (portletNamespace: string) => {
+export const AppTodoModule = (portletName: string, portletNamespace: string, translationsUrl: string, preferencesUrl: string) => {
     @NgModule({
         imports: [
             BrowserModule,
@@ -30,18 +30,20 @@ export const AppTodoModule = (portletNamespace: string) => {
             StaffListComponent,
             NotFoundComponent
         ],
-        providers: [{ provide: AppConfig, useFactory: () => new AppConfig(portletNamespace) }, AlwaysDenyGuard],
+        providers: [
+            {
+                provide: AppConfig,
+                useValue: new AppConfig(portletName, portletNamespace, translationsUrl, preferencesUrl)
+            },
+            AlwaysDenyGuard],
         entryComponents: [AppTodoComponent]
     })
     class AppTodoModule {
-        constructor(
-            private resolver: ComponentFactoryResolver,
-            private appConfig: AppConfig
-        ) { }
+        constructor(private resolver: ComponentFactoryResolver, private appConfig: AppConfig) {}
 
         ngDoBootstrap(appRef: ApplicationRef) {
             const factory = this.resolver.resolveComponentFactory(AppTodoComponent);
-            (<any>factory).factory.selector = "app-com-axiell-arena-ui-poc-todo#" + this.appConfig.portletNamespace;
+            (<any>factory).factory.selector = this.appConfig.appSelector();
             appRef.bootstrap(factory);
         }
     }
