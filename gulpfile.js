@@ -29,7 +29,7 @@ gulp.task('clean', function () {
  */
 gulp.task("dev-resources", function () {
   return gulp.src([config.dev_resources_dir + '/index.html', config.dev_resources_dir + '/favicon.ico',
-    config.dev_resources_dir + '/css/*',config.dev_resources_dir + '/json/*'], {base: config.dev_resources_dir})
+    config.dev_resources_dir + '/css/*', config.dev_resources_dir + '/json/*'], {base: config.dev_resources_dir})
     .pipe(gulp.dest(config.build_dir));
 });
 
@@ -121,20 +121,20 @@ config.setupJarDeploy(gulp, liferay_config);
 
 function showWebpackSummary(stats) {
   gutil.log('[webpack-watch]\n' + stats.toString({
-      colors: true,
-      hash: true,
-      timings: true,
-      chunks: false,
-      chunkModules: false,
-      modules: false,
-      children: true,
-      version: true,
-      cached: false,
-      cachedAssets: false,
-      reasons: false,
-      source: false,
-      errorDetails: true
-    }));
+    colors: true,
+    hash: true,
+    timings: true,
+    chunks: false,
+    chunkModules: false,
+    modules: false,
+    children: true,
+    version: true,
+    cached: false,
+    cachedAssets: false,
+    reasons: false,
+    source: false,
+    errorDetails: true
+  }));
 }
 
 gulp.task('watch', (cb) => {
