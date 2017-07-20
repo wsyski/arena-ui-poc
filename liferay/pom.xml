@@ -99,6 +99,7 @@
 									<includes>
 										<include>**/ax-util.js</include>
 										<include>**/main.js</include>
+										<include>**/main.js.map</include>
 										<include>**/ng-runtime-dll.js</include>
                                         <include>**/shim.js</include>
                                         <include>**/zone.js</include>
