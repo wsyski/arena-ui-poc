@@ -4,14 +4,12 @@ import {Injectable} from "@angular/core";
 export class AppConfig {
     public portletName: string;
     public portletNamespace: string;
-    public translationsUrl: string;
-    public preferencesUrl: string;
+    public portletSettingsUrl: string;
 
-    constructor(portletName: string, portletNamespace: string, translationsUrl: string, preferencesUrl: string) {
+    constructor(portletName: string, portletNamespace: string, portletSettingsUrl: string) {
         this.portletName = portletName;
         this.portletNamespace = portletNamespace;
-        this.translationsUrl = translationsUrl;
-        this.preferencesUrl = preferencesUrl;
+        this.portletSettingsUrl = portletSettingsUrl;
     }
 
     appSelector() {

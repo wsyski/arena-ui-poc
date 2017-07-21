@@ -1,9 +1,11 @@
 Bundle-SymbolicName: com.axiell.arena_ui_poc
 Bundle-Description: Arena POC
 Bundle-Version: 1.0.0
+Private-Package: org.apache.commons.lang3.*
 
 Web-ContextPath: /com.axiell.arena-ui-poc
 
+-includeresource: @commons-lang3-${commons-lang3.version}.jar;lib:=true
 -jsp: *.jsp,*.jspf
 -metatype: *
 -plugin.bundle: com.liferay.ant.bnd.resource.bundle.ResourceBundleLoaderAnalyzerPlugin

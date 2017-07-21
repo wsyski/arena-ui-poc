@@ -17,7 +17,7 @@ import {AppConfig} from "../common/app-config";
 import {NotFoundComponent} from "../common/not-found.component";
 import {AlwaysDenyGuard} from "../common/always-deny-guard";
 
-export const getAppGithubModule = (portletName: string, portletNamespace: string, translationsUrl: string, preferencesUrl: string) => {
+export const getAppGithubModule = (portletName: string, portletNamespace: string, portletSettingsUrl: string) => {
     @NgModule({
         declarations: [
             AppGithubComponent,
@@ -39,7 +39,7 @@ export const getAppGithubModule = (portletName: string, portletNamespace: string
         providers: [
             {
                 provide: AppConfig,
-                useValue: new AppConfig(portletName, portletNamespace, translationsUrl, preferencesUrl)
+                useValue: new AppConfig(portletName, portletNamespace, portletSettingsUrl)
             },
             AlwaysDenyGuard,
             GithubService

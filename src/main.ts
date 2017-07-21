@@ -10,18 +10,18 @@ const getPortletShortName = (portletName: string) => {
     return portletName.substring(startIndex + 1);
 };
 
-export const runPortlet = (portletName: string, portletNamespace: string, translationsUrl: string, preferencesUrl: string) => {
+export const runPortlet = (portletName: string, portletNamespace: string, portletSettingsUrl: string) => {
     let portletShortName = getPortletShortName(portletName);
     let appModule;
     switch (portletShortName) {
         case "github":
-            appModule = getAppGithubModule(portletName, portletNamespace, translationsUrl, preferencesUrl);
+            appModule = getAppGithubModule(portletName, portletNamespace, portletSettingsUrl);
             break;
         case "heroes":
-            appModule = getAppHeroesModule(portletName, portletNamespace, translationsUrl, preferencesUrl);
+            appModule = getAppHeroesModule(portletName, portletNamespace, portletSettingsUrl);
             break;
         case "todo":
-            appModule = getAppTodoModule(portletName, portletNamespace, translationsUrl, preferencesUrl);
+            appModule = getAppTodoModule(portletName, portletNamespace, portletSettingsUrl);
             break;
         default:
             console.log(`Invalid portlet short name: ${portletShortName}`)

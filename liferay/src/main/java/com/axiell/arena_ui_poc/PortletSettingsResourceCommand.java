@@ -9,6 +9,7 @@ import com.liferay.portal.kernel.portlet.bridges.mvc.BaseMVCResourceCommand;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCResourceCommand;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.osgi.service.component.annotations.Component;
 
 import javax.portlet.ResourceRequest;
@@ -21,14 +22,22 @@ import java.util.*;
                 "javax.portlet.name=" + ArenaUIPortletKeys.HEROES_PORTLET_NAME,
                 "javax.portlet.name=" + ArenaUIPortletKeys.GITHUB_PORTLET_NAME,
                 "javax.portlet.name=" + ArenaUIPortletKeys.TODO_PORTLET_NAME,
-                "mvc.command.name=/arena-ui/translations"
+                "mvc.command.name=/portlet-settings"
         },
         service = MVCResourceCommand.class
 )
-public class TranslationsResourceCommand extends BaseMVCResourceCommand {
+public class PortletSettingsResourceCommand extends BaseMVCResourceCommand {
 
     @Override
     protected void doServeResource(final ResourceRequest resourceRequest, final ResourceResponse resourceResponse) throws IOException {
+        PortletSettings portletSettings=getPortletSettings(resourceRequest);
+        LOGGER.debug("portletSettings: "+portletSettings);
+        JSONSerializer jsonSerializer = JSONFactoryUtil.createJSONSerializer();
+        JSONPortletResponseUtil.writeJSON(resourceRequest, resourceResponse, jsonSerializer.serializeDeep(portletSettings));
+    }
+
+    private PortletSettings getPortletSettings(final ResourceRequest resourceRequest) {
+        Map<String, String[]> preferences = resourceRequest.getPreferences().getMap();
         String localeAsString = ParamUtil.getString(resourceRequest, "locale");
         Locale locale;
         if (localeAsString == null || localeAsString.isEmpty()) {
@@ -37,10 +46,8 @@ public class TranslationsResourceCommand extends BaseMVCResourceCommand {
             locale = Locale.forLanguageTag(localeAsString.replace('_', '-'));
         }
         ResourceBundle resourceBundle = getPortletConfig(resourceRequest).getResourceBundle(locale);
-        //ResourceBundle resourceBundle = ResourceBundle.getBundle("Language",locale);
         Map<String, String> translations = toMap(resourceBundle);
-        JSONSerializer jsonSerializer = JSONFactoryUtil.createJSONSerializer();
-        JSONPortletResponseUtil.writeJSON(resourceRequest, resourceResponse, jsonSerializer.serializeDeep(translations));
+        return new PortletSettings(preferences, translations);
     }
 
     private static Map<String, String> toMap(final ResourceBundle resourceBundle) {
@@ -54,7 +61,28 @@ public class TranslationsResourceCommand extends BaseMVCResourceCommand {
         return map;
     }
 
+    private static final class PortletSettings {
+        final Map<String, String[]> preferences;
+        final Map<String, String> translations;
+
+        public PortletSettings(final Map<String, String[]> preferences, final Map<String, String> translations) {
+            this.preferences = preferences;
+            this.translations = translations;
+        }
+
+        public Map<String, String[]> getPreferences() {
+            return preferences;
+        }
+
+        public Map<String, String> getTranslations() {
+            return translations;
+        }
+
+        @Override
+        public String toString() {
+            return ReflectionToStringBuilder.toString(this);
+        }
+    }
+
     public static final Log LOGGER = LogFactoryUtil.getLog(AbstractArenaUIPortlet.class);
-
-
 }
