@@ -1,5 +1,5 @@
 import {Injectable} from "@angular/core";
-import {Http} from "@angular/http";
+import {Http, Response, ResponseContentType} from "@angular/http";
 
 @Injectable()
 export class AppConfig {
@@ -10,16 +10,20 @@ export class AppConfig {
     constructor(private http: Http) {
     }
 
-    public load(portletName: string, portletNamespace: string, portletSettingsUrl: string) {
+    public load(portletName: string, portletNamespace: string, portletSettingsUrl: string): () => Promise<any> {
         this.portletName = portletName;
         this.portletNamespace = portletNamespace;
-        return new Promise((resolve, reject) => {
-            this.http.get(portletSettingsUrl)
-                .subscribe(data => {
-                    this.portletSettings = data.json();
-                    resolve();
-                });
-        });
+        return (): Promise<any> => {
+            let promise: Promise<any> = new Promise((resolve: any) => {
+                this.http.get(portletSettingsUrl, {responseType: ResponseContentType.Json})
+                    .subscribe((response: Response) => {
+                        this.portletSettings = response.json();
+                        console.log(this.portletSettings);
+                        resolve();
+                    });
+            });
+            return promise;
+        }
     }
 
     public appSelector() {
