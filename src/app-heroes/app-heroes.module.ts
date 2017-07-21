@@ -17,7 +17,7 @@ import {NotFoundComponent} from "../common/not-found.component";
 import {AlwaysDenyGuard} from "../common/always-deny-guard";
 import {HttpModule} from "@angular/http";
 
-export const AppHeroesModule = (portletName: string, portletNamespace: string, translationsUrl: string, preferencesUrl: string) => {
+export const getAppHeroesModule = (portletName: string, portletNamespace: string, translationsUrl: string, preferencesUrl: string) => {
     @NgModule({
         imports: [
             BrowserModule,

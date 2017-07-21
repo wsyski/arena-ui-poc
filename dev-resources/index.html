@@ -6,9 +6,9 @@
     <title>Arena UI POC</title>
     <link rel="stylesheet" href="css/aui.css">
     <base href="/">
-    <script src="ax-util.js"></script>
+    <script src="ax-bootstrap.js"></script>
     <script type="text/javascript">
-      var bundleSymbolicName = "com.axiell.arena-ui-poc";
+      var bundleSymbolicName = "com.axiell.arena_ui_poc";
     </script>
 </head>
 <body>
@@ -18,16 +18,16 @@
     <h2 class="portlet-title-text">Github portletId0</h2>
     <div class=" portlet-content-container">
         <div class="portlet-body">
-            <app-com-axiell-arena-ui-poc-github id="portletId0">Loading...</app-com-axiell-arena-ui-poc-github>
+            <app-github id="portletId0">Loading...</app-github>
         </div>
     </div>
 </div>
 
 <script type="text/javascript">
-  AxUtil.scriptLoader.loadAll(["shim.js", "zone.js", "ng-runtime-dll.js", "main.js"], function () {
+  AxBootstrap.scriptLoader.loadAll(["shim.js", "zone.js", "ng-runtime-dll.js", "main.js"], function () {
     var translationsUrl = "/json/translations.json";
     var preferencesUrl = "/json/preferences-github.json";
-    var portletName = "com_axiell_arena_ui_poc_github";
+    var portletName = "github";
     var portletNamespace = "portletId0";
     var runPortlet = window["AxMain_" + bundleSymbolicName.replace(/[-\.]/g, '_')].runPortlet;
 
@@ -52,16 +52,16 @@
     <h2 class="portlet-title-text">Heroes portletId1</h2>
     <div class=" portlet-content-container">
         <div class="portlet-body">
-            <app-com-axiell-arena-ui-poc-heroes id="portletId1">Loading...</app-com-axiell-arena-ui-poc-heroes>
+            <app-heroes id="portletId1">Loading...</app-heroes>
         </div>
     </div>
 </div>
 
 <script type="text/javascript">
-  AxUtil.scriptLoader.loadAll(["shim.js", "zone.js", "ng-runtime-dll.js", "main.js"], function () {
+  AxBootstrap.scriptLoader.loadAll(["shim.js", "zone.js", "ng-runtime-dll.js", "main.js"], function () {
     var translationsUrl = "/json/translations.json";
     var preferencesUrl = "/json/preferences-heroes.json";
-    var portletName = "com_axiell_arena_ui_poc_heroes";
+    var portletName = "heroes";
     var portletNamespace = "portletId1";
     var runPortlet = window["AxMain_" + bundleSymbolicName.replace(/[-\.]/g, '_')].runPortlet;
 
@@ -86,15 +86,15 @@
     <h2 class="portlet-title-text">Todo portletId2</h2>
     <div class=" portlet-content-container">
         <div class="portlet-body">
-            <app-com-axiell-arena-ui-poc-todo id="portletId2">Loading...</app-com-axiell-arena-ui-poc-todo>
+            <app-todo id="portletId2">Loading...</app-todo>
         </div>
     </div>
 </div>
 <script type="text/javascript">
-  AxUtil.scriptLoader.loadAll(["shim.js", "zone.js", "ng-runtime-dll.js", "main.js"], function () {
+  AxBootstrap.scriptLoader.loadAll(["shim.js", "zone.js", "ng-runtime-dll.js", "main.js"], function () {
     var translationsUrl = "/json/translations.json";
     var preferencesUrl = "/json/preferences-todo.json";
-    var portletName = "com_axiell_arena_ui_poc_todo";
+    var portletName = "todo";
     var portletNamespace = "portletId2";
     var runPortlet = window["AxMain_" + bundleSymbolicName.replace(/[-\.]/g, '_')].runPortlet;
 

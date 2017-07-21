@@ -1,12 +1,12 @@
 import {platformBrowserDynamic} from "@angular/platform-browser-dynamic";
-import {AppGithubModule} from "./app-github/app-github.module";
-import {AppHeroesModule} from "./app-heroes/app-heroes.module";
-import {AppTodoModule} from "./app-todo/app-todo.module";
+import {getAppGithubModule} from "./app-github/app-github.module";
+import {getAppHeroesModule} from "./app-heroes/app-heroes.module";
+import {getAppTodoModule} from "./app-todo/app-todo.module";
 
-const getPortletShortName=(portletName: string) => {
+const getPortletShortName = (portletName: string) => {
     let lastIndexOfDot = portletName.lastIndexOf('.');
     let lastIndexOfUnderscore = portletName.lastIndexOf('_');
-    let startIndex = Math.max(lastIndexOfDot,lastIndexOfUnderscore);
+    let startIndex = Math.max(lastIndexOfDot, lastIndexOfUnderscore);
     return portletName.substring(startIndex + 1);
 };
 
@@ -15,13 +15,13 @@ export const runPortlet = (portletName: string, portletNamespace: string, transl
     let appModule;
     switch (portletShortName) {
         case "github":
-            appModule = AppGithubModule(portletName,portletNamespace,translationsUrl,preferencesUrl);
+            appModule = getAppGithubModule(portletName, portletNamespace, translationsUrl, preferencesUrl);
             break;
         case "heroes":
-            appModule = AppHeroesModule(portletName,portletNamespace,translationsUrl,preferencesUrl);
+            appModule = getAppHeroesModule(portletName, portletNamespace, translationsUrl, preferencesUrl);
             break;
         case "todo":
-            appModule = AppTodoModule(portletName,portletNamespace,translationsUrl,preferencesUrl);
+            appModule = getAppTodoModule(portletName, portletNamespace, translationsUrl, preferencesUrl);
             break;
         default:
             console.log(`Invalid portlet short name: ${portletShortName}`)

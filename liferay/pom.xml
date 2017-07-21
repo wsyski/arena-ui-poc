@@ -97,7 +97,7 @@
 									<directory>${project.basedir}/../build</directory>
 									<targetPath>${project.build.outputDirectory}/META-INF/resources</targetPath>
 									<includes>
-										<include>**/ax-util.js</include>
+										<include>**/ax-bootstrap.js</include>
 										<include>**/main.js</include>
 										<include>**/main.js.map</include>
 										<include>**/ng-runtime-dll.js</include>

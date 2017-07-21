@@ -1,7 +1,7 @@
 import { Component }          from '@angular/core';
 
 @Component({
-    selector: 'app-com-axiell-arena-ui-poc-heroes',
+    selector: 'app-heroes',
     template: `
         <h1>{{title}}</h1>
         <nav>

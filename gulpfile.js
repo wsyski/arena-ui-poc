@@ -46,7 +46,7 @@ gulp.task("uglify", function () {
  *  Install global scripts needed by Angular
  */
 gulp.task('globals', function () {
-  return gulp.src(['globals/ax-util.js', 'node_modules/zone.js/dist/zone.js', 'node_modules/core-js/client/shim.js'])
+  return gulp.src(['globals/ax-bootstrap.js', 'node_modules/zone.js/dist/zone.js', 'node_modules/core-js/client/shim.js'])
     .pipe(gulpif(/zone\.js$/, replace(/&& define\.amd/, '&& define.amdxxx')))
     .pipe(gulp.dest(config.build_dir))
 });

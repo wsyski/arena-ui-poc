@@ -3,7 +3,7 @@
 <app-<%= portletDisplay.getPortletName().replaceAll("[_\\.]","-") %> id="<portlet:namespace/>">Loading...</app-<%= portletDisplay.getPortletName().replaceAll("[_\\.]","-") %>>
 
 <script type="text/javascript">
-  AxUtil.scriptLoader.loadAll(["<%=request.getContextPath()%>/shim.js", "<%=request.getContextPath()%>/zone.js",  "<%=request.getContextPath()%>/ng-runtime-dll.js", "<%=request.getContextPath()%>/main.js"], function () {
+  AxBootstrap.scriptLoader.loadAll(["<%=request.getContextPath()%>/shim.js", "<%=request.getContextPath()%>/zone.js",  "<%=request.getContextPath()%>/ng-runtime-dll.js", "<%=request.getContextPath()%>/main.js"], function () {
     var translationsUrl = '<portlet:resourceURL id="/arena-ui/translations"><portlet:param name="locale" value="<%=request.getLocale().toLanguageTag()%>"/></portlet:resourceURL>';
     var preferencesUrl = '<portlet:resourceURL id="/arena-ui/preferences"/>';
     var bundleSymbolicName = '<%= org.osgi.framework.FrameworkUtil.getBundle(com.axiell.arena_ui_poc.AbstractArenaUIPortlet.class).getSymbolicName()%>';

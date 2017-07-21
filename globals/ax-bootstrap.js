@@ -91,5 +91,5 @@
 
   exports.scriptLoader = exports.scriptLoader || new ScriptLoader();
 
-}(window.AxUtil = window.AxUtil || {}));
+}(window.AxBootstrap = window.AxBootstrap || {}));
 

@@ -12,7 +12,7 @@ import javax.portlet.Portlet;
         property = {
                 "com.liferay.portlet.display-category=" + ArenaUIPortletKeys.DISPLAY_CATEGORY,
                 "com.liferay.portlet.instanceable=true",
-                "com.liferay.portlet.header-portlet-javascript=/ax-util.js",
+                "com.liferay.portlet.header-portlet-javascript=/ax-bootstrap.js",
                 "com.liferay.portlet.single-page-application=false",
                 "javax.portlet.display-name=" + ArenaUIPortletKeys.GITHUB_PORTLET_DISPLAY_NAME,
                 "javax.portlet.init-param.config-template=" + ArenaUIPortletKeys.GITHUB_PORTLET_CONFIG_TEMPLATE,
