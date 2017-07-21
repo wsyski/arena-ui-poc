@@ -23,11 +23,18 @@ module.exports = {
   plugins: [new webpack.DllReferencePlugin({
     context: '.',
     manifest: require(path.join(__dirname, 'ng-runtime', 'ng-runtime-manifest.json'))
-  }), // suppress Typescript warnings when building Angular into vendor package
-    //new webpack.ContextReplacementPlugin(/angular(\\|\/)core(\\|\/)(esm(\\|\/)src|src)(\\|\/)linker/,appRoot),
-    new webpack.LoaderOptionsPlugin({
-      debug: true
+  }),
+    new webpack.optimize.UglifyJsPlugin({
+      debug: true,
+      minimize: false,
+      compress: false,
+      beautify: true,
+      mangle: false,
+      sourceMap: true,
+      comments: true
     }),
+    // suppress Typescript warnings when building Angular into vendor package
+    //new webpack.ContextReplacementPlugin(/angular(\\|\/)core(\\|\/)(esm(\\|\/)src|src)(\\|\/)linker/,appRoot),
     new webpack.ContextReplacementPlugin(/angular(\\|\/)core(\\|\/)@angular/, appRoot),],
   resolve: {
     extensions: ['*', '.ts', '.js']
