@@ -15,7 +15,8 @@ import {HeroDetailComponent} from "./hero-detail.component";
 import {DashboardComponent} from "./dashboard.component";
 import {NotFoundComponent} from "../common/not-found.component";
 import {AlwaysDenyGuard} from "../common/always-deny-guard";
-import {HttpModule} from "@angular/http";
+import {Http, HttpModule} from "@angular/http";
+import {onAppInit} from "../common/app-init";
 
 export const getAppHeroesModule = (portletName: string, portletNamespace: string, portletSettingsUrl: string) => {
     @NgModule({
@@ -37,11 +38,11 @@ export const getAppHeroesModule = (portletName: string, portletNamespace: string
         providers: [
             HeroService,
             AlwaysDenyGuard,
-            AppConfig,
+            {provide: AppConfig, useValue: new AppConfig(portletName, portletNamespace, portletSettingsUrl)},
             {
                 provide: APP_INITIALIZER,
-                useFactory: (appConfig: AppConfig) => () => appConfig.load(portletName, portletNamespace, portletSettingsUrl),
-                deps: [AppConfig],
+                useFactory: onAppInit,
+                deps: [Http, AppConfig],
                 multi: true
             }
         ],

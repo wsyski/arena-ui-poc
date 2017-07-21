@@ -5,7 +5,7 @@ import {AppGithubComponent} from "./app-github.component";
 import {GithubService} from "./github/shared/github.service";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {BrowserModule} from "@angular/platform-browser";
-import {HttpModule} from "@angular/http";
+import {Http, HttpModule} from "@angular/http";
 
 import {AboutComponent} from "./about/about.component";
 import {HomeComponent} from "./home/home.component";
@@ -16,6 +16,7 @@ import {ContactComponent} from "./contact/contact.component";
 import {AppConfig} from "../common/app-config";
 import {NotFoundComponent} from "../common/not-found.component";
 import {AlwaysDenyGuard} from "../common/always-deny-guard";
+import {onAppInit} from "../common/app-init";
 
 export const getAppGithubModule = (portletName: string, portletNamespace: string, portletSettingsUrl: string) => {
     @NgModule({
@@ -39,11 +40,11 @@ export const getAppGithubModule = (portletName: string, portletNamespace: string
         providers: [
             GithubService,
             AlwaysDenyGuard,
-            AppConfig,
+            {provide: AppConfig, useValue: new AppConfig(portletName, portletNamespace, portletSettingsUrl)},
             {
                 provide: APP_INITIALIZER,
-                useFactory: (appConfig: AppConfig) => () => appConfig.load(portletName, portletNamespace, portletSettingsUrl),
-                deps: [AppConfig],
+                useFactory: onAppInit,
+                deps: [Http, AppConfig],
                 multi: true
             }
         ],

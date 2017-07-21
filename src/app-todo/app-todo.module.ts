@@ -8,11 +8,12 @@ import {TaskComponent} from "./todo/components/task.component";
 import {StaffListComponent} from "./staff/components/staff-list.component";
 
 import {FormsModule} from "@angular/forms";
-import {HttpModule} from "@angular/http";
+import {Http, HttpModule} from "@angular/http";
 import {AppConfig} from "../common/app-config";
 import {AppTodoRoutingModule} from "./app-todo.routes";
 import {NotFoundComponent} from "../common/not-found.component";
 import {AlwaysDenyGuard} from "../common/always-deny-guard";
+import {onAppInit} from "../common/app-init";
 
 export const getAppTodoModule = (portletName: string, portletNamespace: string, portletSettingsUrl: string) => {
     @NgModule({
@@ -32,11 +33,11 @@ export const getAppTodoModule = (portletName: string, portletNamespace: string, 
         ],
         providers: [
             AlwaysDenyGuard,
-            AppConfig,
+            {provide: AppConfig, useValue: new AppConfig(portletName, portletNamespace, portletSettingsUrl)},
             {
                 provide: APP_INITIALIZER,
-                useFactory: (appConfig: AppConfig) => () => appConfig.load(portletName, portletNamespace, portletSettingsUrl),
-                deps: [AppConfig],
+                useFactory: onAppInit,
+                deps: [Http, AppConfig],
                 multi: true
             }
         ],

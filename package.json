@@ -11,7 +11,7 @@
     "compile": "gulp compile",
     "deploy": "gulp deploy",
     "build": "gulp build",
-    "serve": "http-server build -d -c-1 -o",
+    "serve": "http-server build -p 8081 -d -c-1 -o",
     "webpack-dev-server": "gulp webpack-dev-server",
     "watch": "gulp watch",
     "postinstall": "typings install"
