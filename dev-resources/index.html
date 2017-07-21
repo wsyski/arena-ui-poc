@@ -26,7 +26,7 @@
 <script type="text/javascript">
   AxBootstrap.scriptLoader.loadAll(["shim.js", "zone.js", "ng-runtime-dll.js", "main.js"], function () {
     var portletName = "github";
-    var portletSettingsUrl = "/json/portlet-settings-" + portletName + ".json";
+    var portletSettingsUrl = location.origin + "/json/portlet-settings-" + portletName + ".json";
     var portletNamespace = "portletId0";
     var runPortlet = window["AxMain_" + bundleSymbolicName.replace(/[-\.]/g, '_')].runPortlet;
 
@@ -59,7 +59,7 @@
 <script type="text/javascript">
   AxBootstrap.scriptLoader.loadAll(["shim.js", "zone.js", "ng-runtime-dll.js", "main.js"], function () {
     var portletName = "heroes";
-    var portletSettingsUrl = "/json/portlet-settings-" + portletName + ".json";
+    var portletSettingsUrl = location.origin + "/json/portlet-settings-" + portletName + ".json";
     var portletNamespace = "portletId1";
     var runPortlet = window["AxMain_" + bundleSymbolicName.replace(/[-\.]/g, '_')].runPortlet;
 
@@ -91,7 +91,7 @@
 <script type="text/javascript">
   AxBootstrap.scriptLoader.loadAll(["shim.js", "zone.js", "ng-runtime-dll.js", "main.js"], function () {
     var portletName = "todo";
-    var portletSettingsUrl = "/json/portlet-settings-" + portletName + ".json";
+    var portletSettingsUrl = location.origin + "/json/portlet-settings-" + portletName + ".json";
     var portletNamespace = "portletId2";
     var runPortlet = window["AxMain_" + bundleSymbolicName.replace(/[-\.]/g, '_')].runPortlet;
 

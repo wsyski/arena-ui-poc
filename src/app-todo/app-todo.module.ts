@@ -1,4 +1,4 @@
-import {ApplicationRef, ComponentFactoryResolver, NgModule}      from '@angular/core';
+import {APP_INITIALIZER, ApplicationRef, ComponentFactoryResolver, NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 
 import {AppTodoComponent} from "./app-todo.component";
@@ -31,15 +31,20 @@ export const getAppTodoModule = (portletName: string, portletNamespace: string, 
             NotFoundComponent
         ],
         providers: [
+            AlwaysDenyGuard,
+            AppConfig,
             {
-                provide: AppConfig,
-                useValue: new AppConfig(portletName, portletNamespace, portletSettingsUrl)
-            },
-            AlwaysDenyGuard],
+                provide: APP_INITIALIZER,
+                useFactory: (appConfig: AppConfig) => () => appConfig.load(portletName, portletNamespace, portletSettingsUrl),
+                deps: [AppConfig],
+                multi: true
+            }
+        ],
         entryComponents: [AppTodoComponent]
     })
     class AppTodoModule {
-        constructor(private resolver: ComponentFactoryResolver, private appConfig: AppConfig) {}
+        constructor(private resolver: ComponentFactoryResolver, private appConfig: AppConfig) {
+        }
 
         ngDoBootstrap(appRef: ApplicationRef) {
             const factory = this.resolver.resolveComponentFactory(AppTodoComponent);

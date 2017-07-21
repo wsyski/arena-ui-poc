@@ -1,4 +1,4 @@
-import {ApplicationRef, ComponentFactoryResolver, NgModule} from "@angular/core";
+import {APP_INITIALIZER, ApplicationRef, ComponentFactoryResolver, NgModule} from "@angular/core";
 import {RouterModule} from "@angular/router";
 import {rootRouterConfig} from "./app-github.routes";
 import {AppGithubComponent} from "./app-github.component";
@@ -37,17 +37,21 @@ export const getAppGithubModule = (portletName: string, portletNamespace: string
             RouterModule.forRoot(rootRouterConfig, {useHash: true})
         ],
         providers: [
-            {
-                provide: AppConfig,
-                useValue: new AppConfig(portletName, portletNamespace, portletSettingsUrl)
-            },
+            GithubService,
             AlwaysDenyGuard,
-            GithubService
+            AppConfig,
+            {
+                provide: APP_INITIALIZER,
+                useFactory: (appConfig: AppConfig) => () => appConfig.load(portletName, portletNamespace, portletSettingsUrl),
+                deps: [AppConfig],
+                multi: true
+            }
         ],
         entryComponents: [AppGithubComponent]
     })
     class AppGithubModule {
-        constructor(private resolver: ComponentFactoryResolver, private appConfig: AppConfig) {}
+        constructor(private resolver: ComponentFactoryResolver, private appConfig: AppConfig) {
+        }
 
         ngDoBootstrap(appRef: ApplicationRef) {
             const factory = this.resolver.resolveComponentFactory(AppGithubComponent);

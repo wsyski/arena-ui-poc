@@ -1,4 +1,4 @@
-import {ApplicationRef, ComponentFactoryResolver, NgModule} from '@angular/core';
+import {APP_INITIALIZER, ApplicationRef, ComponentFactoryResolver, NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {FormsModule} from '@angular/forms';
 
@@ -35,12 +35,16 @@ export const getAppHeroesModule = (portletName: string, portletNamespace: string
             NotFoundComponent
         ],
         providers: [
-            {
-                provide: AppConfig,
-                useValue: new AppConfig(portletName, portletNamespace, portletSettingsUrl)
-            },
+            HeroService,
             AlwaysDenyGuard,
-            HeroService],
+            AppConfig,
+            {
+                provide: APP_INITIALIZER,
+                useFactory: (appConfig: AppConfig) => () => appConfig.load(portletName, portletNamespace, portletSettingsUrl),
+                deps: [AppConfig],
+                multi: true
+            }
+        ],
         entryComponents: [AppHeroesComponent]
     })
     class AppHeroesModule {
