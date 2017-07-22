@@ -1,6 +1,5 @@
 import {platformBrowserDynamic} from "@angular/platform-browser-dynamic";
 import {getAppGithubModule} from "./app-github/app-github.module";
-import {getAppHeroesModule} from "./app-heroes/app-heroes.module";
 import {getAppTodoModule} from "./app-todo/app-todo.module";
 
 const getPortletShortName = (portletName: string) => {
@@ -16,9 +15,6 @@ export const runPortlet = (portletName: string, portletNamespace: string, portle
     switch (portletShortName) {
         case "github":
             appModule = getAppGithubModule(portletName, portletNamespace, portletSettingsUrl);
-            break;
-        case "heroes":
-            appModule = getAppHeroesModule(portletName, portletNamespace, portletSettingsUrl);
             break;
         case "todo":
             appModule = getAppTodoModule(portletName, portletNamespace, portletSettingsUrl);

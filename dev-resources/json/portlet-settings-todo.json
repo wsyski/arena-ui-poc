@@ -1,14 +1,8 @@
 {
   "preferences": {
-    "fontFamily": [
-      "Arial"
-    ],
-    "fontSize": [
-      "10"
-    ],
-    "fontColor": [
-      "voilet"
-    ]
+    "fontFamily": "Arial",
+    "fontSize": 10,
+    "fontColor": "voilet"
   },
   "translations": {
     "javax.portlet.title": "Todo Portlet",
