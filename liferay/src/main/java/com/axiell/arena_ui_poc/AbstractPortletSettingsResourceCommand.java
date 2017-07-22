@@ -56,7 +56,7 @@ public abstract class AbstractPortletSettingsResourceCommand<C> extends BaseMVCR
     }
 
     private final class PortletSettings<C> {
-        final Map<String, Object> preferences = new HashMap<>();
+        final Map<String, Object> portletConfiguration = new HashMap<>();
         final Map<String, String> translations;
 
         private PortletSettings(final C portletConfiguration, final Map<String, String> translations) {
@@ -65,7 +65,7 @@ public abstract class AbstractPortletSettingsResourceCommand<C> extends BaseMVCR
                 try {
                     Object o = method.invoke(portletConfiguration);
                     if (o != null) {
-                        preferences.put(method.getName(), o);
+                        this.portletConfiguration.put(method.getName(), o);
                     }
                 } catch (IllegalAccessException | InvocationTargetException ex) {
                     LOGGER.error(ex.getMessage(), ex);
@@ -74,8 +74,8 @@ public abstract class AbstractPortletSettingsResourceCommand<C> extends BaseMVCR
             this.translations = translations;
         }
 
-        public Map<String, Object> getPreferences() {
-            return preferences;
+        public Map<String, Object> getPortletConfiguration() {
+            return portletConfiguration;
         }
 
         public Map<String, String> getTranslations() {
