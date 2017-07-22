@@ -1,6 +1,6 @@
 package com.axiell.arena_ui_poc.todo;
 
-import com.axiell.arena_ui_poc.AbstractArenaUIPortlet;
+import com.axiell.arena_ui_poc.AbstractPortlet;
 import com.axiell.arena_ui_poc.ArenaUIPortletKeys;
 import org.osgi.service.component.annotations.Component;
 
@@ -24,7 +24,7 @@ import javax.portlet.Portlet;
         },
         service = Portlet.class
 )
-public class TodoPortlet extends AbstractArenaUIPortlet<TodoPortletConfiguration> {
+public class TodoPortlet extends AbstractPortlet<TodoPortletConfiguration> {
 
     @Override
     protected Class<TodoPortletConfiguration> getConfigurationClass() {

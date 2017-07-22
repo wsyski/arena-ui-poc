@@ -1,43 +1,37 @@
 package com.axiell.arena_ui_poc;
 
+import com.liferay.portal.configuration.metatype.bnd.util.ConfigurableUtil;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONSerializer;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.module.configuration.ConfigurationException;
 import com.liferay.portal.kernel.portlet.JSONPortletResponseUtil;
 import com.liferay.portal.kernel.portlet.bridges.mvc.BaseMVCResourceCommand;
-import com.liferay.portal.kernel.portlet.bridges.mvc.MVCResourceCommand;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
-import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Activate;
+import org.osgi.service.component.annotations.Modified;
 
 import javax.portlet.ResourceRequest;
 import javax.portlet.ResourceResponse;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.*;
 
-@Component(
-        property = {
-                "javax.portlet.name=" + ArenaUIPortletKeys.HEROES_PORTLET_NAME,
-                "javax.portlet.name=" + ArenaUIPortletKeys.GITHUB_PORTLET_NAME,
-                "javax.portlet.name=" + ArenaUIPortletKeys.TODO_PORTLET_NAME,
-                "mvc.command.name=/portlet-settings"
-        },
-        service = MVCResourceCommand.class
-)
-public class PortletSettingsResourceCommand extends BaseMVCResourceCommand {
+public abstract class AbstractPortletSettingsResourceCommand<C> extends BaseMVCResourceCommand {
 
     @Override
-    protected void doServeResource(final ResourceRequest resourceRequest, final ResourceResponse resourceResponse) throws IOException {
-        PortletSettings portletSettings=getPortletSettings(resourceRequest);
-        LOGGER.debug("portletSettings: "+portletSettings);
+    protected void doServeResource(final ResourceRequest resourceRequest, final ResourceResponse resourceResponse) throws IOException, ConfigurationException {
+        PortletSettings portletSettings = getPortletSettings(resourceRequest);
+        LOGGER.debug("portletSettings: " + portletSettings);
         JSONSerializer jsonSerializer = JSONFactoryUtil.createJSONSerializer();
         JSONPortletResponseUtil.writeJSON(resourceRequest, resourceResponse, jsonSerializer.serializeDeep(portletSettings));
     }
 
-    private PortletSettings getPortletSettings(final ResourceRequest resourceRequest) {
-        Map<String, String[]> preferences = resourceRequest.getPreferences().getMap();
+    private PortletSettings getPortletSettings(final ResourceRequest resourceRequest) throws ConfigurationException {
         String localeAsString = ParamUtil.getString(resourceRequest, "locale");
         Locale locale;
         if (localeAsString == null || localeAsString.isEmpty()) {
@@ -47,7 +41,7 @@ public class PortletSettingsResourceCommand extends BaseMVCResourceCommand {
         }
         ResourceBundle resourceBundle = getPortletConfig(resourceRequest).getResourceBundle(locale);
         Map<String, String> translations = toMap(resourceBundle);
-        return new PortletSettings(preferences, translations);
+        return new PortletSettings<C>(portletConfiguration, translations);
     }
 
     private static Map<String, String> toMap(final ResourceBundle resourceBundle) {
@@ -61,16 +55,26 @@ public class PortletSettingsResourceCommand extends BaseMVCResourceCommand {
         return map;
     }
 
-    private static final class PortletSettings {
-        final Map<String, String[]> preferences;
+    private final class PortletSettings<C> {
+        final Map<String, Object> preferences = new HashMap<>();
         final Map<String, String> translations;
 
-        public PortletSettings(final Map<String, String[]> preferences, final Map<String, String> translations) {
-            this.preferences = preferences;
+        private PortletSettings(final C portletConfiguration, final Map<String, String> translations) {
+            Method[] methods = getConfigurationClass().getDeclaredMethods();
+            for (Method method : methods) {
+                try {
+                    Object o = method.invoke(portletConfiguration);
+                    if (o != null) {
+                        preferences.put(method.getName(), o);
+                    }
+                } catch (IllegalAccessException | InvocationTargetException ex) {
+                    LOGGER.error(ex.getMessage(), ex);
+                }
+            }
             this.translations = translations;
         }
 
-        public Map<String, String[]> getPreferences() {
+        public Map<String, Object> getPreferences() {
             return preferences;
         }
 
@@ -84,5 +88,13 @@ public class PortletSettingsResourceCommand extends BaseMVCResourceCommand {
         }
     }
 
-    public static final Log LOGGER = LogFactoryUtil.getLog(AbstractArenaUIPortlet.class);
+    protected void activate(final Map<Object, Object> properties) {
+        portletConfiguration = ConfigurableUtil.createConfigurable(getConfigurationClass(), properties);
+    }
+
+    public static final Log LOGGER = LogFactoryUtil.getLog(AbstractPortletConfigurationAction.class);
+
+    private volatile C portletConfiguration;
+
+    protected abstract Class<C> getConfigurationClass();
 }

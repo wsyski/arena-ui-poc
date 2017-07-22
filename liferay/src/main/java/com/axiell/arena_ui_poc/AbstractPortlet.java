@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.util.Map;
 
 
-public abstract class AbstractArenaUIPortlet<C> extends MVCPortlet {
+public abstract class AbstractPortlet<C> extends MVCPortlet {
 
     @Override
     public void doView(final RenderRequest renderRequest, final RenderResponse renderResponse) throws IOException, PortletException {
@@ -33,7 +33,7 @@ public abstract class AbstractArenaUIPortlet<C> extends MVCPortlet {
         portletConfiguration = ConfigurableUtil.createConfigurable(getConfigurationClass(), properties);
     }
 
-    public static final Log LOGGER = LogFactoryUtil.getLog(AbstractArenaUIPortlet.class);
+    public static final Log LOGGER = LogFactoryUtil.getLog(AbstractPortlet.class);
 
     protected volatile C portletConfiguration;
 

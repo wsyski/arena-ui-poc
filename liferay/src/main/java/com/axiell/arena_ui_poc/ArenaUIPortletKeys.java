@@ -8,10 +8,6 @@ public class ArenaUIPortletKeys {
     public static final String GITHUB_PORTLET_DISPLAY_NAME = "Github Portlet";
     public static final String GITHUB_PORTLET_CONFIGURATION = "com.axiell.arena_ui_poc.github.GithubPortletConfiguration";
     public static final String GITHUB_PORTLET_CONFIG_TEMPLATE = "/configuration-"+GITHUB_PORTLET_NAME+".jsp";
-    public static final String HEROES_PORTLET_NAME = "heroes";
-    public static final String HEROES_PORTLET_DISPLAY_NAME = "Heroes Portlet";
-    public static final String HEROES_PORTLET_CONFIGURATION = "com.axiell.arena_ui_poc.heroes.HeroesPortletConfiguration";
-    public static final String HEROES_PORTLET_CONFIG_TEMPLATE = "/configuration-"+HEROES_PORTLET_NAME+".jsp";
     public static final String TODO_PORTLET_NAME = "todo";
     public static final String TODO_PORTLET_DISPLAY_NAME = "Todo Portlet";
     public static final String TODO_PORTLET_CONFIGURATION = "com.axiell.arena_ui_poc.todo.TodoPortletConfiguration";

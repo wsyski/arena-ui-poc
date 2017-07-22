@@ -1,15 +1,18 @@
 package com.axiell.arena_ui_poc.todo;
 
-import com.axiell.arena_ui_poc.AbstractArenaUIPortletConfigurationAction;
+import com.axiell.arena_ui_poc.AbstractPortletConfigurationAction;
 import com.axiell.arena_ui_poc.ArenaUIPortletKeys;
 import com.liferay.portal.kernel.portlet.ConfigurationAction;
 import com.liferay.portal.kernel.util.ParamUtil;
+import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.ConfigurationPolicy;
+import org.osgi.service.component.annotations.Modified;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
+import java.util.Map;
 
 @Component(
         configurationPid = ArenaUIPortletKeys.TODO_PORTLET_CONFIGURATION,
@@ -19,7 +22,7 @@ import javax.portlet.PortletConfig;
         },
         service = ConfigurationAction.class
 )
-public class TodoPortletConfigurationAction extends AbstractArenaUIPortletConfigurationAction<TodoPortletConfiguration> {
+public class TodoPortletConfigurationAction extends AbstractPortletConfigurationAction<TodoPortletConfiguration> {
 
     @Override
     public void processAction(final PortletConfig portletConfig, final ActionRequest actionRequest, final ActionResponse actionResponse) throws Exception {
@@ -42,6 +45,12 @@ public class TodoPortletConfigurationAction extends AbstractArenaUIPortletConfig
         setPreference(actionRequest, "fontSize", fontSize);
 
         super.processAction(portletConfig, actionRequest, actionResponse);
+    }
+
+    @Activate
+    @Modified
+    protected void activate(final Map<Object, Object> properties) {
+        super.activate(properties);
     }
 
     @Override
