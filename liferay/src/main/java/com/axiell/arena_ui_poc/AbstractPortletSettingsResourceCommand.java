@@ -11,8 +11,6 @@ import com.liferay.portal.kernel.portlet.bridges.mvc.BaseMVCResourceCommand;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
-import org.osgi.service.component.annotations.Activate;
-import org.osgi.service.component.annotations.Modified;
 
 import javax.portlet.ResourceRequest;
 import javax.portlet.ResourceResponse;
@@ -56,7 +54,7 @@ public abstract class AbstractPortletSettingsResourceCommand<C> extends BaseMVCR
     }
 
     private final class PortletSettings<C> {
-        final Map<String, Object> portletConfiguration = new HashMap<>();
+        final Map<String, Object> configuration = new HashMap<>();
         final Map<String, String> translations;
 
         private PortletSettings(final C portletConfiguration, final Map<String, String> translations) {
@@ -65,7 +63,7 @@ public abstract class AbstractPortletSettingsResourceCommand<C> extends BaseMVCR
                 try {
                     Object o = method.invoke(portletConfiguration);
                     if (o != null) {
-                        this.portletConfiguration.put(method.getName(), o);
+                        this.configuration.put(method.getName(), o);
                     }
                 } catch (IllegalAccessException | InvocationTargetException ex) {
                     LOGGER.error(ex.getMessage(), ex);
@@ -74,8 +72,8 @@ public abstract class AbstractPortletSettingsResourceCommand<C> extends BaseMVCR
             this.translations = translations;
         }
 
-        public Map<String, Object> getPortletConfiguration() {
-            return portletConfiguration;
+        public Map<String, Object> getConfiguration() {
+            return configuration;
         }
 
         public Map<String, String> getTranslations() {
