@@ -1,11 +1,12 @@
 import {Injectable} from "@angular/core";
+import {PortletSettings} from "./portlet-settings";
 
 @Injectable()
 export class AppConfig {
     public portletName: string;
     public portletNamespace: string;
     public portletSettingsUrl: string;
-    public portletSettings: any;
+    public portletSettings: PortletSettings;
 
     constructor(portletName: string, portletNamespace: string, portletSettingsUrl: string) {
         this.portletName = portletName;
