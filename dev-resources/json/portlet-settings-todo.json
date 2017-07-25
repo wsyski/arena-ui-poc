@@ -24,6 +24,10 @@
     "javax.portlet.keywords": "",
     "arena.todo.tasks": "Tasks",
     "arena.todo.about": "About",
-    "arena.todo.staff": "Staff"
+    "arena.todo.staff": "Staff",
+    "arena.github.home": "Home",
+    "arena.github.about": "About",
+    "arena.github.repos": "Github Repos",
+    "arena.github.contact": "Contact Us"
   }
 }

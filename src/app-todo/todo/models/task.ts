@@ -1,6 +1,6 @@
 export class Task {
 
-    constructor(public name:string, public done:boolean) {
+    constructor(public name: string, public done: boolean) {
     }
 
     toggleDone() {

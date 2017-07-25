@@ -1,8 +1,6 @@
-import {Component} from "@angular/core";
-import {Task} from "../models/task";
-import {OnInit} from "@angular/core";
-import {TaskService} from "../services/task-service";
-import {TaskComponent} from "./task.component";
+import {Component, OnInit} from '@angular/core';
+import {Task} from '../models/task';
+import {TaskService} from '../services/task-service';
 
 @Component({
     selector: 'task-list',
@@ -12,24 +10,24 @@ import {TaskComponent} from "./task.component";
 })
 export class TaskListComponent implements OnInit {
 
-    todoCount:number;
-    selectedTask:Task;
-    tasks:Array<Task>;
+    todoCount: number;
+    selectedTask: Task;
+    tasks: Array<Task>;
 
-    constructor(private _taskService:TaskService) {
+    constructor(private _taskService: TaskService) {
         this.tasks = _taskService.getTasks();
         this.calculateTodoCount();
     }
 
     ngOnInit() {
-        console.log("Todo component initialized with " + this.tasks.length + " tasks.");
+        console.log('Todo component initialized with ' + this.tasks.length + ' tasks.');
     }
 
     calculateTodoCount() {
         this.todoCount = this.tasks.filter(t => !t.done).length;
     }
 
-    select(task:Task) {
+    select(task: Task) {
         this.selectedTask = task;
     }
 }

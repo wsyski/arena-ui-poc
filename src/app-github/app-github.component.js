@@ -12,7 +12,7 @@ var AppGithubComponent = (function () {
     }
     AppGithubComponent = __decorate([
         core_1.Component({
-            selector: 'app-com-axiell-arena-ui-poc-github',
+            selector: 'app-github',
             templateUrl: './app-github.component.html',
         })
     ], AppGithubComponent);

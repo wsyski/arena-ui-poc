@@ -1,17 +1,14 @@
-import {Component} from "@angular/core";
-import {Input} from "@angular/core";
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 
-import {Task} from "../models/task";
-import {Output} from "@angular/core";
-import {EventEmitter} from "@angular/core";
+import {Task} from '../models/task';
 
 @Component({
     selector: 'task',
     templateUrl: './task.html'
 })
 export class TaskComponent {
-    @Input() task:Task;
-    @Output() statusChanged:any = new EventEmitter<any>();
+    @Input() task: Task;
+    @Output() statusChanged: any = new EventEmitter<any>();
 
     toggleDone() {
         this.task.toggleDone();

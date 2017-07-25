@@ -1,29 +1,14 @@
-<h3>
-  Github
-</h3>
-<nav>
-	<a [routerLink]="['/']">
-    Home
-  </a>
-  |
-	<a [routerLink]="['/about']">
-    About
-  </a>
-  |
-	<a [routerLink]="['/github', 'angular']">
-    Github Repos
-  </a>
-  |
-	<a [routerLink]="['/contact']">
-    Contact Us
-  </a>
-</nav>
+<section>
+    <nav class='navbar navbar-default'>
+        <ul class='nav nav-pills'>
+            <li class="nav-item"><a [routerLink]="['/']">{{ 'arena.github.home' | translate }}</a></li>
+            <li class="nav-item"><a [routerLink]="['/about']">{{ 'arena.github.about' | translate }}</a></li>
+            <li class="nav-item"><a [routerLink]="['/github', 'angular']">{{ 'arena.github.repos' | translate }}</a></li>
+            <li class="nav-item"><a [routerLink]="['/contact']">{{ 'arena.github.contact' | translate }}</a></li>
+        </ul>
+    </nav>
 
-<main>
-	<router-outlet></router-outlet>
-</main>
-
-
-<footer>
-  © 2017
-</footer>
+    <main>
+        <router-outlet></router-outlet>
+    </main>
+</section>
