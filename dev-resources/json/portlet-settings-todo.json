@@ -21,6 +21,9 @@
     "javax.portlet.display-name.heroes": "Heroes Portlet Display Name",
     "javax.portlet.keywords.heroes": "angular,javascript",
     "javax.portlet.short-title.todo": "Todo Portlet Short Title",
-    "javax.portlet.keywords": ""
+    "javax.portlet.keywords": "",
+    "arena.todo.tasks": "Tasks",
+    "arena.todo.about": "About",
+    "arena.todo.staff": "Staff"
   }
 }
