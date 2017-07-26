@@ -53,7 +53,7 @@ export const getAppTodoModule = (portletName: string, portletNamespace: string, 
 
         ngDoBootstrap(appRef: ApplicationRef) {
             const factory = this.resolver.resolveComponentFactory(AppTodoComponent);
-            (<any>factory).factory.selector = this.appConfigService.getAppConfig().appSelector();
+            (<any>factory).factory.selector = this.appConfigService.getAppSelector();
             appRef.bootstrap(factory);
         }
     }

@@ -60,7 +60,7 @@ export const getAppGithubModule = (portletName: string, portletNamespace: string
 
         ngDoBootstrap(appRef: ApplicationRef) {
             const factory = this.resolver.resolveComponentFactory(AppGithubComponent);
-            (<any>factory).factory.selector = this.appConfigService.getAppConfig().appSelector();
+            (<any>factory).factory.selector = this.appConfigService.getAppSelector();
             appRef.bootstrap(factory);
         }
     }

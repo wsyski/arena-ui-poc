@@ -11,9 +11,9 @@ export class HomeComponent {
     public fontFamily: string;
     public fontSize: number;
 
-    constructor(public appConfigService: AppConfigService) {
-        this.fontColor = appConfigService.getAppConfig().portletConfiguration['fontColor'];
-        this.fontSize = appConfigService.getAppConfig().portletConfiguration['fontSize'];
-        this.fontFamily = appConfigService.getAppConfig().portletConfiguration['fontFamily'];
+    constructor(private appConfigService: AppConfigService) {
+        this.fontColor = appConfigService.portletConfiguration['fontColor'];
+        this.fontSize = appConfigService.portletConfiguration['fontSize'];
+        this.fontFamily = appConfigService.portletConfiguration['fontFamily'];
     }
 }

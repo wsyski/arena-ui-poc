@@ -1,28 +1,29 @@
 import {Injectable} from '@angular/core';
-import {AppConfig} from './app-config';
 import {Http, Response, ResponseContentType} from '@angular/http';
 
 @Injectable()
 export class AppConfigService {
-    private appConfig: AppConfig;
+    public portletName: string;
+    public portletNamespace: string;
+    public portletConfiguration: Map<string, any>;
 
     constructor(private http: Http) {
     }
 
     load(portletName: string, portletNamespace: string, portletConfigurationUrl: string): Promise<any> {
+        this.portletName=portletName;
+        this.portletNamespace=portletNamespace;
         return new Promise<any>((resolve: any) => {
             this.http.get(portletConfigurationUrl, {responseType: ResponseContentType.Json}).map((response: Response) => response.json())
                 .subscribe((portletConfiguration: Map<string, any>) => {
                     console.log(portletConfiguration);
-                    this.appConfig = new AppConfig(portletName, portletNamespace, portletConfiguration);
+                    this.portletConfiguration = portletConfiguration;
                     resolve(true);
                 });
         });
     }
 
-
-    getAppConfig(): AppConfig {
-        return this.appConfig;
+    getAppSelector() {
+        return 'app-' + this.portletName.replace(/[_\.]/g, '-') + '#' + this.portletNamespace;
     }
-
 }
