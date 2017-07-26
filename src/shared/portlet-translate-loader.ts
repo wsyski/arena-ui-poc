@@ -1,16 +1,11 @@
 import {Observable} from 'rxjs/Observable';
 import {TranslateLoader} from '@ngx-translate/core';
-import {AppConfig} from '../common/app-config';
-
-export function createPortletTranslateLoader(appConfig: AppConfig) {
-    return new PortletTranslateLoader(appConfig);
-}
+import {Http, Response, ResponseContentType} from '@angular/http';
 
 export class PortletTranslateLoader implements TranslateLoader {
-    constructor(private appConfig: AppConfig) {
-    }
+    constructor(private http: Http, private translationsUrl: string) {}
 
     public getTranslation(lang: string): Observable<any> {
-        return this.appConfig.portletSettings.map((portletSettings) => portletSettings.translations);
+        return this.http.get(this.translationsUrl, {responseType: ResponseContentType.Json}).map((response: Response) => response.json());
     }
 }

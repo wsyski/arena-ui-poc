@@ -1,6 +1,6 @@
-package com.axiell.arena_ui_poc.todo;
+package com.axiell.arena_ui_poc.github;
 
-import com.axiell.arena_ui_poc.AbstractPortletSettingsResourceCommand;
+import com.axiell.arena_ui_poc.AbstractPortletConfigurationResourceCommand;
 import com.axiell.arena_ui_poc.ArenaUIPortletKeys;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCResourceCommand;
 import org.osgi.service.component.annotations.Activate;
@@ -11,12 +11,12 @@ import java.util.Map;
 
 @Component(
         property = {
-                "javax.portlet.name=" + ArenaUIPortletKeys.TODO_PORTLET_NAME,
-                "mvc.command.name=/portlet-settings"
+                "javax.portlet.name=" + ArenaUIPortletKeys.GITHUB_PORTLET_NAME,
+                "mvc.command.name=/portlet-configuration"
         },
         service = MVCResourceCommand.class
 )
-public class TodoPortletSettingsResourceCommand extends AbstractPortletSettingsResourceCommand<TodoPortletConfiguration> {
+public class GithubPortletConfigurationResourceCommand extends AbstractPortletConfigurationResourceCommand<GithubPortletConfiguration> {
 
     @Activate
     @Modified
@@ -25,7 +25,7 @@ public class TodoPortletSettingsResourceCommand extends AbstractPortletSettingsR
     }
 
     @Override
-    protected Class<TodoPortletConfiguration> getConfigurationClass() {
-        return TodoPortletConfiguration.class;
+    protected Class<GithubPortletConfiguration> getConfigurationClass() {
+        return GithubPortletConfiguration.class;
     }
 }

@@ -3,11 +3,10 @@ import {APP_INITIALIZER, ModuleWithProviders, NgModule, Optional, SkipSelf} from
 
 import {CommonModule} from '@angular/common';
 
-import {Http, HttpModule, Response, ResponseContentType} from "@angular/http";
 
-import {AppConfig} from "../common/app-config";
-import {TranslateService} from "@ngx-translate/core";
-import {PortletSettings} from "../common/portlet-settings";
+import {TranslateService} from '@ngx-translate/core';
+import {AppConfigService} from './app-config-service';
+import {HttpModule} from '@angular/http';
 
 @NgModule({
     imports: [CommonModule, HttpModule],
@@ -22,15 +21,16 @@ export class CoreModule {
         }
     }
 
-    static forRoot(portletName: string, portletNamespace: string, portletSettingsUrl: string): ModuleWithProviders {
+    static forRoot(portletName: string, portletNamespace: string, portletConfigurationUrl: string): ModuleWithProviders {
+
         return {
             ngModule: CoreModule,
             providers: [
-                {provide: AppConfig, useValue: new AppConfig(portletName, portletNamespace, portletSettingsUrl)},
+                AppConfigService,
                 {
                     provide: APP_INITIALIZER,
-                    useFactory: onAppInit,
-                    deps: [Http, AppConfig],
+                    useFactory: (appConfigService: AppConfigService) => () => appConfigService.load(portletName, portletNamespace, portletConfigurationUrl),
+                    deps: [AppConfigService],
                     multi: true
                 },
                 TranslateService
@@ -39,16 +39,5 @@ export class CoreModule {
     }
 }
 
-export function onAppInit(http: Http, appConfig: AppConfig): () => Promise<any> {
-    appConfig.portletSettings = http.get(appConfig.portletSettingsUrl, {responseType: ResponseContentType.Json})
-        .map((response: Response) => response.json());
-    return (): Promise<any> => {
-        let promise: Promise<any> = new Promise((resolve: any) => {
-            appConfig.portletSettings.subscribe((portletSettings: PortletSettings) => {
-                console.log(portletSettings);
-                resolve();
-            });
-        });
-        return promise;
-    }
-}
+
+

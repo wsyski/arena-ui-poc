@@ -8,27 +8,28 @@ import {TaskComponent} from './todo/components/task.component';
 import {StaffListComponent} from './staff/components/staff-list.component';
 
 import {FormsModule} from '@angular/forms';
-import {AppConfig} from '../common/app-config';
+import {AppConfigService} from '../core/app-config-service';
 import {AppTodoRoutingModule} from './app-todo.routing';
 import {NotFoundComponent} from '../common/not-found.component';
 import {AlwaysDenyGuard} from '../common/always-deny.guard';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {CoreModule} from '../core/core.module';
-import {createPortletTranslateLoader} from '../shared/portlet-translate-loader';
+import {PortletTranslateLoader} from '../shared/portlet-translate-loader';
 import {SharedModule} from '../shared/shared.module';
+import {Http} from '@angular/http';
 
-export const getAppTodoModule = (portletName: string, portletNamespace: string, portletSettingsUrl: string) => {
+export const getAppTodoModule = (portletName: string, portletNamespace: string, portletConfigurationUrl: string, translationsUrl: string) => {
     @NgModule({
         imports: [
             BrowserModule,
             FormsModule,
             SharedModule,
-            CoreModule.forRoot(portletName, portletNamespace, portletSettingsUrl),
+            CoreModule.forRoot(portletName, portletNamespace, portletConfigurationUrl),
             TranslateModule.forRoot({
                 loader: {
                     provide: TranslateLoader,
-                    useFactory: createPortletTranslateLoader,
-                    deps: [AppConfig]
+                    useFactory: (http: Http) => new PortletTranslateLoader(http, translationsUrl),
+                    deps: [Http]
                 }
             }),
             AppTodoRoutingModule
@@ -47,15 +48,15 @@ export const getAppTodoModule = (portletName: string, portletNamespace: string, 
         entryComponents: [AppTodoComponent]
     })
     class AppTodoModule {
-        constructor(private resolver: ComponentFactoryResolver, private appConfig: AppConfig) {
+        constructor(private resolver: ComponentFactoryResolver, private appConfigService: AppConfigService) {
         }
 
         ngDoBootstrap(appRef: ApplicationRef) {
             const factory = this.resolver.resolveComponentFactory(AppTodoComponent);
-            (<any>factory).factory.selector = this.appConfig.appSelector();
+            (<any>factory).factory.selector = this.appConfigService.getAppConfig().appSelector();
             appRef.bootstrap(factory);
         }
     }
 
     return AppTodoModule;
-};
+}

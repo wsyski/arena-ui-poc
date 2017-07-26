@@ -7,7 +7,8 @@
 <script type="text/javascript">
   AxBootstrap.scriptLoader.loadAll(["<%=request.getContextPath()%>/shim.js", "<%=request.getContextPath()%>/zone.js",
     "<%=request.getContextPath()%>/ng-runtime-dll.js", "<%=request.getContextPath()%>/main.js"], function () {
-    var portletSettingsUrl = '<portlet:resourceURL id="/portlet-settings"><portlet:param name="locale" value="<%=request.getLocale().toLanguageTag()%>"/></portlet:resourceURL>';
+    var portletConfigurationUrl = '<portlet:resourceURL id="/portlet-configuration"/>';
+    var portletTranslationsUrl = '<portlet:resourceURL id="/translations"><portlet:param name="locale" value="<%=request.getLocale().toLanguageTag()%>"/></portlet:resourceURL>';
     var bundleSymbolicName = '<%= org.osgi.framework.FrameworkUtil.getBundle(AbstractPortlet.class).getSymbolicName()%>';
     var portletName = '<%= portletDisplay.getPortletName()%>';
     var portletNamespace = '<portlet:namespace/>';
@@ -20,12 +21,12 @@
       case 'interactive':
       case 'complete':
       default:
-        runPortlet(portletName, portletNamespace, portletSettingsUrl);
+        runPortlet(portletName, portletNamespace, portletConfigurationUrl, portletTranslationsUrl);
     }
 
     function domReadyHandler() {
       document.removeEventListener('DOMContentLoaded', domReadyHandler, false);
-      runPortlet(portletName, portletNamespace, portletSettingsUrl);
+      runPortlet(portletName, portletNamespace, portletConfigurationUrl, portletTranslationsUrl);
     }
   });
 </script>

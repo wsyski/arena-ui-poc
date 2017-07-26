@@ -34,12 +34,6 @@ public class TodoPortletConfigurationAction extends AbstractPortletConfiguration
         String fontFamily = ParamUtil.getString(actionRequest, "fontFamily");
         String fontSize = ParamUtil.getString(actionRequest, "fontSize");
 
-        if (LOGGER.isDebugEnabled()) {
-            LOGGER.debug("Message Display Configuration: Font Family:" + fontFamily);
-            LOGGER.debug("Message Display Configuration: Font Size:" + fontSize);
-            LOGGER.debug("Message Display Configuration: Font Color:" + fontColor);
-        }
-
         setPreference(actionRequest, "fontColor", fontColor);
         setPreference(actionRequest, "fontFamily", fontFamily);
         setPreference(actionRequest, "fontSize", fontSize);
