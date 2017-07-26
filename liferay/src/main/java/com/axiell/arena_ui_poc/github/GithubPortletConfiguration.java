@@ -8,13 +8,13 @@ import com.axiell.arena_ui_poc.ArenaUIPortletKeys;
 )
 public interface GithubPortletConfiguration {
 
-	@Meta.AD(deflt = "voilet", required = false)
+	@Meta.AD(deflt = "blue", required = false)
 	public String fontColor();
 
-	@Meta.AD(deflt = "Arial", required = false)
+	@Meta.AD(deflt = "Courier", required = false)
 	public String fontFamily();
 
-	@Meta.AD(deflt = "10", required = false)
+	@Meta.AD(deflt = "20", required = false)
 	public int fontSize();
 
 }

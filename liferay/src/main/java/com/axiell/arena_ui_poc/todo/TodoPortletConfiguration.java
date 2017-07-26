@@ -9,12 +9,12 @@ import com.liferay.portal.kernel.json.JSON;
 )
 public interface TodoPortletConfiguration {
 
-	@Meta.AD(deflt = "voilet", required = false)
+	@Meta.AD(deflt = "red", required = false)
 	public String fontColor();
 
 	@Meta.AD(deflt = "Arial", required = false)
 	public String fontFamily();
 
-	@Meta.AD(deflt = "10", required = false)
+	@Meta.AD(deflt = "20", required = false)
 	public int fontSize();
 }
