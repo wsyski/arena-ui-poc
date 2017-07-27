@@ -1,4 +1,4 @@
-<h4><b>My Work Items ({{todoCount}})</b></h4>
+<div [style.color]="fontColor" [style.font-size.px]="fontSize" [style.font-family]="fontFamily">{{ 'arena.todo.work-items' | translate:{'todoCount': todoCount} }}</div>
 <ul class="list-group">
     <li class="list-group-item" *ngFor="let task of tasks" [class.selected]="task == selectedTask">
         <a href="javascript:void(0)" (click)="select(task)">

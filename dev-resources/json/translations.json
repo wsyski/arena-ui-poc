@@ -19,6 +19,7 @@
   "arena.todo.tasks": "Tasks",
   "arena.todo.about": "About",
   "arena.todo.staff": "Staff",
+  "arena.todo.work-items": "My Work Items ({{todoCount}})",
   "arena.github.home": "Home",
   "arena.github.about": "About",
   "arena.github.repos": "Github Repos",

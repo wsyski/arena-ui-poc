@@ -4,7 +4,7 @@ import {Task} from '../models/task';
 
 @Component({
     selector: 'task',
-    templateUrl: './task.html'
+    templateUrl: './task.component.html'
 })
 export class TaskComponent {
     @Input() task: Task;
