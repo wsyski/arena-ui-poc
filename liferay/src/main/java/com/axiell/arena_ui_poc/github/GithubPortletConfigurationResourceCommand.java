@@ -18,12 +18,6 @@ import java.util.Map;
 )
 public class GithubPortletConfigurationResourceCommand extends AbstractPortletConfigurationResourceCommand<GithubPortletConfiguration> {
 
-    @Activate
-    @Modified
-    protected void activate(final Map<Object, Object> properties) {
-        super.activate(properties);
-    }
-
     @Override
     protected Class<GithubPortletConfiguration> getConfigurationClass() {
         return GithubPortletConfiguration.class;

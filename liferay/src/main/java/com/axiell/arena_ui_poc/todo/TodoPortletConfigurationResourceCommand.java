@@ -18,12 +18,6 @@ import java.util.Map;
 )
 public class TodoPortletConfigurationResourceCommand extends AbstractPortletConfigurationResourceCommand<TodoPortletConfiguration> {
 
-    @Activate
-    @Modified
-    protected void activate(final Map<Object, Object> properties) {
-        super.activate(properties);
-    }
-
     @Override
     protected Class<TodoPortletConfiguration> getConfigurationClass() {
         return TodoPortletConfiguration.class;

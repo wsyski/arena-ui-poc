@@ -8,7 +8,7 @@ import com.axiell.arena_ui_poc.ArenaUIPortletKeys;
 )
 public interface GithubPortletConfiguration {
 
-	@Meta.AD(deflt = "blue", required = false)
+	@Meta.AD(deflt = "red", required = false)
 	public String fontColor();
 
 	@Meta.AD(deflt = "Courier New", required = false)

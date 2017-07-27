@@ -1,6 +1,5 @@
 package com.axiell.arena_ui_poc;
 
-import com.axiell.arena_ui_poc.todo.TodoPortletConfiguration;
 import com.liferay.portal.configuration.metatype.bnd.util.ConfigurableUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -22,7 +21,7 @@ public abstract class AbstractPortletConfigurationAction<C> extends DefaultConfi
             LOGGER.debug("include: " + this.getPortletName());
         }
 
-        httpServletRequest.setAttribute(TodoPortletConfiguration.class.getName(), portletConfiguration);
+        httpServletRequest.setAttribute(getConfigurationClass().getName(), portletConfiguration);
         super.include(portletConfig, httpServletRequest, httpServletResponse);
     }
 

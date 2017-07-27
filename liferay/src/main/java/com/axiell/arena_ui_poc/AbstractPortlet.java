@@ -1,12 +1,10 @@
 package com.axiell.arena_ui_poc;
 
-import com.axiell.arena_ui_poc.todo.TodoPortletConfiguration;
 import com.liferay.portal.configuration.metatype.bnd.util.ConfigurableUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
-import org.osgi.service.component.annotations.Activate;
-import org.osgi.service.component.annotations.Modified;
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 
 import javax.portlet.PortletException;
 import javax.portlet.RenderRequest;
@@ -23,17 +21,18 @@ public abstract class AbstractPortlet<C> extends MVCPortlet {
         if (LOGGER.isDebugEnabled()) {
             LOGGER.debug("doView: " + this.getPortletName());
         }
-        renderRequest.setAttribute(TodoPortletConfiguration.class.getName(), portletConfiguration);
+        renderRequest.setAttribute(getConfigurationClass().getName(), portletConfiguration);
         super.doView(renderRequest, renderResponse);
     }
 
-    @Activate
-    @Modified
     protected void activate(final Map<Object, Object> properties) {
         portletConfiguration = ConfigurableUtil.createConfigurable(getConfigurationClass(), properties);
+        if (LOGGER.isDebugEnabled()) {
+            LOGGER.debug("portletConfiguration: "+ ReflectionToStringBuilder.toString(portletConfiguration));
+        }
     }
 
-    public static final Log LOGGER = LogFactoryUtil.getLog(AbstractPortlet.class);
+    protected static final Log LOGGER = LogFactoryUtil.getLog(AbstractPortlet.class);
 
     protected volatile C portletConfiguration;
 

@@ -2,9 +2,12 @@ package com.axiell.arena_ui_poc.github;
 
 import com.axiell.arena_ui_poc.AbstractPortlet;
 import com.axiell.arena_ui_poc.ArenaUIPortletKeys;
+import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Modified;
 
 import javax.portlet.Portlet;
+import java.util.Map;
 
 @Component(
         configurationPid = ArenaUIPortletKeys.GITHUB_PORTLET_CONFIGURATION,
@@ -25,6 +28,12 @@ import javax.portlet.Portlet;
         service = Portlet.class
 )
 public class GithubPortlet extends AbstractPortlet<GithubPortletConfiguration> {
+
+    @Activate
+    @Modified
+    protected void activate(Map<Object, Object> properties) {
+        super.activate(properties);
+    }
 
     @Override
     protected Class<GithubPortletConfiguration> getConfigurationClass() {
