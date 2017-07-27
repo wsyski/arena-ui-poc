@@ -11,7 +11,7 @@ public interface GithubPortletConfiguration {
 	@Meta.AD(deflt = "blue", required = false)
 	public String fontColor();
 
-	@Meta.AD(deflt = "Courier", required = false)
+	@Meta.AD(deflt = "Courier New", required = false)
 	public String fontFamily();
 
 	@Meta.AD(deflt = "20", required = false)

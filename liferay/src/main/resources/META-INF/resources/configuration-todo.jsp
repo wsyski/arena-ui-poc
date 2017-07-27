@@ -37,8 +37,7 @@
 	/>
 
 	<aui:fieldset>
-		<aui:select name="fontFamily" label="Font Family"
-			value="<%= fontFamily %>">
+		<aui:select name="fontFamily" label="Font Family" value="<%= fontFamily %>">
 			<aui:option value="Arial">Arial</aui:option>
 			<aui:option value="Comic Sans MS">Comic Sans MS</aui:option>
 			<aui:option value="Courier New">Courier New</aui:option>
@@ -53,17 +52,31 @@
 			<aui:option value="13">13</aui:option>
 			<aui:option value="14">14</aui:option>
 			<aui:option value="15">15</aui:option>
+			<aui:option value="16">16</aui:option>
+			<aui:option value="17">17</aui:option>
+			<aui:option value="18">18</aui:option>
+			<aui:option value="19">19</aui:option>
+			<aui:option value="20">20</aui:option>
+			<aui:option value="21">21</aui:option>
+			<aui:option value="22">22</aui:option>
+			<aui:option value="23">23</aui:option>
+			<aui:option value="24">24</aui:option>
+			<aui:option value="25">25</aui:option>
+			<aui:option value="26">26</aui:option>
+			<aui:option value="27">27</aui:option>
+			<aui:option value="28">28</aui:option>
+			<aui:option value="29">29</aui:option>
+			<aui:option value="30">30</aui:option>
 		</aui:select>
 
-		<aui:select name="fontColor" label="Font Color"
-			value="<%= fontColor %>">
-			<aui:option value="voilet">Voilet</aui:option>
-			<aui:option value="indigo">Indigo</aui:option>
-			<aui:option value="blue">Blue</aui:option>
-			<aui:option value="green">Green</aui:option>
-			<aui:option value="yellow">Yellow</aui:option>
-			<aui:option value="orange">Orange</aui:option>
-			<aui:option value="red">Red</aui:option>
+		<aui:select name="fontColor" label="Font Color"	value="<%= fontColor %>">
+			<aui:option value="voilet">voilet</aui:option>
+			<aui:option value="indigo">indigo</aui:option>
+			<aui:option value="blue">blue</aui:option>
+			<aui:option value="green">green</aui:option>
+			<aui:option value="yellow">yellow</aui:option>
+			<aui:option value="orange">orange</aui:option>
+			<aui:option value="red">red</aui:option>
 		</aui:select>
 	</aui:fieldset>
 
