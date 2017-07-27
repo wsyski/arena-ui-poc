@@ -4,11 +4,11 @@ import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONSerializer;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.model.PortletInstance;
 import com.liferay.portal.kernel.module.configuration.ConfigurationException;
-import com.liferay.portal.kernel.module.configuration.ConfigurationProviderUtil;
+import com.liferay.portal.kernel.module.configuration.ConfigurationProvider;
 import com.liferay.portal.kernel.portlet.JSONPortletResponseUtil;
 import com.liferay.portal.kernel.portlet.bridges.mvc.BaseMVCResourceCommand;
-import com.liferay.portal.kernel.settings.PortletInstanceSettingsLocator;
 import com.liferay.portal.kernel.theme.PortletDisplay;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.WebKeys;
@@ -22,12 +22,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 public abstract class AbstractPortletConfigurationResourceCommand<C> extends BaseMVCResourceCommand {
+    protected ConfigurationProvider configurationProvider;
 
     @Override
     protected void doServeResource(final ResourceRequest resourceRequest, final ResourceResponse resourceResponse) throws IOException, ConfigurationException {
         ThemeDisplay themeDisplay = (ThemeDisplay) resourceRequest.getAttribute(WebKeys.THEME_DISPLAY);
         PortletDisplay portletDisplay = themeDisplay.getPortletDisplay();
-        C portletConfiguration = ConfigurationProviderUtil.getConfiguration(getConfigurationClass(), new PortletInstanceSettingsLocator(themeDisplay.getLayout(), portletDisplay.getId()));
+        PortletInstance portletInstance = PortletInstance.fromPortletInstanceKey(portletDisplay.getPortletName());
+        C portletConfiguration = configurationProvider.getPortletInstanceConfiguration(getConfigurationClass(), themeDisplay.getLayout(), portletInstance);
         JSONSerializer jsonSerializer = JSONFactoryUtil.createJSONSerializer();
         JSONPortletResponseUtil.writeJSON(resourceRequest, resourceResponse, jsonSerializer.serializeDeep(toMap(portletConfiguration)));
     }
@@ -52,4 +54,6 @@ public abstract class AbstractPortletConfigurationResourceCommand<C> extends Bas
     protected static final Log LOGGER = LogFactoryUtil.getLog(AbstractPortletConfigurationResourceCommand.class);
 
     protected abstract Class<C> getConfigurationClass();
+
+
 }
