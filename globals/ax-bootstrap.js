@@ -4,7 +4,7 @@
 
   function ScriptLoader() {
     var loadingScripts = [];
-    var globalScripts = ['zone.js', 'ng-runtime-dll.js'];
+    var globalScripts = ['ng-runtime-dll.js', 'shim.js', 'zone.js',];
 
     function getHeadElement() {
       return document.getElementsByTagName('head')[0];
@@ -13,7 +13,8 @@
     function isInDom(src) {
       var nodes = document.querySelectorAll("script[src]");
       for (var i = 0; i < nodes.length; i++) {
-        if (isSrcEqual(nodes[i].src, src)) {
+        var nodeSrc = nodes[i].src;
+        if (isSrcEqual(nodeSrc, src)) {
           return true;
         }
       }
