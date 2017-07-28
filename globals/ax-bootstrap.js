@@ -4,20 +4,45 @@
 
   function ScriptLoader() {
     var loadingScripts = [];
+    var globalScripts = ['zone.js', 'ng-runtime-dll.js'];
 
     function getHeadElement() {
       return document.getElementsByTagName('head')[0];
     }
 
     function isInDom(src) {
-      var nodes = document.querySelectorAll("script[src='" + src + "']");
-      return nodes && nodes.length > 0;
+      var nodes = document.querySelectorAll("script[src]");
+      for (var i = 0; i < nodes.length; i++) {
+        if (isSrcEqual(nodes[i].src, src)) {
+          return true;
+        }
+      }
+      return false;
+    }
+
+    function isSrcEqual(src1, src2) {
+      var fileName1 = getFileName(src1);
+      var fileName2 = getFileName(src2);
+      if (fileName1 === fileName2 && isGlobalFileName(fileName1)) {
+        return true;
+      }
+      return src1 === src2;
+    }
+
+    function getFileName(src) {
+      return src.substring(src.lastIndexOf('/') + 1);
+    }
+
+    function isGlobalFileName(fileName) {
+      return globalScripts.some(function (globalFileName) {
+        return fileName === globalFileName;
+      });
     }
 
     function getLoadingScriptIndex(src) {
       var idx = -1;
       loadingScripts.forEach(function (loadingScript, index) {
-        if (loadingScript.src === src) {
+        if (isSrcEqual(loadingScript.src, src)) {
           idx = index;
         }
       });
@@ -25,6 +50,7 @@
     }
 
     function onScriptLoaded(src) {
+      console.log("Loaded script src: " + src);
       var idx = getLoadingScriptIndex(src);
       if (idx >= 0) {
         loadingScripts[idx].callbacks.forEach(function (callback) {
@@ -70,14 +96,13 @@
       }
     }
 
-    function loadAll(srcs,callback) {
+    function loadAll(srcs, callback) {
       if (srcs.length > 0) {
         var src = srcs.shift();
         load(src, function () {
-          loadAll(srcs,callback);
+          loadAll(srcs, callback);
         });
-      }
-      else if (callback) {
+      } else if (callback) {
         callback();
       }
     }
