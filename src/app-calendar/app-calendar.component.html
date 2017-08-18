@@ -1,0 +1,12 @@
+<section>
+    <nav class='navbar navbar-default'>
+        <ul class='nav nav-pills'>
+            <li class="nav-item"><a [routerLink]="['/']">{{ 'arena.calendar.home' | translate }}</a></li>
+            <li class="nav-item"><a [routerLink]="['/about']">{{ 'arena.calendar.about' | translate }}</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <router-outlet></router-outlet>
+    </main>
+</section>

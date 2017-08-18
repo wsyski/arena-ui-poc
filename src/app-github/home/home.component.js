@@ -8,8 +8,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var HomeComponent = (function () {
-    function HomeComponent() {
+    function HomeComponent(appConfigService) {
+        this.appConfigService = appConfigService;
     }
+    HomeComponent.prototype.ngOnInit = function () {
+        this.fontColor = this.appConfigService.portletConfiguration['fontColor'];
+        this.fontSize = this.appConfigService.portletConfiguration['fontSize'];
+        this.fontFamily = this.appConfigService.portletConfiguration['fontFamily'];
+    };
     HomeComponent = __decorate([
         core_1.Component({
             selector: 'home',

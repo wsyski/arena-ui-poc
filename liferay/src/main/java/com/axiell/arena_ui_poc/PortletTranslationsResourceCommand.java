@@ -23,6 +23,7 @@ import java.util.*;
 
 @Component(
         property = {
+                "javax.portlet.name=" + ArenaUIPortletKeys.CALENDAR_PORTLET_NAME,
                 "javax.portlet.name=" + ArenaUIPortletKeys.GITHUB_PORTLET_NAME,
                 "javax.portlet.name=" + ArenaUIPortletKeys.TODO_PORTLET_NAME,
                 "mvc.command.name=/translations"

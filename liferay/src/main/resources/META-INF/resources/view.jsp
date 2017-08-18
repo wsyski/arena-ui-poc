@@ -15,14 +15,6 @@
     var runMain = function() {
       window["AxMain_" + bundleSymbolicName.replace(/[-\.]/g, '_')].run(portletName, portletNamespace, configurationUrl, translationsUrl);
     };
-    var runPortlet=function() {
-      if (window.gapi) {
-        window.gapi.load('client', runMain);
-      }
-      else {
-        runMain();
-      }
-    };
 
     switch (document.readyState) {
       case 'loading':
@@ -31,12 +23,12 @@
       case 'interactive':
       case 'complete':
       default:
-        runPortlet();
+        runMain();
     }
 
     function domReadyHandler() {
       document.removeEventListener('DOMContentLoaded', domReadyHandler, false);
-      runPortlet();
+      runMain();
     }
   });
 </script>

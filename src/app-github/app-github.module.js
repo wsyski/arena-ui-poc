@@ -19,22 +19,22 @@ var repo_browser_component_1 = require("./github/repo-browser/repo-browser.compo
 var repo_list_component_1 = require("./github/repo-list/repo-list.component");
 var repo_detail_component_1 = require("./github/repo-detail/repo-detail.component");
 var contact_component_1 = require("./contact/contact.component");
-var app_config_1 = require("../common/app-config");
 var not_found_component_1 = require("../common/not-found.component");
 var always_deny_guard_1 = require("../common/always-deny.guard");
 var core_module_1 = require("../core/core.module");
 var core_2 = require("@ngx-translate/core");
 var portlet_translate_loader_1 = require("../shared/portlet-translate-loader");
 var shared_module_1 = require("../shared/shared.module");
-exports.getAppGithubModule = function (portletName, portletNamespace, portletSettingsUrl) {
+var http_1 = require("@angular/http");
+exports.getAppGithubModule = function (portletName, portletNamespace, portletConfigurationUrl, translationsUrl) {
     var AppGithubModule = (function () {
-        function AppGithubModule(resolver, appConfig) {
+        function AppGithubModule(resolver, appConfigService) {
             this.resolver = resolver;
-            this.appConfig = appConfig;
+            this.appConfigService = appConfigService;
         }
         AppGithubModule.prototype.ngDoBootstrap = function (appRef) {
             var factory = this.resolver.resolveComponentFactory(app_github_component_1.AppGithubComponent);
-            factory.factory.selector = this.appConfig.appSelector();
+            factory.factory.selector = this.appConfigService.getAppSelector();
             appRef.bootstrap(factory);
         };
         AppGithubModule = __decorate([
@@ -54,12 +54,12 @@ exports.getAppGithubModule = function (portletName, portletNamespace, portletSet
                     forms_1.FormsModule,
                     forms_1.ReactiveFormsModule,
                     shared_module_1.SharedModule,
-                    core_module_1.CoreModule.forRoot(portletName, portletNamespace, portletSettingsUrl),
+                    core_module_1.CoreModule.forRoot(portletName, portletNamespace, portletConfigurationUrl),
                     core_2.TranslateModule.forRoot({
                         loader: {
                             provide: core_2.TranslateLoader,
-                            useFactory: portlet_translate_loader_1.createPortletTranslateLoader,
-                            deps: [app_config_1.AppConfig]
+                            useFactory: function (http) { return new portlet_translate_loader_1.PortletTranslateLoader(http, translationsUrl); },
+                            deps: [http_1.Http]
                         }
                     }),
                     router_1.RouterModule.forRoot(app_github_routing_1.rootRouterConfig, { useHash: true })

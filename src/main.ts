@@ -1,6 +1,7 @@
 import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 import {getAppGithubModule} from './app-github/app-github.module';
 import {getAppTodoModule} from './app-todo/app-todo.module';
+import {getAppCalendarModule} from './app-calendar/app-calendar.module';
 
 const getPortletShortName = (portletName: string) => {
     let lastIndexOfDot = portletName.lastIndexOf('.');
@@ -13,6 +14,9 @@ export const run = (portletName: string, portletNamespace: string, portletConfig
     let portletShortName = getPortletShortName(portletName);
     let appModule;
     switch (portletShortName) {
+        case 'calendar':
+            appModule = getAppCalendarModule(portletName, portletNamespace, portletConfigurationUrl, translationsUrl);
+            break;
         case 'github':
             appModule = getAppGithubModule(portletName, portletNamespace, portletConfigurationUrl, translationsUrl);
             break;
