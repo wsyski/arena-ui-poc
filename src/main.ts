@@ -9,7 +9,7 @@ const getPortletShortName = (portletName: string) => {
     return portletName.substring(startIndex + 1);
 };
 
-export const runPortlet = (portletName: string, portletNamespace: string, portletConfigurationUrl: string, translationsUrl: string) => {
+export const run = (portletName: string, portletNamespace: string, portletConfigurationUrl: string, translationsUrl: string) => {
     let portletShortName = getPortletShortName(portletName);
     let appModule;
     switch (portletShortName) {

@@ -7,12 +7,22 @@
 <script type="text/javascript">
   AxBootstrap.scriptLoader.loadAll(["<%=request.getContextPath()%>/shim.js", "<%=request.getContextPath()%>/zone.js",
     "<%=request.getContextPath()%>/ng-runtime-dll.js", "<%=request.getContextPath()%>/main.js"], function () {
-    var portletConfigurationUrl = '<portlet:resourceURL id="/portlet-configuration"/>';
-    var portletTranslationsUrl = '<portlet:resourceURL id="/translations"><portlet:param name="locale" value="<%=request.getLocale().toLanguageTag()%>"/></portlet:resourceURL>';
+    var configurationUrl = '<portlet:resourceURL id="/portlet-configuration"/>';
+    var translationsUrl = '<portlet:resourceURL id="/translations"><portlet:param name="locale" value="<%=request.getLocale().toLanguageTag()%>"/></portlet:resourceURL>';
     var bundleSymbolicName = '<%= org.osgi.framework.FrameworkUtil.getBundle(AbstractPortlet.class).getSymbolicName()%>';
     var portletName = '<%= portletDisplay.getPortletName()%>';
     var portletNamespace = '<portlet:namespace/>';
-    var runPortlet = window["AxMain_" + bundleSymbolicName.replace(/[-\.]/g, '_')].runPortlet;
+    var runMain = function() {
+      window["AxMain_" + bundleSymbolicName.replace(/[-\.]/g, '_')].run(portletName, portletNamespace, configurationUrl, translationsUrl);
+    };
+    var runPortlet=function() {
+      if (window.gapi) {
+        window.gapi.load('client', runMain);
+      }
+      else {
+        runMain();
+      }
+    };
 
     switch (document.readyState) {
       case 'loading':
@@ -21,12 +31,12 @@
       case 'interactive':
       case 'complete':
       default:
-        runPortlet(portletName, portletNamespace, portletConfigurationUrl, portletTranslationsUrl);
+        runPortlet();
     }
 
     function domReadyHandler() {
       document.removeEventListener('DOMContentLoaded', domReadyHandler, false);
-      runPortlet(portletName, portletNamespace, portletConfigurationUrl, portletTranslationsUrl);
+      runPortlet();
     }
   });
 </script>
