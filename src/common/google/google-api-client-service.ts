@@ -1,40 +1,43 @@
 import {Observable} from 'rxjs/Rx';
-import {Inject, Injectable, InjectionToken, OpaqueToken} from '@angular/core';
+import {Inject, Injectable, InjectionToken} from '@angular/core';
+import {AppConfigService} from '../../core/app-config-service';
 
-export const GAPI = new InjectionToken('Gapi');
+export const GAPI = new InjectionToken('gapi');
+export const DISCOVERY_DOCS = new InjectionToken('discoveryDocs');
 
 @Injectable()
 export class GoogleApiClientService {
     private gapi: any;
+    private discoveryDocs: string[];
 
-    constructor(@Inject(GAPI) gapi, private apiKey: string, private discoveryDocs: string[]) {
+    constructor(@Inject(GAPI) gapi, @Inject(DISCOVERY_DOCS) discoveryDocs: string[], private appConfigService: AppConfigService) {
         this.gapi = gapi;
+        this.discoveryDocs = discoveryDocs;
     }
 
-    public onLoad(callback: () => any) {
-        this.loadClient().subscribe(callback);
+    getGapiClient(): Observable<any> {
+        return Observable.create((observer: any) => {
+            if (this.gapi.client) {
+                this.initGapiClient(observer.next);
+            } else {
+                this.gapi.load('client', () => {
+                    this.initGapiClient(observer.next);
+                });
+            }
+        });
     }
 
-    private initClient(callback: () => void): void {
+    private initGapiClient(callback: (gapiClient: any) => void): void {
+        let googleApiKey = this.appConfigService.getApiKey();
         this.gapi.client.init({
-            'apiKey': this.apiKey,
+            'apiKey': googleApiKey,
             'discoveryDocs': this.discoveryDocs
         }).then(function () {
-            callback();
+            callback(this.gapi.client);
         }, function (reason) {
             console.log('Error: ' + reason.result.error.message);
         });
     }
 
-    private loadClient(): Observable<void> {
-        return Observable.create((observer: any) => {
-            if (this.gapi.client) {
-                this.initClient(observer.next);
-            } else {
-                this.gapi.load('client', () => {
-                    this.initClient(observer.next);
-                });
-            }
-        });
-    }
+
 }

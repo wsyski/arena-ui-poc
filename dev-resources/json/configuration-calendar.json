@@ -1,5 +1,6 @@
 {
   "fontFamily": "Verdana",
   "fontSize": 20,
-  "fontColor": "green"
+  "fontColor": "green",
+  "keyGoogleApi": "AIzaSyDPWrheGl3eMGZpssQ51F9HNkbpTHTWYqM"
 }

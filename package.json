@@ -33,6 +33,7 @@
   "devDependencies": {
     "@angular/compiler-cli": "^4.3.5",
     "@angular/platform-server": "^4.3.5",
+    "@types/gapi": "0.0.35",
     "@types/node": "^7.0.29",
     "angular2-template-loader": "^0.6.2",
     "gogo-shell": "^0.0.5",
