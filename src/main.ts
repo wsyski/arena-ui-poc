@@ -10,12 +10,12 @@ const getPortletShortName = (portletName: string) => {
     return portletName.substring(startIndex + 1);
 };
 
-export const run = (portletName: string, portletNamespace: string, portletConfigurationUrl: string, translationsUrl: string) => {
+export const run = (portletName: string, portletNamespace: string, portletConfigurationUrl: string, translationsUrl: string, gapi: any) => {
     let portletShortName = getPortletShortName(portletName);
     let appModule;
     switch (portletShortName) {
         case 'calendar':
-            appModule = getAppCalendarModule(portletName, portletNamespace, portletConfigurationUrl, translationsUrl);
+            appModule = getAppCalendarModule(portletName, portletNamespace, portletConfigurationUrl, translationsUrl, gapi);
             break;
         case 'github':
             appModule = getAppGithubModule(portletName, portletNamespace, portletConfigurationUrl, translationsUrl);

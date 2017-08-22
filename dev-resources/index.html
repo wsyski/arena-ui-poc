@@ -31,7 +31,7 @@
     var portletConfigurationUrl = location.origin + "/json/configuration-" + portletName + ".json";
     var portletNamespace = "portletId0";
     var runMain = function() {
-      window["AxMain_" + bundleSymbolicName.replace(/[-\.]/g, '_')].run(portletName, portletNamespace, portletConfigurationUrl, translationsUrl);
+      window["AxMain_" + bundleSymbolicName.replace(/[-\.]/g, '_')].run(portletName, portletNamespace, portletConfigurationUrl, translationsUrl, gapi);
     };
 
     switch (document.readyState) {
@@ -66,7 +66,7 @@
     var portletConfigurationUrl = location.origin + "/json/configuration-" + portletName + ".json";
     var portletNamespace = "portletId1";
     var runMain = function() {
-      window["AxMain_" + bundleSymbolicName.replace(/[-\.]/g, '_')].run(portletName, portletNamespace, portletConfigurationUrl, translationsUrl);
+      window["AxMain_" + bundleSymbolicName.replace(/[-\.]/g, '_')].run(portletName, portletNamespace, portletConfigurationUrl, translationsUrl, gapi);
     };
 
     switch (document.readyState) {
@@ -100,7 +100,7 @@
     var portletConfigurationUrl = location.origin + "/json/configuration-" + portletName + ".json";
     var portletNamespace = "portletId2";
     var runMain = function() {
-      window["AxMain_" + bundleSymbolicName.replace(/[-\.]/g, '_')].run(portletName, portletNamespace, portletConfigurationUrl, translationsUrl);
+      window["AxMain_" + bundleSymbolicName.replace(/[-\.]/g, '_')].run(portletName, portletNamespace, portletConfigurationUrl, translationsUrl, gapi);
     };
 
     switch (document.readyState) {

@@ -13,7 +13,7 @@
     var portletName = '<%= portletDisplay.getPortletName()%>';
     var portletNamespace = '<portlet:namespace/>';
     var runMain = function() {
-      window["AxMain_" + bundleSymbolicName.replace(/[-\.]/g, '_')].run(portletName, portletNamespace, configurationUrl, translationsUrl);
+      window["AxMain_" + bundleSymbolicName.replace(/[-\.]/g, '_')].run(portletName, portletNamespace, configurationUrl, translationsUrl, gapi);
     };
 
     switch (document.readyState) {

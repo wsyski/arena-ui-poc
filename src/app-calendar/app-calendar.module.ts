@@ -15,8 +15,9 @@ import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {PortletTranslateLoader} from '../shared/portlet-translate-loader';
 import {SharedModule} from '../shared/shared.module';
 import {Http} from '@angular/http';
+import {GAPI, GoogleApiClientService} from '../common/google/google-api-client-service';
 
-export const getAppCalendarModule = (portletName: string, portletNamespace: string, portletConfigurationUrl: string, translationsUrl: string) => {
+export const getAppCalendarModule = (portletName: string, portletNamespace: string, portletConfigurationUrl: string, translationsUrl: string, gapi: any) => {
     @NgModule({
         declarations: [
             AppcalendarComponent,
@@ -40,6 +41,8 @@ export const getAppCalendarModule = (portletName: string, portletNamespace: stri
             RouterModule.forRoot(rootRouterConfig, {useHash: true})
         ],
         providers: [
+            {provide: GAPI, useValue: gapi},
+            GoogleApiClientService,
             AlwaysDenyGuard
         ],
         entryComponents: [AppcalendarComponent]

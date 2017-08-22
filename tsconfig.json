@@ -9,7 +9,12 @@
     "experimentalDecorators": true,
     "lib": ["es2015", "dom"],
     "noImplicitAny": false,
-    "suppressImplicitAnyIndexErrors": true
+    "suppressImplicitAnyIndexErrors": true,
+    //"noUnusedLocals": true,
+    "types": [
+      "gapi",
+      "gapi.client"
+    ]
   },
   "files": [
     "src/main.ts"
