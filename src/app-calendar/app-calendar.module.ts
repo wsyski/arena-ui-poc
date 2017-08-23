@@ -1,12 +1,9 @@
 import {ApplicationRef, ComponentFactoryResolver, NgModule} from '@angular/core';
 import {RouterModule} from '@angular/router';
 import {rootRouterConfig} from './app-calendar.routing';
-import {AppcalendarComponent} from './app-calendar.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {BrowserModule} from '@angular/platform-browser';
 
-import {AboutComponent} from './about/about.component';
-import {HomeComponent} from './home/home.component';
 import {AppConfigService} from '../core/app-config-service';
 import {NotFoundComponent} from '../common/not-found.component';
 import {AlwaysDenyGuard} from '../common/always-deny.guard';
@@ -15,16 +12,17 @@ import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {PortletTranslateLoader} from '../shared/portlet-translate-loader';
 import {SharedModule} from '../shared/shared.module';
 import {Http} from '@angular/http';
-import {DISCOVERY_DOCS, GAPI, GoogleApiClientService} from '../common/google/google-api-client-service';
-import {GoogleApiCalendarService} from '../common/google/google-api-calendar-service';
+import {DISCOVERY_DOCS, GAPI, GoogleApiClientService} from '../common/google/client-service';
+import {GoogleApiCalendarService} from '../common/google/calendar-service';
+import {AppCalendarComponent} from './app-calendar.component';
+import {CalendarEventDetailComponent} from './calendar-event-detail.component';
 
 export const getAppCalendarModule = (portletName: string, portletNamespace: string, portletConfigurationUrl: string, translationsUrl: string, gapi: any) => {
     @NgModule({
         declarations: [
-            AppcalendarComponent,
-            AboutComponent,
-            NotFoundComponent,
-            HomeComponent
+            AppCalendarComponent,
+            CalendarEventDetailComponent,
+            NotFoundComponent
         ],
         imports: [
             BrowserModule,
@@ -48,14 +46,14 @@ export const getAppCalendarModule = (portletName: string, portletNamespace: stri
             GoogleApiCalendarService,
             AlwaysDenyGuard
         ],
-        entryComponents: [AppcalendarComponent]
+        entryComponents: [AppCalendarComponent]
     })
     class AppCalendarModule {
         constructor(private resolver: ComponentFactoryResolver, private appConfigService: AppConfigService) {
         }
 
         ngDoBootstrap(appRef: ApplicationRef) {
-            const factory = this.resolver.resolveComponentFactory(AppcalendarComponent);
+            const factory = this.resolver.resolveComponentFactory(AppCalendarComponent);
             (<any>factory).factory.selector = this.appConfigService.getAppSelector();
             appRef.bootstrap(factory);
         }
