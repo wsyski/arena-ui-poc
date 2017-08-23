@@ -30,6 +30,6 @@ export class AppConfigService {
     }
 
     getApiKey(): string {
-        return this.portletConfiguration.get(KEY_GOOGLE_API);
+        return this.portletConfiguration[KEY_GOOGLE_API];
     }
 }

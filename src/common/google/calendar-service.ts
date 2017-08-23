@@ -10,7 +10,7 @@ export class GoogleApiCalendarService {
   constructor(private googleApiClientService: GoogleApiClientService) {
   }
 
-  private listEvents(): Observable<CalendarEventListResponse> {
+  listEvents(): Observable<CalendarEventListResponse> {
     return this.googleApiClientService.getGapiClient().flatMap((gapiClient: any) => {
       return Observable.create((observer: Observer<CalendarEventListResponse>) => {
         gapiClient.calendar.events.list({'calendarId': 'primary'}).then((response) => {
@@ -18,7 +18,6 @@ export class GoogleApiCalendarService {
           }
         );
       });
-    })
-
+    });
   }
 }

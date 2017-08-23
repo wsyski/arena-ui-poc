@@ -78,6 +78,7 @@
           var script = document.createElement("script");
           script.setAttribute("type", "text/javascript");
           script.setAttribute("src", src);
+          //script.setAttribute("defer","");
           head.appendChild(script);
           var loadingScript = {
             src: src,
@@ -85,8 +86,11 @@
           };
           loadingScripts.push(loadingScript);
           idx = loadingScripts.length - 1;
-          script.onreadystatechange = script.onload = function () {
+          script.onload = function () {
             onScriptLoaded(src);
+          };
+          script.onreadystatechange = function() {
+            if (this.readyState === 'complete') this.onload();
           }
         } else {
           console.log("Script src: " + src + " already loading");

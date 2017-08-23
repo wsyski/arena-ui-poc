@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script>
+      // Client ID and API key from the Developer Console
+      var CLIENT_ID = '940608118695-uhbck623d3gu9c3fo0tlduqnb3ghlfi0.apps.googleusercontent.com';
+      var API_KEY = 'AIzaSyDPWrheGl3eMGZpssQ51F9HNkbpTHTWYqM';
+      //var API_KEY = 'AIzaSyBH72gKl9ggasNCvyN5xlxKFpvcE0-30vc';
+
+      // Array of API discovery doc URLs for APIs used by the quickstart
+      var DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"];
+
+      // Authorization scopes required by the API; multiple scopes can be
+      // included, separated by spaces.
+      var SCOPES = "https://www.googleapis.com/auth/calendar.readonly";
+
+      // Loads the JavaScript client library and invokes `start` afterwards.
+      function loadClient() {
+        gapi.load('client', {
+          'callback': function() {
+            gapi.client.init({
+              'apiKey': API_KEY,
+              'discoveryDocs': DISCOVERY_DOCS
+            }).then(function () {
+              listUpcomingEvents();
+            }, function (reason) {
+              console.error('gapi.client can not be initialized: ' + reason.result.error.message);
+            });
+          },
+          'onerror': function() {
+            console.error('gapi.client failed to load');
+          }});
+      }
+
+      function appendPre(message) {
+        var pre = document.getElementById('results');
+        var textContent = document.createTextNode(message + '\n');
+        pre.appendChild(textContent);
+      }
+
+      function listUpcomingEvents() {
+        gapi.client.calendar.events.list({
+          'calendarId': 'axiell.arenaevents@gmail.com', //'calendarId': 'axiell.sweden@gmail.com',
+          'timeMin': (new Date()).toISOString(),
+          'showDeleted': false,
+          'singleEvents': true,
+          'maxResults': 10,
+          'orderBy': 'startTime'
+        }).then(function (response) {
+          var events = response.result.items;
+          appendPre('Upcoming events:');
+
+          if (events.length > 0) {
+            for (i = 0; i < events.length; i++) {
+              var event = events[i];
+              var when = event.start.dateTime;
+              if (!when) {
+                when = event.start.date;
+              }
+              appendPre(event.summary + ' (' + when + ')')
+            }
+          } else {
+            appendPre('No upcoming events found.');
+          }
+        });
+      }
+    </script>
+    <script src="shim.js"></script>
+    <script src="zone.js"></script>
+    <script src="https://apis.google.com/js/api.js"></script>
+  </head>
+<body>
+<div id="results"></div>
+<script type="text/javascript">
+
+    switch (document.readyState) {
+      case 'loading':
+        document.addEventListener('DOMContentLoaded', domReadyHandler, false);
+        break;
+      case 'interactive':
+      case 'complete':
+      default:
+        loadClient();
+    }
+
+    function domReadyHandler() {
+      document.removeEventListener('DOMContentLoaded', domReadyHandler, false);
+      loadClient();
+    }
+</script>
+</body>
+</html>

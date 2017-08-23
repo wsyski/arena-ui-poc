@@ -7,37 +7,53 @@ export const DISCOVERY_DOCS = new InjectionToken('discoveryDocs');
 
 @Injectable()
 export class GoogleApiClientService {
-    private gapi: any;
-    private discoveryDocs: string[];
+  private gapi: any;
+  private discoveryDocs: string[];
 
-    constructor(@Inject(GAPI) gapi, @Inject(DISCOVERY_DOCS) discoveryDocs: string[], private appConfigService: AppConfigService) {
-        this.gapi = gapi;
-        this.discoveryDocs = discoveryDocs;
-    }
+  constructor(@Inject(GAPI) gapi, @Inject(DISCOVERY_DOCS) discoveryDocs: string[], private appConfigService: AppConfigService) {
+    this.gapi = gapi;
+    this.discoveryDocs = discoveryDocs;
+  }
 
-    getGapiClient(): Observable<any> {
-        return Observable.create((observer: any) => {
-            if (this.gapi.client) {
-                this.initGapiClient(observer.next);
-            } else {
-                this.gapi.load('client', () => {
-                    this.initGapiClient(observer.next);
-                });
+  getGapiClient(): Observable<any> {
+    return Observable.create((observer: any) => {
+      let gapi = this.gapi;
+      let googleApiKey = this.appConfigService.getApiKey();
+      let discoveryDocs = this.discoveryDocs;
+      if (gapi.client) {
+        this.initGapiClient(gapi, observer.next);
+      } else {
+          gapi.load('client', {
+            'callback': function () {
+              // this.initGapiClient(gapi, observer.next)
+              gapi.client.init({
+                'apiKey': googleApiKey,
+                'discoveryDocs': discoveryDocs
+              }).then(function () {
+                observer.next(gapi.client);
+              }, function (reason) {
+                console.error('gapi.client can not be initialized: ' + reason.result.error.message);
+              });
+            },
+            'onerror': function (error) {
+              console.error('gapi.client failed to load');
             }
-        });
-    }
+          });
+      }
+    });
+  }
 
-    private initGapiClient(callback: (gapiClient: any) => void): void {
-        let googleApiKey = this.appConfigService.getApiKey();
-        this.gapi.client.init({
-            'apiKey': googleApiKey,
-            'discoveryDocs': this.discoveryDocs
-        }).then(function () {
-            callback(this.gapi.client);
-        }, function (reason) {
-            console.log('Error: ' + reason.result.error.message);
-        });
-    }
+  private initGapiClient(gapi: any, callback: (gapiClient: any) => void): void {
+    let googleApiKey = this.appConfigService.getApiKey();
+    gapi.client.init({
+      'apiKey': googleApiKey,
+      'discoveryDocs': this.discoveryDocs
+    }).then(() => {
+      callback(gapi.client);
+    }, (reason) => {
+      console.error('gapi.client can not be initialized: ' + reason.result.error.message);
+    });
+  }
 
 
 }
