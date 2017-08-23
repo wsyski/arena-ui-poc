@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {CalendarEvent} from '../common/google/calendar-event';
 import {Router} from '@angular/router';
 import {Observable} from 'rxjs/Observable';
-import {CalendarEventListResponse} from '../common/google/calendar-event-list-response';
 import {GoogleApiCalendarService} from '../common/google/calendar-service';
 
 @Component({
@@ -13,15 +12,15 @@ import {GoogleApiCalendarService} from '../common/google/calendar-service';
 export class AppCalendarComponent implements OnInit {
   selectedCalendarEvent: CalendarEvent;
 
-  calendarEventListResponse: Observable<CalendarEventListResponse>;
+  calendarEvents$: Observable<CalendarEvent[]>;
 
   constructor(private googleApiCalendarService: GoogleApiCalendarService, private router: Router) {
   }
 
   ngOnInit() {
-    this.calendarEventListResponse = this.googleApiCalendarService.listEvents();
+    this.calendarEvents$ = this.googleApiCalendarService.listEvents();
     console.log('AppCalendarComponent.ngOnInit');
-    this.calendarEventListResponse.subscribe((result) => {
+    this.calendarEvents$.subscribe((result) => {
       console.log(result);
     });
   }

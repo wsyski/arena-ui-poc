@@ -12,12 +12,12 @@ import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {PortletTranslateLoader} from '../shared/portlet-translate-loader';
 import {SharedModule} from '../shared/shared.module';
 import {Http} from '@angular/http';
-import {DISCOVERY_DOCS, GAPI, GoogleApiClientService} from '../common/google/client-service';
+import {DISCOVERY_DOCS, GoogleApiClientService} from '../common/google/client-service';
 import {GoogleApiCalendarService} from '../common/google/calendar-service';
 import {AppCalendarComponent} from './app-calendar.component';
 import {CalendarEventDetailComponent} from './calendar-event-detail.component';
 
-export const getAppCalendarModule = (portletName: string, portletNamespace: string, portletConfigurationUrl: string, translationsUrl: string, gapi: any) => {
+export const getAppCalendarModule = (portletName: string, portletNamespace: string, portletConfigurationUrl: string, translationsUrl: string) => {
     @NgModule({
         declarations: [
             AppCalendarComponent,
@@ -40,7 +40,6 @@ export const getAppCalendarModule = (portletName: string, portletNamespace: stri
             RouterModule.forRoot(rootRouterConfig, {useHash: true})
         ],
         providers: [
-            {provide: GAPI, useValue: gapi},
             {provide: DISCOVERY_DOCS, useValue: ['https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest']},
             GoogleApiClientService,
             GoogleApiCalendarService,

@@ -1,6 +1,6 @@
 <section>
     <ul>
-        <li *ngFor="let calendarEvent of calendarEventListResponse.items | async"
+        <li *ngFor="let calendarEvent of calendarEvents$ | async"
             [class.selected]="calendarEvent === selectedCalendarEvent"
             (click) = onSelect(calendarEvent)>
             <span>{{calendarEvent.id}} {{calendarEvent.description}} </span>
