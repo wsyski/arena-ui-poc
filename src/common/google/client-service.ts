@@ -12,13 +12,25 @@ export class GoogleApiClientService {
     this.discoveryDocs = discoveryDocs;
   }
 
-  getGapiClient(): Observable<any> {
+  initClient(): Observable<any> {
     return Observable.create((observer: any) => {
       let googleApiKey = this.appConfigService.getApiKey();
       let discoveryDocs = this.discoveryDocs;
       this.ngZone.runOutsideAngular(() => {
+
+        function gapiClientInit(callback: () => void): void {
+          gapi.client.init({
+            'apiKey': googleApiKey,
+            'discoveryDocs': discoveryDocs
+          }).then(() => {
+            callback();
+          }, (reason) => {
+            console.error('gapi.client can not be initialized: ' + reason.result.error.message);
+          });
+        }
+
         if (gapi.client) {
-          this.initGapiClient(() => {
+          gapiClientInit(() => {
             this.ngZone.run(() => {
               observer.next();
               observer.complete();
@@ -27,7 +39,7 @@ export class GoogleApiClientService {
         } else {
           gapi.load('client', {
             'callback': () => {
-              this.initGapiClient(() => {
+              gapiClientInit(() => {
                 this.ngZone.run(() => {
                   observer.next();
                   observer.complete();
@@ -42,18 +54,4 @@ export class GoogleApiClientService {
       });
     });
   }
-
-  private initGapiClient(callback: () => void): void {
-    let googleApiKey = this.appConfigService.getApiKey();
-    gapi.client.init({
-      'apiKey': googleApiKey,
-      'discoveryDocs': this.discoveryDocs
-    }).then(() => {
-      callback();
-    }, (reason) => {
-      console.error('gapi.client can not be initialized: ' + reason.result.error.message);
-    });
-  }
-
-
 }

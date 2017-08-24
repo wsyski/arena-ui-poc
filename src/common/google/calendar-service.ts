@@ -12,7 +12,7 @@ export class GoogleApiCalendarService {
 
   listEvents(): Observable<CalendarEventListResponse> {
     return Observable.create((observer: Observer<CalendarEventListResponse>) => {
-      let subscription = this.googleApiClientService.getGapiClient().subscribe(() => {
+      let subscription = this.googleApiClientService.initClient().subscribe(() => {
         this.ngZone.runOutsideAngular(() => {
           gapi.client.calendar.events.list({
             'calendarId': 'axiell.arenaevents@gmail.com',

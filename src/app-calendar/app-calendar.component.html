@@ -1,5 +1,5 @@
 <section>
-    <div *ngIf="calendarEventListResponse; else loading; let calendarEventListResponse">
+    <div *ngIf="(calendarEventListResponse$|async); else loading; let calendarEventListResponse">
         <p>Summary: {{calendarEventListResponse.summary}}</p>
     <ul>
         <li *ngFor="let calendarEvent of calendarEventListResponse.items"

@@ -14,60 +14,13 @@ import {Observer} from 'rxjs/Observer';
 })
 export class AppCalendarComponent implements OnInit {
   selectedCalendarEvent: CalendarEvent;
-  calendarEventListResponse: CalendarEventListResponse;
-
-  /*
-    calendarEventListResponse: CalendarEventListResponse = {
-    kind: 'calendar#events',
-    etag: '"p33sfp96qmjgda0g"',
-    summary: 'axiell.arenaevents@gmail.com',
-    updated: '2017-08-18T08:55:43.163Z',
-    timeZone: 'Europe/Stockholm',
-    accessRole: 'reader',
-    defaultReminders: [],
-    items: [
-      {id: 'l27cec9q8tgo5l17hg1a1ap121', kind: 'calendar#event', description: 'Event 0'},
-      {id: 'l27cec9q8tgo5l17hg1a1ap122', kind: 'calendar#event', description: 'Event 1'},
-      {id: 'l27cec9q8tgo5l17hg1a1ap123', kind: 'calendar#event', description: 'Event 2'}
-    ]
-  };
-  */
+  calendarEventListResponse$: Observable<CalendarEventListResponse>;
 
   constructor(private googleApiCalendarService: GoogleApiCalendarService, private router: Router) {
   }
 
   ngOnInit() {
-    let calendarEventListResponse$ = this.listEvents();
-    calendarEventListResponse$.subscribe((calendarEventListResponse) => {
-      this.calendarEventListResponse = calendarEventListResponse;
-    });
-  }
-
-  private listEvents() {
-    return this.googleApiCalendarService.listEvents();
-    /*
-    let calendarEventListResponse: CalendarEventListResponse = {
-      kind: 'calendar#events',
-      etag: '"p33sfp96qmjgda0g"',
-      summary: 'axiell.arenaevents@gmail.com',
-      updated: '2017-08-18T08:55:43.163Z',
-      timeZone: 'Europe/Stockholm',
-      accessRole: 'reader',
-      defaultReminders: [],
-      items: [
-        {id: 'l27cec9q8tgo5l17hg1a1ap121', kind: 'calendar#event', description: 'Event 0'},
-        {id: 'l27cec9q8tgo5l17hg1a1ap122', kind: 'calendar#event', description: 'Event 1'},
-        {id: 'l27cec9q8tgo5l17hg1a1ap123', kind: 'calendar#event', description: 'Event 2'}
-      ]
-    };
-    return Observable.create((observer: Observer<CalendarEventListResponse>) => {
-      setTimeout(() => {
-        observer.next(calendarEventListResponse);
-        observer.complete();
-      }, 2000);
-    });
-    */
-    // return Observable.of(calendarEventListResponse).delay(2000);
+    this.calendarEventListResponse$ = this.googleApiCalendarService.listEvents();
   }
 
   onSelect(calendarEvent: CalendarEvent): void {
