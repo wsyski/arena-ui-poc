@@ -1,30 +1,37 @@
-import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
-import {CalendarEvent} from '../common/google/calendar-event';
+import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {GoogleApiCalendarService} from '../common/google/calendar-service';
-import {CalendarEventListResponse} from '../common/google/calendar-event-list-response';
 import {Observable} from 'rxjs/Observable';
-import {Observer} from 'rxjs/Observer';
+import Event = gapi.client.calendar.Event;
+import Events = gapi.client.calendar.Events;
+import EventsListParameters = gapi.client.calendar.EventsListParameters;
 
 @Component({
-  selector: 'app-calendar',
-  styleUrls: ['./app-calendar.component.css'],
-  templateUrl: './app-calendar.component.html',
-  changeDetection: ChangeDetectionStrategy.Default
+    selector: 'app-calendar',
+    styleUrls: ['./app-calendar.component.css'],
+    templateUrl: './app-calendar.component.html'
 })
 export class AppCalendarComponent implements OnInit {
-  selectedCalendarEvent: CalendarEvent;
-  calendarEventListResponse$: Observable<CalendarEventListResponse>;
+    selectedCalendarEvent: Event;
+    calendarEventListResponse$: Observable<Events>;
 
-  constructor(private googleApiCalendarService: GoogleApiCalendarService, private router: Router) {
-  }
+    constructor(private googleApiCalendarService: GoogleApiCalendarService, private router: Router) {
+    }
 
-  ngOnInit() {
-    this.calendarEventListResponse$ = this.googleApiCalendarService.listEvents();
-  }
+    ngOnInit() {
+        let eventsListParameters: EventsListParameters = {
+            'calendarId': 'axiell.arenaevents@gmail.com',
+            'timeMin': (new Date()).toISOString(),
+            'showDeleted': false,
+            'singleEvents': true,
+            'maxResults': 10,
+            'orderBy': 'startTime'
+        };
+        this.calendarEventListResponse$ = this.googleApiCalendarService.eventsList(eventsListParameters);
+    }
 
-  onSelect(calendarEvent: CalendarEvent): void {
-    this.selectedCalendarEvent = calendarEvent;
-    this.router.navigate(['/detail', calendarEvent.id]);
-  }
+    onSelect(calendarEvent: Event): void {
+        this.selectedCalendarEvent = calendarEvent;
+        this.router.navigate(['/detail', calendarEvent.id]);
+    }
 }
