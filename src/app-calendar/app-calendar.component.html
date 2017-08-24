@@ -1,6 +1,7 @@
 <section>
+    <p>Summary: {{(calendarEventListResponse$ | async)?.summary}}</p>
     <ul>
-        <li *ngFor="let calendarEvent of calendarEvents$ | async"
+        <li *ngFor="let calendarEvent of (calendarEventListResponse$|async)?.items"
             [class.selected]="calendarEvent === selectedCalendarEvent"
             (click) = onSelect(calendarEvent)>
             <span>{{calendarEvent.id}} {{calendarEvent.description}} </span>
