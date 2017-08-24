@@ -4,6 +4,7 @@ import {Router} from '@angular/router';
 import {GoogleApiCalendarService} from '../common/google/calendar-service';
 import {CalendarEventListResponse} from '../common/google/calendar-event-list-response';
 import {Observable} from 'rxjs/Observable';
+import {Observer} from 'rxjs/Observer';
 
 @Component({
   selector: 'app-calendar',
@@ -42,8 +43,8 @@ export class AppCalendarComponent implements OnInit {
     });
   }
 
-  private  listEvents() {
-    return this.googleApiCalendarService.listEvents().share();
+  private listEvents() {
+    return this.googleApiCalendarService.listEvents();
     /*
     let calendarEventListResponse: CalendarEventListResponse = {
       kind: 'calendar#events',
@@ -59,8 +60,14 @@ export class AppCalendarComponent implements OnInit {
         {id: 'l27cec9q8tgo5l17hg1a1ap123', kind: 'calendar#event', description: 'Event 2'}
       ]
     };
-    return Observable.of(calendarEventListResponse).delay(2000);
+    return Observable.create((observer: Observer<CalendarEventListResponse>) => {
+      setTimeout(() => {
+        observer.next(calendarEventListResponse);
+        observer.complete();
+      }, 2000);
+    });
     */
+    // return Observable.of(calendarEventListResponse).delay(2000);
   }
 
   onSelect(calendarEvent: CalendarEvent): void {

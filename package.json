@@ -13,10 +13,10 @@
     "build": "gulp build",
     "start": "http-server build -p 8081 -d -c-1 -o",
     "webpack-dev-server": "gulp webpack-dev-server",
-    "watch": "gulp watch",
-    "postinstall": "typings install"
+    "watch": "gulp watch"
   },
   "dependencies": {
+    "@angular/animations": "^4.3.6",
     "@angular/common": "^4.3.6",
     "@angular/compiler": "^4.3.6",
     "@angular/core": "^4.3.6",
@@ -57,7 +57,6 @@
     "through2": "^2.0.1",
     "ts-loader": "^2.3.3",
     "typescript": "^2.4.2",
-    "typings": "^2.1.1",
     "vinyl-named": "^1.1.0",
     "webpack": "^3.2.0",
     "webpack-dev-server": "^2.5.1",
