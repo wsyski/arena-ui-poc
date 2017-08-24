@@ -1,12 +1,15 @@
 <section>
-    <p>Summary: {{(calendarEventListResponse$ | async)?.summary}}</p>
+    <div *ngIf="calendarEventListResponse; else loading; let calendarEventListResponse">
+        <p>Summary: {{calendarEventListResponse.summary}}</p>
     <ul>
-        <li *ngFor="let calendarEvent of (calendarEventListResponse$|async)?.items"
+        <li *ngFor="let calendarEvent of calendarEventListResponse.items"
             [class.selected]="calendarEvent === selectedCalendarEvent"
             (click) = onSelect(calendarEvent)>
             <span>{{calendarEvent.id}} {{calendarEvent.description}} </span>
         </li>
     </ul>
+    </div>
+    <ng-template #loading>Loading Data...</ng-template>
 
     <main>
         <router-outlet></router-outlet>
