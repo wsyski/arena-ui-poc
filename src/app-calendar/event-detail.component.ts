@@ -3,10 +3,10 @@ import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'product',
-  styleUrls: ['./calendar-event-detail.component.css'],
-  templateUrl: './calendar-event-detail.component.html',
+  styleUrls: ['./event-detail.component.css'],
+  templateUrl: './event-detail.component.html',
 })
-export class CalendarEventDetailComponent {
+export class EventDetailComponent {
   calendarEventId: string;
 
   constructor(private route: ActivatedRoute) {
