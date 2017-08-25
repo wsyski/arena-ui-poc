@@ -1,0 +1,3 @@
+<event-search-input [value]="terms | async" (search)="onSearch($event)"></event-search-input>
+<app-results-count></app-results-count>
+<app-search-results [books]="books | async"></app-search-results>

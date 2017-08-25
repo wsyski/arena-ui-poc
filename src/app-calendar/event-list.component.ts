@@ -7,11 +7,11 @@ import Events = gapi.client.calendar.Events;
 import EventsListParameters = gapi.client.calendar.EventsListParameters;
 
 @Component({
-    selector: 'app-event-list',
-    styleUrls: ['./app-event-list.component.css'],
-    templateUrl: './app-event-list.component.html'
+    selector: 'event-list',
+    styleUrls: ['./event-list.component.css'],
+    templateUrl: './event-list.component.html'
 })
-export class AppEventListComponent implements OnInit {
+export class EventListComponent implements OnInit {
     selectedCalendarEvent: Event;
     calendarEventListResponse$: Observable<Events>;
 
