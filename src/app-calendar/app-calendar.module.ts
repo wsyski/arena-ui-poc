@@ -16,6 +16,10 @@ import {DISCOVERY_DOCS, GoogleApiClientService} from '../common/google/client-se
 import {GoogleApiCalendarService} from '../common/google/calendar-service';
 import {AppCalendarComponent} from './app-calendar.component';
 import {CalendarEventDetailComponent} from './calendar-event-detail.component';
+import {StoreModule} from '@ngrx/store';
+import {reducers} from './reducers';
+import {EffectsModule} from '@ngrx/effects';
+import {EventEffects} from './event-effects';
 
 export const getAppCalendarModule = (portletName: string, portletNamespace: string, portletConfigurationUrl: string, translationsUrl: string) => {
     @NgModule({
@@ -37,7 +41,9 @@ export const getAppCalendarModule = (portletName: string, portletNamespace: stri
                     deps: [Http]
                 }
             }),
-            RouterModule.forRoot(rootRouterConfig, {useHash: true})
+            RouterModule.forRoot(rootRouterConfig, {useHash: true}),
+          StoreModule.forRoot(reducers),
+          EffectsModule.forRoot([EventEffects]),
         ],
         providers: [
             {provide: DISCOVERY_DOCS, useValue: ['https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest']},

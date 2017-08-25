@@ -2,6 +2,7 @@ import {Observable} from 'rxjs/Rx';
 import {Injectable, NgZone} from '@angular/core';
 import {GoogleApiClientService} from './client-service';
 import {Observer} from 'rxjs/Observer';
+import Event = gapi.client.calendar.Event;
 import Events = gapi.client.calendar.Events;
 import EventsListParameters = gapi.client.calendar.EventsListParameters;
 
@@ -26,5 +27,19 @@ export class GoogleApiCalendarService {
         });
       });
     });
+  }
+
+  searchEvents(query: string): Observable<Event[]> {
+    let eventsListParameters: EventsListParameters = {
+      'q': query,
+      'calendarId': 'axiell.arenaevents@gmail.com',
+      'timeMin': (new Date()).toISOString(),
+      'showDeleted': false,
+      'singleEvents': true,
+      'maxResults': 10,
+      'orderBy': 'startTime'
+    };
+    let calendarEventListResponse$: Observable<Events> = this.eventsList(eventsListParameters);
+    return calendarEventListResponse$.map((calendarEventListResponse: Events) => calendarEventListResponse.items);
   }
 }
