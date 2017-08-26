@@ -4,8 +4,8 @@ import {Injectable} from '@angular/core';
 import {Actions, Effect} from '@ngrx/effects';
 import {Observable} from 'rxjs/Observable';
 import {Action} from '@ngrx/store';
-import * as SearchActions from './search-actions';
-import {GoogleApiCalendarService} from '../common/google/calendar-service';
+import * as SearchActions from '../actions/search-actions';
+import {GoogleApiCalendarService} from '../../common/google/calendar-service';
 
 @Injectable()
 export class EventEffects {

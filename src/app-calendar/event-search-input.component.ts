@@ -19,10 +19,11 @@ export class EventSearchInputComponent {
     @Output() search = new EventEmitter<string>();
 
     ngOnInit() {
+        this.search.emit();
         this.searchTerms
             .valueChanges
             .debounceTime(500)
-            .filter(terms => terms !== '' && terms !== this.value)
+            .filter(terms => terms !== this.value)
             .subscribe(this.search);
     }
 }
