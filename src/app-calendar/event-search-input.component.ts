@@ -9,18 +9,18 @@ import {FormControl} from '@angular/forms';
     templateUrl: './event-search-input.component.html'
 })
 export class EventSearchInputComponent {
-    searchTerms: FormControl = new FormControl();
+    query: FormControl = new FormControl();
 
     @Input()
     set value(val: string) {
-        this.searchTerms.setValue(val, {onlySelf: true, emitEvent: false});
+        this.query.setValue(val, {onlySelf: true, emitEvent: false});
     }
 
     @Output() search = new EventEmitter<string>();
 
     ngOnInit() {
         this.search.emit();
-        this.searchTerms
+        this.query
             .valueChanges
             .debounceTime(500)
             .filter(terms => terms !== this.value)

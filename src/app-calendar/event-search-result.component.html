@@ -1,7 +1,12 @@
 <section>
-        <ul>
-            <li *ngFor="let event of events">
-                <span>{{event.id}} {{event.description}} </span>
-            </li>
-        </ul>
+    <ul>
+        <li *ngFor="let event of events"
+            [class.selected]="event === selectedEvent"
+            (click)=onSelect(event)>
+            <span>{{event.id}} {{event.description}} </span>
+        </li>
+    </ul>
+    <main>
+        <router-outlet></router-outlet>
+    </main>
 </section>

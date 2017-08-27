@@ -17,7 +17,7 @@ export class EventSearchComponent {
     events: Observable<Event[]>;
 
     constructor(private store: Store<fromRoot.State>) {
-        this.terms = store.select(fromRoot.selectTerms);
+        this.terms = store.select(fromRoot.selectQuery);
         this.events = store.select(fromRoot.selectResults);
     }
 

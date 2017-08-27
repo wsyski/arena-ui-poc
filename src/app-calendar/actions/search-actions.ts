@@ -3,6 +3,7 @@ import Event = gapi.client.calendar.Event;
 
 export const SEARCH = '[Events] Search';
 export const SEARCH_SUCCESS = '[Events] Search Success';
+export const SELECT = '[Events] Select';
 
 export class Search implements Action {
   readonly type = SEARCH;
@@ -18,4 +19,11 @@ export class SearchSuccess implements Action {
   }
 }
 
-export type All = Search | SearchSuccess;
+export class Select implements Action {
+    readonly type = SELECT;
+
+    constructor(public payload: Event) {
+    }
+}
+
+export type All = Search | SearchSuccess | Select;

@@ -18,6 +18,10 @@ export function selectCount(state: State) {
     return state.search.results.length;
 }
 
-export function selectTerms(state: State) {
-    return state.search.searchTerms;
+export function selectQuery(state: State) {
+    return state.search.query;
+}
+
+export function selectEvent(state: State) {
+    return state.search.selectedEvent;
 }
