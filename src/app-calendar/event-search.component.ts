@@ -13,15 +13,15 @@ import Event = gapi.client.calendar.Event;
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class EventSearchComponent {
-    terms: Observable<string>;
+    query: Observable<string>;
     events: Observable<Event[]>;
 
     constructor(private store: Store<fromRoot.State>) {
-        this.terms = store.select(fromRoot.selectQuery);
+        this.query = store.select(fromRoot.selectQuery);
         this.events = store.select(fromRoot.selectResults);
     }
 
-    onSearch(terms: string) {
-        this.store.dispatch(new SearchActions.Search(terms));
+    onSearch(query: string) {
+        this.store.dispatch(new SearchActions.Search(query));
     }
 }
