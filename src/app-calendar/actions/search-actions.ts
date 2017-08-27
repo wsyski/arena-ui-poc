@@ -22,7 +22,7 @@ export class SearchSuccess implements Action {
 export class Select implements Action {
     readonly type = SELECT;
 
-    constructor(public payload: Event) {
+    constructor(public payload: string) {
     }
 }
 

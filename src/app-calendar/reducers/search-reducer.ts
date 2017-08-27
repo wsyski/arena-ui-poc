@@ -4,13 +4,13 @@ import * as SearchActions from '../actions/search-actions';
 export interface State {
     query: string;
     results: Event[],
-    selectedEvent: Event
+    selectedEventId: string
 }
 
 const initialState: State = {
     query: '',
     results: [],
-    selectedEvent: null
+    selectedEventId: null
 };
 
 export function reducer(state = initialState, action: SearchActions.All): State {
@@ -32,7 +32,7 @@ export function reducer(state = initialState, action: SearchActions.All): State 
         case SearchActions.SELECT: {
             return {
                 ...state,
-                selectedEvent: action.payload
+                selectedEventId: action.payload
             };
         }
 

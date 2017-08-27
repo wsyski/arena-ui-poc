@@ -1,12 +1,11 @@
 <section>
-    <ul>
-        <li *ngFor="let event of events"
-            [class.selected]="event === selectedEvent"
-            (click)=onSelect(event)>
-            <span>{{event.id}} {{event.description}} </span>
-        </li>
-    </ul>
-    <main>
-        <router-outlet></router-outlet>
-    </main>
+    <ng-container *ngIf="(selectedEventId$ | async) || {}; let selectedEventId">
+        <ul>
+            <li *ngFor="let event of events"
+                [class.selected]="event.id === selectedEventId"
+                (click)=onSelect(event)>
+                <span>{{event.id}} {{event.description}} </span>
+            </li>
+        </ul>
+    </ng-container>
 </section>

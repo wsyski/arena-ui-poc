@@ -1,3 +1,4 @@
 <event-search-input [value]="query | async" (search)="onSearch($event)"></event-search-input>
 <event-search-result-count></event-search-result-count>
 <event-search-result [events]="events | async"></event-search-result>
+<router-outlet></router-outlet>

@@ -22,6 +22,6 @@ export function selectQuery(state: State) {
     return state.search.query;
 }
 
-export function selectEvent(state: State) {
-    return state.search.selectedEvent;
+export function selectEventId(state: State) {
+    return state.search.selectedEventId;
 }
