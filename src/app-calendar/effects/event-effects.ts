@@ -9,12 +9,18 @@ import {GoogleApiCalendarService} from '../../common/google/calendar-service';
 
 @Injectable()
 export class EventEffects {
-  @Effect()
-  search$: Observable<Action> = this.actions$.ofType(SearchActions.SEARCH)
-    .map((action: SearchActions.Search) => action.payload)
-    .switchMap(terms => this.googleApiCalendarService.searchEvents(terms))
-    .map(results => new SearchActions.SearchSuccess(results));
+    @Effect()
+    search$: Observable<Action> = this.actions$.ofType(SearchActions.SEARCH)
+        .map((action: SearchActions.Search) => action.payload)
+        .switchMap(query => this.googleApiCalendarService.searchEvents(query))
+        .map(results => new SearchActions.SearchSuccess(results));
 
-  constructor(private actions$: Actions, private googleApiCalendarService: GoogleApiCalendarService) {
-  }
+    @Effect()
+    select$: Observable<Action> = this.actions$.ofType(SearchActions.SELECT)
+        .map((action: SearchActions.Select) => action.payload)
+        .switchMap(id => this.googleApiCalendarService.getEvent(id))
+        .map(event => new SearchActions.SelectSuccess(event));
+
+    constructor(private actions$: Actions, private googleApiCalendarService: GoogleApiCalendarService) {
+    }
 }

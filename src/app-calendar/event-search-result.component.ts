@@ -1,7 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {Store} from '@ngrx/store';
-import * as SearchActions from './actions/search-actions';
 import * as fromRoot from './reducers/reducers';
 import {Observable} from 'rxjs/Observable';
 import Event = gapi.client.calendar.Event;
@@ -16,14 +15,13 @@ export class EventSearchResultComponent implements OnInit {
     @Input() events;
 
     constructor(private store: Store<fromRoot.State>, private router: Router) {
-        this.selectedEventId$ = store.select(fromRoot.selectEventId);
+        this.selectedEventId$ = store.select(fromRoot.selectedEventId);
     }
 
     ngOnInit() {
     }
 
     onSelect(event: Event): void {
-        this.store.dispatch(new SearchActions.Select(event.id));
         this.router.navigate(['/detail', event.id]);
     }
 }

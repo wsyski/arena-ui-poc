@@ -4,13 +4,15 @@ import * as SearchActions from '../actions/search-actions';
 export interface State {
     query: string;
     results: Event[],
-    selectedEventId: string
+    selectedEventId: string,
+    selectedEvent: Event
 }
 
 const initialState: State = {
     query: '',
     results: [],
-    selectedEventId: null
+    selectedEventId: null,
+    selectedEvent: null
 };
 
 export function reducer(state = initialState, action: SearchActions.All): State {
@@ -36,6 +38,12 @@ export function reducer(state = initialState, action: SearchActions.All): State 
             };
         }
 
+        case SearchActions.SELECT_SUCCESS: {
+            return {
+                ...state,
+                selectedEvent: action.payload
+            };
+        }
         default: {
             return state;
         }
