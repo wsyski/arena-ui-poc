@@ -1,31 +1,34 @@
 import * as fromSearch from './search-reducer';
+import * as fromDetail from './detail-reducer';
 import {routerReducer} from '@ngrx/router-store';
 
 export interface State {
-    search: fromSearch.State;
+  detail: fromDetail.State;
+  search: fromSearch.State;
 }
 
 export const reducers = {
-    search: fromSearch.reducer,
-    router: routerReducer
+  detail: fromDetail.reducer,
+  router: routerReducer,
+  search: fromSearch.reducer
 };
 
 export function selectResults(state: State) {
-    return state.search.results;
+  return state.search.results;
 }
 
 export function selectCount(state: State) {
-    return state.search.results.length;
+  return state.search.results.length;
 }
 
 export function selectQuery(state: State) {
-    return state.search.query;
+  return state.search.query;
 }
 
 export function selectedEventId(state: State) {
-    return state.search.selectedEventId;
+  return state.detail.selectedEventId;
 }
 
 export function selectedEvent(state: State) {
-    return state.search.selectedEvent;
+  return state.detail.selectedEvent;
 }

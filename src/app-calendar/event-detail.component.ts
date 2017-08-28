@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import * as SearchActions from './actions/search-actions';
+import * as DetailActions from './actions/detail-actions';
 import {Store} from '@ngrx/store';
 import * as fromRoot from './reducers/reducers';
 import Event = gapi.client.calendar.Event;
-import {Observable} from "rxjs/Observable";
+import {Observable} from 'rxjs/Observable';
 
 @Component({
     selector: 'product',
@@ -18,7 +18,7 @@ export class EventDetailComponent implements OnInit {
 
         this.route.params.subscribe(
             params => {
-                this.store.dispatch(new SearchActions.Select(params['id']));
+                this.store.dispatch(new DetailActions.Select(params['id']));
             }
         );
 
