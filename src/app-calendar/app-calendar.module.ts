@@ -22,17 +22,19 @@ import {DetailEffects} from './effects/detail-effects';
 import {SearchEffects} from './effects/search-effects';
 import {AppCalendarComponent} from './app-calendar.component';
 import {EventSearchComponent} from './event-search.component';
-import {EventSearchInputComponent} from './event-search-input.component';
+import {EventSearchQueryComponent} from './event-search-query.component';
 import {EventSearchResultCountComponent} from './event-search-result-count.component';
 import {EventSearchResultComponent} from './event-search-result.component';
+import {EventSearchMoreComponent} from './event-search-more.component';
 
 export const getAppCalendarModule = (portletName: string, portletNamespace: string, portletConfigurationUrl: string, translationsUrl: string) => {
   @NgModule({
     declarations: [
       AppCalendarComponent,
       EventSearchComponent,
-      EventSearchInputComponent,
+      EventSearchQueryComponent,
       EventDetailComponent,
+      EventSearchMoreComponent,
       EventSearchResultComponent,
       EventSearchResultCountComponent,
       NotFoundComponent

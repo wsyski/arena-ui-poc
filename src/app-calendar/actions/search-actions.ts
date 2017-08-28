@@ -5,8 +5,7 @@ export const SEARCH = '[Events] Search';
 export const SEARCH_SUCCESS = '[Events] Search Success';
 
 export interface SearchPayload {
-  query: string;
-  pageToken?: string
+  query?: string;
 }
 
 export interface SearchSuccessPayload {

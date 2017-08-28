@@ -4,16 +4,16 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {FormControl} from '@angular/forms';
 
 @Component({
-    selector: 'event-search-input',
-    styleUrls: ['./event-search-input.component.css'],
-    templateUrl: './event-search-input.component.html'
+    selector: 'event-search-query',
+    styleUrls: ['./event-search-query.component.css'],
+    templateUrl: './event-search-query.component.html'
 })
-export class EventSearchInputComponent {
+export class EventSearchQueryComponent {
     query: FormControl = new FormControl();
 
     @Input()
-    set value(val: string) {
-        this.query.setValue(val, {onlySelf: true, emitEvent: false});
+    set value(value: string) {
+        this.query.setValue(value, {onlySelf: true, emitEvent: false});
     }
 
     @Output() search = new EventEmitter<string>();

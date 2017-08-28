@@ -18,8 +18,7 @@ export function reducer(state = initialState, action: SearchActions.All): State 
     case SearchActions.SEARCH: {
       return {
         ...state,
-        query: action.payload.query,
-        pageToken: action.payload.pageToken
+        query: action.payload.query
       };
     }
 

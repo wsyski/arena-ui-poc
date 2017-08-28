@@ -1,4 +1,5 @@
-<event-search-input [value]="query | async" (search)="onSearch($event)"></event-search-input>
+<event-search-query [value]="query | async" (search)="onSearch($event)"></event-search-query>
 <event-search-result-count></event-search-result-count>
 <event-search-result [events]="events | async"></event-search-result>
+<event-search-more></event-search-more>
 <router-outlet></router-outlet>
