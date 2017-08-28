@@ -13,7 +13,7 @@ export class SearchEffects {
   search$: Observable<Action> = this.actions$.ofType(SearchActions.SEARCH)
     .map((action: SearchActions.Search) => action.payload)
     .switchMap(payload => this.googleApiCalendarService.searchEvents(payload.query, payload.pageToken))
-    .map(results => new SearchActions.SearchSuccess(results));
+    .map(results => new SearchActions.SearchSuccess({'events': results.items, 'pageToken': results.nextPageToken}));
 
   constructor(private actions$: Actions, private googleApiCalendarService: GoogleApiCalendarService) {
   }

@@ -48,7 +48,7 @@ export class GoogleApiCalendarService {
     });
   }
 
-  searchEvents(query: string, pageToken: string): Observable<Event[]> {
+  searchEvents(query: string, pageToken: string): Observable<Events> {
     let calendarId: string = this.appConfigService.getCalendarId();
     let pageSize: number = this.appConfigService.getPageSize();
     let timeMin: string = (new Date()).toISOString();
@@ -62,8 +62,7 @@ export class GoogleApiCalendarService {
       'singleEvents': true,
       'orderBy': 'startTime'
     };
-    let calendarEventListResponse$: Observable<Events> = this.eventsList(eventsListParameters);
-    return calendarEventListResponse$.map((calendarEventListResponse: Events) => calendarEventListResponse.items);
+    return this.eventsList(eventsListParameters);
   }
 
   getEvent(id: string): Observable<Event> {

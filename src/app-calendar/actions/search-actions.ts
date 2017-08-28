@@ -9,6 +9,11 @@ export interface SearchPayload {
   pageToken?: string
 }
 
+export interface SearchSuccessPayload {
+  events: Event[];
+  pageToken: string
+}
+
 export class Search implements Action {
   readonly type = SEARCH;
 
@@ -19,7 +24,7 @@ export class Search implements Action {
 export class SearchSuccess implements Action {
   readonly type = SEARCH_SUCCESS;
 
-  constructor(public payload: Event[]) {
+  constructor(public payload: SearchSuccessPayload) {
   }
 }
 

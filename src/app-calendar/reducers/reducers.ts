@@ -14,11 +14,11 @@ export const reducers = {
 };
 
 export function selectResults(state: State) {
-  return state.search.results;
+  return state.search.events;
 }
 
 export function selectCount(state: State) {
-  return state.search.results.length;
+  return state.search.events.length;
 }
 
 export function selectQuery(state: State) {
