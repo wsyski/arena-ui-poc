@@ -14,7 +14,7 @@ export const reducers = {
 };
 
 export function isShowMore(state: State) {
-  return state.search.pageToken !== undefined && state.search.pageToken !== '';
+  return !!state.search.pageToken;
 }
 
 export function selectResults(state: State) {
