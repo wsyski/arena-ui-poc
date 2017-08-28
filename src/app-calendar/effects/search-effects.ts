@@ -9,12 +9,12 @@ import {GoogleApiCalendarService} from '../../common/google/calendar-service';
 
 @Injectable()
 export class SearchEffects {
-    @Effect()
-    search$: Observable<Action> = this.actions$.ofType(SearchActions.SEARCH)
-        .map((action: SearchActions.Search) => action.payload)
-        .switchMap(query => this.googleApiCalendarService.searchEvents(query))
-        .map(results => new SearchActions.SearchSuccess(results));
+  @Effect()
+  search$: Observable<Action> = this.actions$.ofType(SearchActions.SEARCH)
+    .map((action: SearchActions.Search) => action.payload)
+    .switchMap(payload => this.googleApiCalendarService.searchEvents(payload.query, payload.pageToken))
+    .map(results => new SearchActions.SearchSuccess(results));
 
-    constructor(private actions$: Actions, private googleApiCalendarService: GoogleApiCalendarService) {
-    }
+  constructor(private actions$: Actions, private googleApiCalendarService: GoogleApiCalendarService) {
+  }
 }

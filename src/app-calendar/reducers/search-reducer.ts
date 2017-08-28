@@ -3,11 +3,13 @@ import * as SearchActions from '../actions/search-actions';
 
 export interface State {
   query: string;
+  pageToken: string,
   results: Event[],
 }
 
 const initialState: State = {
   query: '',
+  pageToken: '',
   results: [],
 };
 
@@ -16,7 +18,8 @@ export function reducer(state = initialState, action: SearchActions.All): State 
     case SearchActions.SEARCH: {
       return {
         ...state,
-        query: action.payload
+        query: action.payload.query,
+        pageToken: action.payload.pageToken
       };
     }
 

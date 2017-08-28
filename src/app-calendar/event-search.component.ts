@@ -22,6 +22,6 @@ export class EventSearchComponent {
     }
 
     onSearch(query: string) {
-        this.store.dispatch(new SearchActions.Search(query));
+        this.store.dispatch(new SearchActions.Search({'query': query}));
     }
 }
