@@ -3,14 +3,30 @@ import Event = gapi.client.calendar.Event;
 
 export const SEARCH = '[Events] Search';
 export const SEARCH_SUCCESS = '[Events] Search Success';
+export const MORE = '[Events] More';
+export const MORE_SUCCESS = '[Events] More Success';
 
 export interface SearchPayload {
-  query?: string;
+  query: string;
 }
 
 export interface SearchSuccessPayload {
   events: Event[];
   pageToken: string
+}
+
+export class More implements Action {
+  readonly type = MORE;
+
+  constructor() {
+  }
+}
+
+export class MoreSuccess implements Action {
+  readonly type = MORE_SUCCESS;
+
+  constructor(public payload: SearchSuccessPayload) {
+  }
 }
 
 export class Search implements Action {
@@ -27,4 +43,4 @@ export class SearchSuccess implements Action {
   }
 }
 
-export type All = Search | SearchSuccess;
+export type All =  More | MoreSuccess | Search | SearchSuccess;

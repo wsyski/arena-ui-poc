@@ -4,6 +4,7 @@ import {Component} from '@angular/core';
 import {Store} from '@ngrx/store';
 import * as fromRoot from './reducers/reducers';
 import * as SearchActions from './actions/search-actions';
+import {Observable} from 'rxjs/Observable';
 
 @Component({
   selector: 'event-search-more',
@@ -16,7 +17,11 @@ export class EventSearchMoreComponent {
   }
 
   showMore() {
-    this.store.dispatch(new SearchActions.Search({}));
+    this.store.dispatch(new SearchActions.More());
+  }
+
+  isShowMore(): Observable<boolean> {
+    return this.store.select(fromRoot.isShowMore);
   }
 
 }

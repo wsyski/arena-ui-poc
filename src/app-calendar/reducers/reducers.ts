@@ -13,6 +13,10 @@ export const reducers = {
   search: fromSearch.reducer
 };
 
+export function isShowMore(state: State) {
+  return state.search.pageToken !== undefined && state.search.pageToken !== '';
+}
+
 export function selectResults(state: State) {
   return state.search.events;
 }

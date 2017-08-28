@@ -15,6 +15,20 @@ const initialState: State = {
 
 export function reducer(state = initialState, action: SearchActions.All): State {
   switch (action.type) {
+    case SearchActions.MORE: {
+      return {
+        ...state,
+      };
+    }
+
+    case SearchActions.MORE_SUCCESS: {
+      return {
+        ...state,
+        events: state.events.concat(action.payload.events),
+        pageToken: action.payload.pageToken
+      };
+    }
+
     case SearchActions.SEARCH: {
       return {
         ...state,
