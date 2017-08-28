@@ -15,31 +15,29 @@ import java.util.List;
 		"javax.portlet.name=" + ArenaUIPortletKeys.CALENDAR_PORTLET_NAME
 	}
 )
-public class CalendarPreferencesValidator
-	implements PreferencesValidator {
+public class CalendarPreferencesValidator implements PreferencesValidator {
 
 	@Override
-	public void validate(PortletPreferences portletPreferences)
-		throws ValidatorException {
+	public void validate(PortletPreferences portletPreferences) throws ValidatorException {
 
-		List<String> invalidFontSizes = new ArrayList<>();
+		List<String> invalidPageSizes = new ArrayList<>();
 
-		String[] fontSizes = portletPreferences.getValues(
-			"fontSize", new String[0]);
+		String[] pageSizes = portletPreferences.getValues(
+			"pageSize", new String[0]);
 
-		for (String fontSize : fontSizes) {
-			if (fontSize!=null) {
-				int fontSizeAsInt=Integer.parseInt(fontSize);
-				if (fontSizeAsInt<0) {
-					invalidFontSizes.add(fontSize);
+		for (String pageSize : pageSizes) {
+			if (pageSize!=null) {
+				int pageSizeAsInt=Integer.parseInt(pageSize);
+				if (pageSizeAsInt<0) {
+					invalidPageSizes.add(pageSize);
 				}
 			}
 
 		}
 
-		if (!invalidFontSizes.isEmpty()) {
+		if (!invalidPageSizes.isEmpty()) {
 			throw new ValidatorException(
-				"Invalid fomt size", invalidFontSizes);
+				"Invalid page size", invalidPageSizes);
 		}
 	}
 

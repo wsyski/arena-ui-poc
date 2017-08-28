@@ -10,13 +10,13 @@ import com.axiell.arena_ui_poc.ArenaUIPortletKeys;
 )
 public interface CalendarPortletConfiguration {
 
-    @Meta.AD(deflt = "green", required = false)
-    public String fontColor();
+    @Meta.AD(deflt = "", required = true)
+    public String keyGoogleApi();
 
-    @Meta.AD(deflt = "Verdana", required = false)
-    public String fontFamily();
+    @Meta.AD(deflt = "", required = true)
+    public String calendarId();
 
-    @Meta.AD(deflt = "20", required = false)
-    public int fontSize();
+    @Meta.AD(deflt = "10", required = true)
+    public int pageSize();
 
 }
