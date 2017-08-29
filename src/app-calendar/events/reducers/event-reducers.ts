@@ -1,5 +1,5 @@
-import * as fromSearch from './search-reducer';
-import * as fromDetail from './detail-reducer';
+import * as fromSearch from './event-search-reducer';
+import * as fromDetail from './event-detail-reducer';
 
 export interface State {
   detail: fromDetail.State;

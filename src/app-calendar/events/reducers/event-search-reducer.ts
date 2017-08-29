@@ -1,5 +1,5 @@
 import Event = gapi.client.calendar.Event;
-import * as SearchActions from '../actions/search-actions';
+import * as SearchActions from '../actions/event-search-actions';
 
 export interface State {
   query: string;

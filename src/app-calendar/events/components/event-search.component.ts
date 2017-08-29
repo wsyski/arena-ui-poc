@@ -2,8 +2,8 @@ import {ChangeDetectionStrategy, Component} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 
 import {Store} from '@ngrx/store';
-import * as SearchActions from '../actions/search-actions';
-import * as fromRoot from '../reducers/reducers';
+import * as SearchActions from '../actions/event-search-actions';
+import * as fromRoot from '../reducers/event-reducers';
 import Event = gapi.client.calendar.Event;
 
 @Component({

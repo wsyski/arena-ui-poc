@@ -2,8 +2,8 @@ import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/filter';
 import {Component} from '@angular/core';
 import {Store} from '@ngrx/store';
-import * as fromRoot from '../reducers/reducers';
-import * as SearchActions from '../actions/search-actions';
+import * as fromRoot from '../reducers/event-reducers';
+import * as SearchActions from '../actions/event-search-actions';
 import {Observable} from 'rxjs/Observable';
 
 @Component({

@@ -1,5 +1,5 @@
 import Event = gapi.client.calendar.Event;
-import * as DetailActions from '../actions/detail-actions';
+import * as DetailActions from '../actions/event-detail-actions';
 
 export interface State {
   selectedEventId: string,

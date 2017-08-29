@@ -4,12 +4,12 @@ import {Injectable} from '@angular/core';
 import {Actions, Effect} from '@ngrx/effects';
 import {Observable} from 'rxjs/Observable';
 import {Action, Store} from '@ngrx/store';
-import * as SearchActions from '../actions/search-actions';
+import * as SearchActions from '../actions/event-search-actions';
 import {GoogleApiCalendarService} from '../../../common/google/calendar-service';
-import * as fromRoot from '../reducers/reducers';
+import * as fromRoot from '../reducers/event-reducers';
 
 @Injectable()
-export class SearchEffects {
+export class EventSearchEffects {
   @Effect()
   search$: Observable<Action> = this.actions$.ofType(SearchActions.SEARCH)
     .map((action: SearchActions.Search) => action.payload)

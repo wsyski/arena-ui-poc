@@ -16,10 +16,10 @@ import {DISCOVERY_DOCS, GoogleApiClientService} from '../common/google/client-se
 import {GoogleApiCalendarService} from '../common/google/calendar-service';
 import {EventDetailComponent} from './events/components/event-detail.component';
 import {StoreModule} from '@ngrx/store';
-import {reducers} from './events/reducers/reducers';
+import {reducers} from './events/reducers/event-reducers';
 import {EffectsModule} from '@ngrx/effects';
-import {DetailEffects} from './events/effects/detail-effects';
-import {SearchEffects} from './events/effects/search-effects';
+import {EventDetailEffects} from './events/effects/event-detail-effects';
+import {EventSearchEffects} from './events/effects/event-search-effects';
 import {AppCalendarComponent} from './app-calendar.component';
 import {EventSearchComponent} from './events/components/event-search.component';
 import {EventSearchQueryComponent} from './events/components/event-search-query.component';
@@ -28,7 +28,6 @@ import {EventSearchResultComponent} from './events/components/event-search-resul
 import {EventSearchMoreComponent} from './events/components/event-search-more.component';
 import {AppCalendarConfig} from './app-calendar-config';
 import {APP_CONFIG, AppConfigGuard} from '../common/app-config.guard';
-import {AppConfig} from '../core/app-config';
 
 export const getAppCalendarModule = (portletName: string, portletNamespace: string, portletConfigurationUrl: string, translationsUrl: string) => {
   @NgModule({
@@ -57,7 +56,7 @@ export const getAppCalendarModule = (portletName: string, portletNamespace: stri
       }),
       RouterModule.forRoot(rootRouterConfig, {useHash: true}),
       StoreModule.forRoot(reducers),
-      EffectsModule.forRoot([DetailEffects, SearchEffects]),
+      EffectsModule.forRoot([EventDetailEffects, EventSearchEffects]),
     ],
     providers: [
       AppCalendarConfig,
