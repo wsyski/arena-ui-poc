@@ -1,5 +1,5 @@
 {
-  "keyGoogleApi": "AIzaSyDPWrheGl3eMGZpssQ51F9HNkbpTHTWYqM",
+  "googleApiKey": "AIzaSyDPWrheGl3eMGZpssQ51F9HNkbpTHTWYqM",
   "calendarId": "axiell.arenaevents@gmail.com",
   "pageSize": 10
 }

@@ -8,12 +8,12 @@
     CalendarPortletConfiguration portletConfiguration =
             (CalendarPortletConfiguration) renderRequest.getAttribute(CalendarPortletConfiguration.class.getName());
 
-    String keyGoogleApi = StringPool.BLANK;
+    String googleApiKey = StringPool.BLANK;
     String calendarId = StringPool.BLANK;
     String pageSize = StringPool.BLANK;
 
     if (Validator.isNotNull(portletConfiguration)) {
-        keyGoogleApi = portletPreferences.getValue("keyGoogleApi", portletConfiguration.keyGoogleApi());
+        googleApiKey = portletPreferences.getValue("googleApiKey", portletConfiguration.googleApiKey());
         calendarId = portletPreferences.getValue("calendarId", portletConfiguration.calendarId());
         pageSize = portletPreferences.getValue("pageSize", String.valueOf(portletConfiguration.pageSize()));
     }
@@ -37,7 +37,7 @@
     />
 
     <aui:fieldset>
-        <aui:input name="keyGoogleApi" label="Google Key API" value="<%= keyGoogleApi %>" required="true"></aui:input>
+        <aui:input name="googleApiKey" label="Google Key API" value="<%= googleApiKey %>" required="true"></aui:input>
 
 
         <aui:input name="calendarId" label="Calendar Id" value="<%= calendarId %>" required="true"></aui:input>

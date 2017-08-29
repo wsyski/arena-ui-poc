@@ -26,6 +26,9 @@ import {EventSearchQueryComponent} from './event-search-query.component';
 import {EventSearchResultCountComponent} from './event-search-result-count.component';
 import {EventSearchResultComponent} from './event-search-result.component';
 import {EventSearchMoreComponent} from './event-search-more.component';
+import {AppCalendarConfig} from './app-calendar-config';
+import {APP_CONFIG, AppConfigGuard} from '../common/app-config.guard';
+import {AppConfig} from '../core/app-config';
 
 export const getAppCalendarModule = (portletName: string, portletNamespace: string, portletConfigurationUrl: string, translationsUrl: string) => {
   @NgModule({
@@ -57,9 +60,12 @@ export const getAppCalendarModule = (portletName: string, portletNamespace: stri
       EffectsModule.forRoot([DetailEffects, SearchEffects]),
     ],
     providers: [
+      AppCalendarConfig,
+      {provide: APP_CONFIG, useExisting: AppCalendarConfig},
       {provide: DISCOVERY_DOCS, useValue: ['https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest']},
       GoogleApiClientService,
       GoogleApiCalendarService,
+      AppConfigGuard,
       AlwaysDenyGuard
     ],
     entryComponents: [AppCalendarComponent]

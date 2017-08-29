@@ -11,7 +11,7 @@ import com.axiell.arena_ui_poc.ArenaUIPortletKeys;
 public interface CalendarPortletConfiguration {
 
     @Meta.AD(deflt = "", required = true)
-    public String keyGoogleApi();
+    public String googleApiKey();
 
     @Meta.AD(deflt = "", required = true)
     public String calendarId();

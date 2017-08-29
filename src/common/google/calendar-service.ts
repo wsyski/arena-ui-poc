@@ -2,7 +2,7 @@ import {Observable} from 'rxjs/Rx';
 import {Injectable, NgZone} from '@angular/core';
 import {GoogleApiClientService} from './client-service';
 import {Observer} from 'rxjs/Observer';
-import {AppConfigService} from '../../core/app-config-service';
+import {AppCalendarConfig} from '../../app-calendar/app-calendar-config';
 import Event = gapi.client.calendar.Event;
 import Events = gapi.client.calendar.Events;
 import EventsListParameters = gapi.client.calendar.EventsListParameters;
@@ -11,7 +11,7 @@ import EventsGetParameters = gapi.client.calendar.EventsGetParameters;
 @Injectable()
 export class GoogleApiCalendarService {
 
-  constructor(private googleApiClientService: GoogleApiClientService, private ngZone: NgZone, private appConfigService: AppConfigService) {
+  constructor(private googleApiClientService: GoogleApiClientService, private ngZone: NgZone, private appCalendarConfig: AppCalendarConfig) {
   }
 
   private eventsList(eventsListParameters: EventsListParameters): Observable<Events> {
@@ -49,8 +49,8 @@ export class GoogleApiCalendarService {
   }
 
   searchEvents(query: string, pageToken: string): Observable<Events> {
-    let calendarId: string = this.appConfigService.getCalendarId();
-    let pageSize: number = this.appConfigService.getPageSize();
+    let calendarId: string = this.appCalendarConfig.getCalendarId();
+    let pageSize: number = this.appCalendarConfig.getPageSize();
     let timeMin: string = (new Date()).toISOString();
     let eventsListParameters: EventsListParameters = {
       'q': query,
@@ -66,7 +66,7 @@ export class GoogleApiCalendarService {
   }
 
   getEvent(id: string): Observable<Event> {
-    let calendarId: string = this.appConfigService.getCalendarId();
+    let calendarId: string = this.appCalendarConfig.getCalendarId();
     let eventsGetParameters: EventsGetParameters = {
       'eventId': id,
       'calendarId': calendarId
