@@ -2,10 +2,7 @@
 
 <portlet-preferences>
 	<preference>
-		<name>isbns</name>
-		<value>0066620996</value>
-		<value>0131412752</value>
-		<value>0201633612</value>
-		<value>0310241448</value>
+		<name>pageSize</name>
+		<value>10</value>
 	</preference>
 </portlet-preferences>

@@ -2,7 +2,7 @@ import {AppConfig} from '../core/app-config';
 import {Injectable} from '@angular/core';
 import {AppConfigService} from '../core/app-config-service';
 
-const KEY_GOOGLE_API = 'googleApiKey';
+const KEY_GOOGLE_API_KEY = 'googleApiKey';
 const KEY_CALENDAR_ID = 'calendarId';
 const KEY_PAGE_SIZE = 'pageSize';
 
@@ -25,7 +25,7 @@ export class AppCalendarConfig implements AppConfig {
   }
 
   getGoogleApiKey(): string {
-    return this.getPortletConfiguration()[KEY_GOOGLE_API];
+    return this.getPortletConfiguration()[KEY_GOOGLE_API_KEY];
   }
 
   getCalendarId(): string {

@@ -13,9 +13,9 @@
     String pageSize = StringPool.BLANK;
 
     if (Validator.isNotNull(portletConfiguration)) {
-        googleApiKey = portletPreferences.getValue("googleApiKey", portletConfiguration.googleApiKey());
-        calendarId = portletPreferences.getValue("calendarId", portletConfiguration.calendarId());
-        pageSize = portletPreferences.getValue("pageSize", String.valueOf(portletConfiguration.pageSize()));
+        googleApiKey = portletPreferences.getValue(CalendarPortletConfiguration.KEY_GOOGLE_API_KEY, portletConfiguration.googleApiKey());
+        calendarId = portletPreferences.getValue(CalendarPortletConfiguration.KEY_CALENDAR_ID, portletConfiguration.calendarId());
+        pageSize = portletPreferences.getValue(CalendarPortletConfiguration.KEY_PAGE_SIZE, String.valueOf(portletConfiguration.pageSize()));
     }
 %>
 
@@ -37,13 +37,16 @@
     />
 
     <aui:fieldset>
-        <aui:input name="googleApiKey" label="Google Key API" value="<%= googleApiKey %>" required="true"></aui:input>
+        <aui:input name="<%=CalendarPortletConfiguration.KEY_GOOGLE_API_KEY%>" label="Google Key API"
+                   value="<%= googleApiKey %>" required="true"></aui:input>
 
 
-        <aui:input name="calendarId" label="Calendar Id" value="<%= calendarId %>" required="true"></aui:input>
+        <aui:input name="<%=CalendarPortletConfiguration.KEY_CALENDAR_ID%>" label="Calendar Id"
+                   value="<%= calendarId %>" required="true"></aui:input>
 
 
-        <aui:select name="pageSize" label="Page Size" value="<%= pageSize %>">
+        <aui:select name="<%=CalendarPortletConfiguration.KEY_PAGE_SIZE%>" label="Page Size" value="<%= pageSize %>"
+                    required="true">
             <aui:option value="5">10</aui:option>
             <aui:option value="10">10</aui:option>
             <aui:option value="15">15</aui:option>

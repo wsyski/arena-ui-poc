@@ -30,13 +30,13 @@ public class CalendarPortletConfigurationAction extends AbstractPortletConfigura
             LOGGER.debug("processAction: " + this.getPortletName());
         }
 
-        String fontColor = ParamUtil.getString(actionRequest, "fontColor");
-        String fontFamily = ParamUtil.getString(actionRequest, "fontFamily");
-        String fontSize = ParamUtil.getString(actionRequest, "fontSize");
+        String googleApiKey = ParamUtil.getString(actionRequest, CalendarPortletConfiguration.KEY_GOOGLE_API_KEY);
+        String calendarId = ParamUtil.getString(actionRequest, CalendarPortletConfiguration.KEY_CALENDAR_ID);
+        String pageSize = ParamUtil.getString(actionRequest, CalendarPortletConfiguration.KEY_PAGE_SIZE);
 
-        setPreference(actionRequest, "fontColor", fontColor);
-        setPreference(actionRequest, "fontFamily", fontFamily);
-        setPreference(actionRequest, "fontSize", fontSize);
+        setPreference(actionRequest, CalendarPortletConfiguration.KEY_GOOGLE_API_KEY, googleApiKey);
+        setPreference(actionRequest, CalendarPortletConfiguration.KEY_CALENDAR_ID, calendarId);
+        setPreference(actionRequest, CalendarPortletConfiguration.KEY_PAGE_SIZE, pageSize);
 
         super.processAction(portletConfig, actionRequest, actionResponse);
     }

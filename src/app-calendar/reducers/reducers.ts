@@ -1,6 +1,5 @@
 import * as fromSearch from './search-reducer';
 import * as fromDetail from './detail-reducer';
-import {routerReducer} from '@ngrx/router-store';
 
 export interface State {
   detail: fromDetail.State;
@@ -9,7 +8,6 @@ export interface State {
 
 export const reducers = {
   detail: fromDetail.reducer,
-  router: routerReducer,
   search: fromSearch.reducer
 };
 
