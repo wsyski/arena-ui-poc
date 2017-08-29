@@ -5,7 +5,7 @@ import {Actions, Effect} from '@ngrx/effects';
 import {Observable} from 'rxjs/Observable';
 import {Action} from '@ngrx/store';
 import * as DetailActions from '../actions/detail-actions';
-import {GoogleApiCalendarService} from '../../common/google/calendar-service';
+import {GoogleApiCalendarService} from '../../../common/google/calendar-service';
 
 @Injectable()
 export class DetailEffects {

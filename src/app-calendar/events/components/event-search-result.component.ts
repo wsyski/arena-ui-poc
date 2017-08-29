@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {Store} from '@ngrx/store';
-import * as fromRoot from './reducers/reducers';
+import * as fromRoot from '../reducers/reducers';
 import {Observable} from 'rxjs/Observable';
 import Event = gapi.client.calendar.Event;
 

@@ -5,7 +5,7 @@ import {Actions, Effect} from '@ngrx/effects';
 import {Observable} from 'rxjs/Observable';
 import {Action, Store} from '@ngrx/store';
 import * as SearchActions from '../actions/search-actions';
-import {GoogleApiCalendarService} from '../../common/google/calendar-service';
+import {GoogleApiCalendarService} from '../../../common/google/calendar-service';
 import * as fromRoot from '../reducers/reducers';
 
 @Injectable()
