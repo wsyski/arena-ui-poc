@@ -2,6 +2,7 @@ import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 import {getAppGithubModule} from './app-github/app-github.module';
 import {getAppTodoModule} from './app-todo/app-todo.module';
 import {getAppCalendarModule} from './app-calendar/app-calendar.module';
+import {Type} from "../../../../../../../opt/java/liferay/angular/arena-ui-poc/node_modules/@angular/core/src/type";
 
 const getPortletShortName = (portletName: string) => {
     let lastIndexOfDot = portletName.lastIndexOf('.');
@@ -12,7 +13,7 @@ const getPortletShortName = (portletName: string) => {
 
 export const run = (portletName: string, portletNamespace: string, portletConfigurationUrl: string, translationsUrl: string) => {
     let portletShortName = getPortletShortName(portletName);
-    let appModule;
+    let appModule: any;
     switch (portletShortName) {
         case 'calendar':
             appModule = getAppCalendarModule(portletName, portletNamespace, portletConfigurationUrl, translationsUrl);
@@ -30,7 +31,7 @@ export const run = (portletName: string, portletNamespace: string, portletConfig
     platformBrowserDynamic()
         .bootstrapModule(appModule)
         .then(success => console.log(`Bootstraped for portlet short name: ${portletShortName}`))
-        .catch(err => console.error(err));
+        .catch((error: Error) => console.error(error));
 };
 
 

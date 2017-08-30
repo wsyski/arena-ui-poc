@@ -10,15 +10,12 @@ import Event = gapi.client.calendar.Event;
     styleUrls: ['./event-search-result.component.css'],
     templateUrl: './event-search-result.component.html'
 })
-export class EventSearchResultComponent implements OnInit {
+export class EventSearchResultComponent{
     selectedEventId$: Observable<string>;
-    @Input() events;
+    @Input() events: any;
 
     constructor(private store: Store<fromRoot.State>, private router: Router) {
         this.selectedEventId$ = store.select(fromRoot.selectedEventId);
-    }
-
-    ngOnInit() {
     }
 
     onSelect(event: Event): void {

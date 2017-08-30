@@ -1,11 +1,10 @@
-import {Component, Input} from '@angular/core';
-import Event = gapi.client.calendar.Event;
+import {Component, Input, OnInit} from '@angular/core';
 
 @Component({
-  selector: 'event-summary',
-  styleUrls: ['./event-summary.component.css'],
-  templateUrl: './event-summary.component.html',
+    selector: 'event-summary',
+    styleUrls: ['./event-summary.component.css'],
+    templateUrl: './event-summary.component.html',
 })
 export class EventSummaryComponent {
-  @Input() event: Event;
+    @Input() event: any;
 }
