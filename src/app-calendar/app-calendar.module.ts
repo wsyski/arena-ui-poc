@@ -15,6 +15,7 @@ import {Http} from '@angular/http';
 import {DISCOVERY_DOCS, GoogleApiClientService} from '../common/google/client-service';
 import {GoogleApiCalendarService} from '../common/google/calendar-service';
 import {EventDetailComponent} from './events/components/event-detail.component';
+import {EventSummaryComponent} from './events/components/event-summary.component';
 import {StoreModule} from '@ngrx/store';
 import {reducers} from './events/reducers/event-reducers';
 import {EffectsModule} from '@ngrx/effects';
@@ -36,6 +37,7 @@ export const getAppCalendarModule = (portletName: string, portletNamespace: stri
       EventSearchComponent,
       EventSearchQueryComponent,
       EventDetailComponent,
+      EventSummaryComponent,
       EventSearchMoreComponent,
       EventSearchResultComponent,
       EventSearchResultCountComponent,

@@ -78,7 +78,7 @@
           var script = document.createElement("script");
           script.setAttribute("type", "text/javascript");
           script.setAttribute("src", src);
-          script.setAttribute("defer", "defer");
+          // script.setAttribute("defer", "defer");
           head.appendChild(script);
           var loadingScript = {
             src: src,

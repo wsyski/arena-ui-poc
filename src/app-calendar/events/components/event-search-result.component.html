@@ -4,7 +4,7 @@
             <li *ngFor="let event of events"
                 [class.selected]="event.id === selectedEventId"
                 (click)=onSelect(event)>
-                <span>{{event.id}} {{event.description}} </span>
+                <event-summary [event]="event"></event-summary>
             </li>
         </ul>
     </ng-container>

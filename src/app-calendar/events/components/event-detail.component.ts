@@ -7,7 +7,7 @@ import Event = gapi.client.calendar.Event;
 import {Observable} from 'rxjs/Observable';
 
 @Component({
-    selector: 'product',
+    selector: 'event-detail',
     styleUrls: ['./event-detail.component.css'],
     templateUrl: './event-detail.component.html',
 })
