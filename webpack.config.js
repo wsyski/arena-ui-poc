@@ -41,8 +41,13 @@ module.exports = {
     rules: [// process Angular templates to inline HTML/CSS then invoke Typescript
       {
         test: /\.ts$/,
-        loader: 'ts-loader!angular2-template-loader'
-      }, // used to load Angular HTML/CSS files for templates
+        loaders: [
+          {
+            loader: 'awesome-typescript-loader',
+            options: { configFileName: 'tsconfig.json'}
+          } , 'angular2-template-loader'
+        ]
+      },
       {
         test: /\.html$/,
         loader: 'html-loader'
