@@ -2,6 +2,7 @@ exec = require('child_process').exec;
 
 module.exports = {
     build_dir:            'build',
+    node_dir:             'node_modules',
     dev_resources_dir:    'dev-resources',
     ngc_dir :             'ngcout',
     aot_dir:              'aot',

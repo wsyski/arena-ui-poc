@@ -1,6 +1,7 @@
 const config = require('./gulp-config');
 const gulp = require('gulp');
 const replace = require('gulp-replace');
+const merge = require('gulp-merge');
 const webpackDevServer = require('webpack-dev-server');
 const gutil = require('gulp-util');
 const gulpif = require('gulp-if');
@@ -25,12 +26,15 @@ gulp.task('clean', function () {
 });
 
 /*
- * Copy main html into build directory.
+ * Copy developer resources into build directory.
  */
 gulp.task("dev-resources", function () {
-  return gulp.src([config.dev_resources_dir + '/*.html', config.dev_resources_dir + '/favicon.ico',
-    config.dev_resources_dir + '/css/*', config.dev_resources_dir + '/json/*'], {base: config.dev_resources_dir})
+  var main = gulp.src([config.dev_resources_dir + '/*.html', config.dev_resources_dir + '/favicon.ico',
+    config.dev_resources_dir + '/aui/*', config.dev_resources_dir + '/json/*'], {base: config.dev_resources_dir})
     .pipe(gulp.dest(config.build_dir));
+  var bootstrap = gulp.src([config.node_dir + '/bootstrap/dist/**'], {base: config.node_dir+ '/bootstrap/dist'})
+    .pipe(gulp.dest(config.build_dir+'/bootstrap'));
+  return merge(main, bootstrap);
 });
 
 /*
