@@ -1,1 +1,14 @@
-<div class="event-summary">event id: {{event.id}} description: {{event.description}}</div>
+<div class="row arena-event-list-item">
+    <div class="col-sm-4">
+        <a href="#">
+            <img src="//lorempixel.com/g/200/100/sports">
+        </a>
+    </div>
+    <div class="col-sm-5">
+        <h4 class="arena-event-list-item-title">
+            <a href="#">{{event.summary}}</a></h4></div>
+    <div class="col-sm-3 arena-event-list-item-info">
+        <time>{{event.start.datetime}}</time>
+        <a href="#">{{event.location}}</a>
+    </div>
+</div>>

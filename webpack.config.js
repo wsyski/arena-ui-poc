@@ -23,17 +23,15 @@ module.exports = {
   plugins: [new webpack.DllReferencePlugin({
     context: '.',
     manifest: require(path.join(__dirname, 'ng-runtime', 'ng-runtime-manifest.json'))
-  }),
-    new webpack.optimize.UglifyJsPlugin({
-      debug: true,
-      minimize: false,
-      compress: false,
-      beautify: true,
-      mangle: false,
-      sourceMap: true,
-      comments: true
-    }),
-    // suppress Typescript warnings when building Angular into vendor package
+  }), new webpack.optimize.UglifyJsPlugin({
+    debug: true,
+    minimize: false,
+    compress: false,
+    beautify: true,
+    mangle: false,
+    sourceMap: true,
+    comments: true
+  }), // suppress Typescript warnings when building Angular into vendor package
     //new webpack.ContextReplacementPlugin(/angular(\\|\/)core(\\|\/)(esm(\\|\/)src|src)(\\|\/)linker/,appRoot),
     new webpack.ContextReplacementPlugin(/angular(\\|\/)core(\\|\/)@angular/, appRoot),],
   resolve: {
@@ -48,7 +46,11 @@ module.exports = {
       {
         test: /\.(html|css)$/,
         loader: 'raw-loader'
-      },],
+      },
+      {
+        test: /\.(png|jpe?g|gif|svg|woff|woff2|ttf|eot|ico)$/,
+        loader: 'file-loader?name=assets/[name].[hash].[ext]'
+      }],
     noParse: /path.join(__dirname,'node_modules', 'angular2', 'bundles')/
   },
   devtool: 'source-map'
