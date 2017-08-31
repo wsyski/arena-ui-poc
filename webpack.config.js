@@ -35,21 +35,30 @@ module.exports = {
     //new webpack.ContextReplacementPlugin(/angular(\\|\/)core(\\|\/)(esm(\\|\/)src|src)(\\|\/)linker/,appRoot),
     new webpack.ContextReplacementPlugin(/angular(\\|\/)core(\\|\/)@angular/, appRoot),],
   resolve: {
-    extensions: ['*', '.ts', '.js']
+    extensions: ['.ts', '.js']
   },
   module: {
-    loaders: [// process Angular templates to inline HTML/CSS then invoke Typescript
+    rules: [// process Angular templates to inline HTML/CSS then invoke Typescript
       {
         test: /\.ts$/,
         loader: 'ts-loader!angular2-template-loader'
       }, // used to load Angular HTML/CSS files for templates
       {
-        test: /\.(html|css)$/,
+        test: /\.html$/,
+        loader: 'html-loader'
+      },
+      {
+        test: /\.(css)$/,
         loader: 'raw-loader'
       },
       {
+        test: /\.scss$/,
+        exclude: /node_modules/,
+        loaders: ['raw-loader', 'sass-loader'] 
+      },
+      {
         test: /\.(png|jpe?g|gif|svg|woff|woff2|ttf|eot|ico)$/,
-        loader: 'file-loader?name=assets/[name].[hash].[ext]'
+        loader: 'file-loader?name=assets/images/[name].[ext]',
       }],
     noParse: /path.join(__dirname,'node_modules', 'angular2', 'bundles')/
   },
