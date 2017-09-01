@@ -17,8 +17,4 @@ export class EventSearchResultComponent{
     constructor(private store: Store<fromRoot.State>, private router: Router) {
         this.selectedEventId$ = store.select(fromRoot.selectedEventId);
     }
-
-    onSelect(event: Event): void {
-        this.router.navigate(['/detail', event.id]);
-    }
 }

@@ -1,5 +1,5 @@
 <ng-container *ngIf="(selectedEventId$ | async) || {}; let selectedEventId">
-    <div *ngFor="let event of events" [class.item-selected]="event.id === selectedEventId" (click)=onSelect(event)>
+    <div *ngFor="let event of events" [class.item-selected]="event.id === selectedEventId">
         <event-summary [event]="event"></event-summary>
     </div>
 </ng-container>
