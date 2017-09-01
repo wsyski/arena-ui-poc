@@ -2,7 +2,6 @@ import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 import {getAppGithubModule} from './app-github/app-github.module';
 import {getAppTodoModule} from './app-todo/app-todo.module';
 import {getAppCalendarModule} from './app-calendar/app-calendar.module';
-import {Type} from "../../../../../../../opt/java/liferay/angular/arena-ui-poc/node_modules/@angular/core/src/type";
 
 const getPortletShortName = (portletName: string) => {
     let lastIndexOfDot = portletName.lastIndexOf('.');
