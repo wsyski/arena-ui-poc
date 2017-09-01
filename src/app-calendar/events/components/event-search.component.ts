@@ -8,7 +8,7 @@ import Event = gapi.client.calendar.Event;
 
 @Component({
     selector: 'event-search',
-    styleUrls: ['./event-search.component.css'],
+    styleUrls: ['./event-search.component.scss'],
     templateUrl: './event-search.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush
 })

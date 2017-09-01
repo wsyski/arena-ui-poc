@@ -7,7 +7,7 @@ import Event = gapi.client.calendar.Event;
 
 @Component({
     selector: 'event-search-result',
-    styleUrls: ['./event-search-result.component.css'],
+    styleUrls: ['./event-search-result.component.scss'],
     templateUrl: './event-search-result.component.html'
 })
 export class EventSearchResultComponent{

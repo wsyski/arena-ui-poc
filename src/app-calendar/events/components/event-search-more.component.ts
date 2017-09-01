@@ -8,7 +8,7 @@ import {Observable} from 'rxjs/Observable';
 
 @Component({
   selector: 'event-search-more',
-  styleUrls: ['./event-search-more.component.css'],
+  styleUrls: ['./event-search-more.component.scss'],
   templateUrl: './event-search-more.component.html'
 })
 export class EventSearchMoreComponent {

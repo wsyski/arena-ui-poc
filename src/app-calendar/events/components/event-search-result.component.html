@@ -1,11 +1,5 @@
-<section>
-    <ng-container *ngIf="(selectedEventId$ | async) || {}; let selectedEventId">
-        <ul>
-            <li *ngFor="let event of events"
-                [class.selected]="event.id === selectedEventId"
-                (click)=onSelect(event)>
-                <event-summary [event]="event"></event-summary>
-            </li>
-        </ul>
-    </ng-container>
-</section>
+<ng-container *ngIf="(selectedEventId$ | async) || {}; let selectedEventId">
+    <div *ngFor="let event of events" [class.item-selected]="event.id === selectedEventId" (click)=onSelect(event)>
+        <event-summary [event]="event"></event-summary>
+    </div>
+</ng-container>

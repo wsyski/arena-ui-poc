@@ -5,7 +5,7 @@ import {FormControl} from '@angular/forms';
 
 @Component({
     selector: 'event-search-query',
-    styleUrls: ['./event-search-query.component.css'],
+    styleUrls: ['./event-search-query.component.scss'],
     templateUrl: './event-search-query.component.html'
 })
 export class EventSearchQueryComponent {

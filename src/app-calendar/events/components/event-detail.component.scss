@@ -1,0 +1,22 @@
+.arena-event-detail {
+  h3 {
+    margin-top: 0;
+  }
+  margin-bottom: 2em;
+  .ics-calendar-link {
+    margin-top: 1em;
+  }
+  .arena-event-detail-register {
+    margin-top: 1.5em;
+    padding-top: 1.5em;
+    border-top: 1px solid #333;
+    a.btn {
+      min-width: 150px;
+      text-transform: uppercase;
+    }
+  }
+  .arena-event-detail-body {
+    margin-top: 1.0em;
+  }
+}
+

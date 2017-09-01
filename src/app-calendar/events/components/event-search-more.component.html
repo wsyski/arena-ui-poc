@@ -1,3 +1,5 @@
-<section>
-    <button (click)="showMore()" [hidden]="! (isShowMore() | async )">More</button>
-</section>
+<ng-container *ngIf="(isShowMore() | async )">
+    <p class="text-center arena-event-list-load-more">
+        <button class="btn btn-md btn-primary" (click)="showMore()">Load more events</button>
+    </p>
+</ng-container>    

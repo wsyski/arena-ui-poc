@@ -8,7 +8,7 @@ import {Observable} from 'rxjs/Observable';
 
 @Component({
     selector: 'event-detail',
-    styleUrls: ['./event-detail.component.css'],
+    styleUrls: ['./event-detail.component.scss'],
     templateUrl: './event-detail.component.html',
 })
 export class EventDetailComponent implements OnInit {
