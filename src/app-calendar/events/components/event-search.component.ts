@@ -4,7 +4,6 @@ import {Observable} from 'rxjs/Observable';
 import {Store} from '@ngrx/store';
 import * as SearchActions from '../actions/event-search-actions';
 import * as fromRoot from '../reducers/event-reducers';
-import {EventSummaryComponent} from './event-summary.component';
 import Event = gapi.client.calendar.Event;
 
 @Component({
