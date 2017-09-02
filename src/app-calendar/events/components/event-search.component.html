@@ -1,7 +1,7 @@
 <router-outlet></router-outlet>
 <div class="container arena-events">
     <h3>Upcoming events</h3>
-    <event-search-query [value]="query | async" (search)="onSearch($event)"></event-search-query>
+    <event-search-query [value]="query | async"></event-search-query>
     <event-search-result-count></event-search-result-count>
     <event-search-result [events]="events | async"></event-search-result>
     <event-search-more></event-search-more>

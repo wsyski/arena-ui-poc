@@ -2,8 +2,8 @@ import {ChangeDetectionStrategy, Component} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 
 import {Store} from '@ngrx/store';
-import * as SearchActions from '../actions/event-search-actions';
 import * as fromRoot from '../reducers/event-reducers';
+import * as SearchActions from '../actions/event-search-actions';
 import Event = gapi.client.calendar.Event;
 
 @Component({
@@ -19,9 +19,6 @@ export class EventSearchComponent {
   constructor(private store: Store<fromRoot.State>) {
     this.query = store.select(fromRoot.selectQuery);
     this.events = store.select(fromRoot.selectResults);
-  }
-
-  onSearch(query: string) {
-    this.store.dispatch(new SearchActions.Search({'query': query}));
+    this.store.dispatch(new SearchActions.Search({'query': ''}));
   }
 }
