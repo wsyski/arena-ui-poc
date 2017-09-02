@@ -1,17 +1,20 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
-import Event = gapi.client.calendar.Event;
+import {Component, Input} from '@angular/core';
+import {Store} from '@ngrx/store';
+import * as SearchActions from '../actions/event-search-actions';
+import * as fromRoot from '../reducers/event-reducers';
 
 @Component({
-  selector: 'event-summary',
-  styleUrls: ['./event-summary.component.scss'],
-  templateUrl: './event-summary.component.html',
+    selector: 'event-summary',
+    styleUrls: ['./event-summary.component.scss'],
+    templateUrl: './event-summary.component.html',
 })
 export class EventSummaryComponent {
-  @Input() event: any;
+    @Input() event: any;
 
-  @Output() search = new EventEmitter<string>();
+    constructor(private store: Store<fromRoot.State>) {
+    }
 
-  onClickLocation() {
-    this.search.emit(this.event.location);
-  }
+    onClickLocation() {
+        this.store.dispatch(new SearchActions.Search({'query': this.event.location}));
+    }
 }

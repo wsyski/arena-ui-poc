@@ -1,12 +1,12 @@
 <div class="row arena-event-list-item">
     <div class="col-sm-4">
-        <a href="#"><img src="missing-event-icon.png"/></a>
+        <a [routerLink]="['/detail', event.id]"><img src="missing-event-icon.png"/></a>
     </div>
     <div class="col-sm-5">
         <h4 class="arena-event-list-item-title"><a [routerLink]="['/detail', event.id]">{{event.summary}}</a></h4>
     </div>
     <div class="col-sm-3 arena-event-list-item-info">
         <time>{{event.start.datetime}}</time>
-        <a (click)="onClickLocation()">{{event.location}}</a>
+        <a href="#" (click)="onClickLocation()">{{event.location}}</a>
     </div>
 </div>
