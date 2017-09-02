@@ -1,6 +1,7 @@
 import Event = gapi.client.calendar.Event;
 
 const MISSING_EVENT_ICON_URL = require('./missing-event-icon.png');
+const ICON_URL_PREFIX = 'https://drive.google.com/uc?id=';
 
 export class DecoratedEvent {
 
@@ -26,7 +27,7 @@ export class DecoratedEvent {
   get iconUrl(): string {
     let iconUrl = MISSING_EVENT_ICON_URL;
     if (this.event.attachments) {
-      let fileUrls = this.event.attachments.filter(attachment => {
+      let fileIds = this.event.attachments.filter(attachment => {
         if (attachment.mimeType) {
           return attachment.mimeType.match(/^image\//i);
         } else if (attachment.title) {
@@ -34,9 +35,9 @@ export class DecoratedEvent {
         } else {
           return false;
         }
-      }).map(attachment => attachment.fileUrl);
-      if (fileUrls.length > 0) {
-        iconUrl = fileUrls[0];
+      }).map(attachment => attachment.fileId);
+      if (fileIds.length > 0) {
+        iconUrl =  ICON_URL_PREFIX + fileIds[0];
       }
     }
     return iconUrl;

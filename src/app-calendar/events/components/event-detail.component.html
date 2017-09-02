@@ -1,3 +1,43 @@
-<ng-container *ngIf="(event$ | async) || {}; let event">
-    <h3 class="event-detail">Details for calendar event id: {{event.id}} description: {{event.description}}</h3>
-</ng-container>    
+<div class="container arena-event-detail">
+    <div class="row">
+        <div class="col-sm-7">
+            <a hred="#"><img [src]="decoratedEvent.iconUrl"/></a>
+        </div>
+        <div class="col-sm-5 arena-event-detail-header">
+            <h3>{{decoratedEvent.summary}}</h3>
+            <time datetime="2017-12-01">Friday, December 1, 2017</time>
+            <div class="arena-event-detail-register">
+                <a href="#" class="btn btn-md btn-primary" role="button">Register</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="row arena-event-detail-body">
+        <div class="col-sm-7">
+            <h4 class="">{{decoratedEvent.description}}</h4>
+        </div>
+        <div class="col-sm-5">
+            <h4 class="">
+                Date and time
+            </h4>
+            <time datetime="2017-12-01">Fri. December 1, 2017</time>
+            <time>11.00 - 13.00</time>
+            <a href="#" (click)="onClickLocation()">{{decoratedEvent.location}}</a>
+            <div class="ics-calendar-link">
+                <a href="#">Add to your calendar</a>
+            </div>
+        </div>
+
+    </div>
+    <!-- end row -->
+    <div class="row">
+        <div class="col-sm-12">
+            <h4>
+                Share with your friends
+            </h4>
+            <i class="icon-email">EMAIL</i>
+            <i class="icon-facebook">FB</i>
+            <i class="icon-twitter">TW</i>
+        </div>
+    </div>
+</div>
