@@ -1,54 +1,58 @@
-<div class="container arena-event-detail">
-    <div class="row">
-        <div class="col-sm-7">
-            <a hred="#"><img [src]="decoratedEvent.iconUrl"/></a>
-        </div>
-        <div class="col-sm-5 arena-event-detail-header">
-            <h3>{{decoratedEvent.summary}}</h3>
-            <div class="arena-event-detail-register">
-                <a href="#" class="btn btn-md btn-primary" role="button">Register</a>
+<ng-container *ngIf="decoratedEvent">
+    <div class="container arena-event-detail">
+        <div class="row">
+            <div class="col-sm-7">
+                <a hred="#"><img [src]="decoratedEvent.iconUrl"/></a>
+            </div>
+            <div class="col-sm-5 arena-event-detail-header">
+                <h3>{{decoratedEvent.summary}}</h3>
+                <div class="arena-event-detail-register">
+                    <a href="#" class="btn btn-md btn-primary" role="button">Register</a>
+                </div>
             </div>
         </div>
-    </div>
 
-    <div class="row arena-event-detail-body">
-        <div class="col-sm-7">
-            <h4 class="">{{decoratedEvent.description}}</h4>
+        <div class="row arena-event-detail-body">
+            <div class="col-sm-7">
+                <h4 class="">{{decoratedEvent.description}}</h4>
+            </div>
+            <div class="col-sm-5">
+                <h4 class="">
+                    <table>
+                        <tr>
+                            <td>Start:</td>
+                            <td>
+                                <time [attr.datetime]="decoratedEvent.startDateAsString">
+                                    {{decoratedEvent.startDateAsLocalizedString}}
+                                </time>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>End:</td>
+                            <td>
+                                <time [attr.datetime]="decoratedEvent.endDateAsString">
+                                    {{decoratedEvent.endDateAsLocalizedString}}
+                                </time>
+                            </td>
+                        </tr>
+                    </table>
+                </h4>
+                <a href="#" (click)="onClickLocation()">{{decoratedEvent.location}}</a>
+                <div class="ics-calendar-link">
+                    <a href="#">Add to your calendar</a>
+                </div>
+            </div>
         </div>
-        <div class="col-sm-5">
-            <h4 class="">
-                <table>
-                    <tr>
-                        <td>Start:</td>
-                        <td>
-                            <time [attr.datetime]="decoratedEvent.startDateAsString">
-                                {{decoratedEvent.startDateAsLocalizedString}}
-                            </time>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>End:</td>
-                        <td>
-                            <time [attr.datetime]="decoratedEvent.endDateAsString">{{decoratedEvent.endDateAsLocalizedString}}</time>
-                        </td>
-                    </tr>
-                </table>
-            </h4>
-            <a href="#" (click)="onClickLocation()">{{decoratedEvent.location}}</a>
-            <div class="ics-calendar-link">
-                <a href="#">Add to your calendar</a>
+        <!-- end row -->
+        <div class="row">
+            <div class="col-sm-12">
+                <h4>
+                    Share with your friends
+                </h4>
+                <i class="icon-email">EMAIL</i>
+                <i class="icon-facebook">FB</i>
+                <i class="icon-twitter">TW</i>
             </div>
         </div>
     </div>
-    <!-- end row -->
-    <div class="row">
-        <div class="col-sm-12">
-            <h4>
-                Share with your friends
-            </h4>
-            <i class="icon-email">EMAIL</i>
-            <i class="icon-facebook">FB</i>
-            <i class="icon-twitter">TW</i>
-        </div>
-    </div>
-</div>
+</ng-container>

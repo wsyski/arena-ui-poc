@@ -28,13 +28,16 @@ export class EventDetailComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.subscription = this.store.select(fromRoot.selectedEvent).subscribe((event: Event) => this.decoratedEvent = new DecoratedEvent(event));
+    this.subscription = this.store.select(fromRoot.selectedEvent).subscribe((event: Event) => {
+      if (event) {
+        this.decoratedEvent = new DecoratedEvent(event)
+      }
+    });
   }
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
-
 
   onClickLocation() {
     this.store.dispatch(new SearchActions.Search({'query': this.decoratedEvent.location}));

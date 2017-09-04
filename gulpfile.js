@@ -29,7 +29,7 @@ gulp.task('clean', function () {
  */
 gulp.task("dev-resources", function () {
   var main = gulp.src([config.dev_resources_dir + '/*.html', config.dev_resources_dir + '/favicon.ico',
-    config.dev_resources_dir + '/aui/*', config.dev_resources_dir + '/json/*'], {base: config.dev_resources_dir})
+    config.dev_resources_dir + '/aui/**', config.dev_resources_dir + '/json/*'], {base: config.dev_resources_dir})
     .pipe(gulp.dest(config.build_dir));
   /*
   var jquery = gulp.src([config.node_dir + '/jquery/dist/jquery.js'], {base: config.node_dir+ '/jquery/dist'})
