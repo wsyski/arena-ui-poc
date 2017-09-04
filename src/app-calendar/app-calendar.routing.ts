@@ -13,7 +13,7 @@ export const rootRouterConfig: Routes = [
       {
         path: '', component: EventSearchComponent,
         children: [
-          {path: 'detail/:id', component: EventDetailComponent}
+          {path: 'events/:id', component: EventDetailComponent}
         ]
       }
     ]

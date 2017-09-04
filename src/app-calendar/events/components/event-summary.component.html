@@ -1,12 +1,32 @@
 <div class="row arena-event-list-item">
     <div class="col-sm-4">
-        <a [routerLink]="['/detail', decoratedEvent.id]"><img [src]="decoratedEvent.iconUrl"/></a>
+        <a [routerLink]="['/events', decoratedEvent.id]"><img [src]="decoratedEvent.iconUrl"/></a>
     </div>
     <div class="col-sm-5">
-        <h4 class="arena-event-list-item-title"><a [routerLink]="['/detail', decoratedEvent.id]">{{decoratedEvent.summary}}</a></h4>
+        <h4 class="arena-event-list-item-title"><a [routerLink]="['/events', decoratedEvent.id]">{{decoratedEvent.summary}}</a>
+        </h4>
     </div>
     <div class="col-sm-3 arena-event-list-item-info">
-        <time>{{event.start.datetime}}</time>
+        <h4 class="">
+            <table>
+                <tr>
+                    <td>Start:</td>
+                    <td>
+                        <time [attr.datetime]="decoratedEvent.startDateAsString">
+                            {{decoratedEvent.startDateAsLocalizedString}}
+                        </time>
+                    </td>
+                </tr>
+                <tr>
+                    <td>End:</td>
+                    <td>
+                        <time [attr.datetime]="decoratedEvent.endDateAsString">
+                            {{decoratedEvent.endDateAsLocalizedString}}
+                        </time>
+                    </td>
+                </tr>
+            </table>
+        </h4>
         <a href="#" (click)="onClickLocation()">{{decoratedEvent.location}}</a>
     </div>
 </div>

@@ -10,7 +10,6 @@ const webpack = require('webpack');
 const webpackStream = require('webpack-stream');
 const clean = require('gulp-clean');
 const uglify = require('gulp-uglify');
-const rename = require('gulp-rename');
 const sequence = require('gulp-sequence');
 const named = require('vinyl-named');
 
@@ -32,11 +31,13 @@ gulp.task("dev-resources", function () {
   var main = gulp.src([config.dev_resources_dir + '/*.html', config.dev_resources_dir + '/favicon.ico',
     config.dev_resources_dir + '/aui/*', config.dev_resources_dir + '/json/*'], {base: config.dev_resources_dir})
     .pipe(gulp.dest(config.build_dir));
+  /*
   var jquery = gulp.src([config.node_dir + '/jquery/dist/jquery.js'], {base: config.node_dir+ '/jquery/dist'})
     .pipe(gulp.dest(config.build_dir+'/jquery'));
   var bootstrap = gulp.src([config.node_dir + '/bootstrap/dist/**'], {base: config.node_dir+ '/bootstrap/dist'})
     .pipe(gulp.dest(config.build_dir+'/bootstrap'));
-  return merge(main, jquery, bootstrap);
+  */
+  return merge(main);
 });
 
 /*

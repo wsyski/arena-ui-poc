@@ -5,7 +5,6 @@
         </div>
         <div class="col-sm-5 arena-event-detail-header">
             <h3>{{decoratedEvent.summary}}</h3>
-            <time datetime="2017-12-01">Friday, December 1, 2017</time>
             <div class="arena-event-detail-register">
                 <a href="#" class="btn btn-md btn-primary" role="button">Register</a>
             </div>
@@ -18,16 +17,28 @@
         </div>
         <div class="col-sm-5">
             <h4 class="">
-                Date and time
+                <table>
+                    <tr>
+                        <td>Start:</td>
+                        <td>
+                            <time [attr.datetime]="decoratedEvent.startDateAsString">
+                                {{decoratedEvent.startDateAsLocalizedString}}
+                            </time>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>End:</td>
+                        <td>
+                            <time [attr.datetime]="decoratedEvent.endDateAsString">{{decoratedEvent.endDateAsLocalizedString}}</time>
+                        </td>
+                    </tr>
+                </table>
             </h4>
-            <time datetime="2017-12-01">Fri. December 1, 2017</time>
-            <time>11.00 - 13.00</time>
             <a href="#" (click)="onClickLocation()">{{decoratedEvent.location}}</a>
             <div class="ics-calendar-link">
                 <a href="#">Add to your calendar</a>
             </div>
         </div>
-
     </div>
     <!-- end row -->
     <div class="row">
