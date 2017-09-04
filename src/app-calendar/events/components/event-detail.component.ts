@@ -1,11 +1,11 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import * as DetailActions from '../actions/event-detail-actions';
 import {Store} from '@ngrx/store';
 import * as fromRoot from '../reducers/event-reducers';
 import * as SearchActions from '../actions/event-search-actions';
 import {DecoratedEvent} from '../models/decorated-event';
-import {Subscription} from 'rxjs/Subscription';
+import {Observable} from 'rxjs/Observable';
 import Event = gapi.client.calendar.Event;
 
 @Component({
@@ -13,33 +13,26 @@ import Event = gapi.client.calendar.Event;
   styleUrls: ['./event-detail.component.scss'],
   templateUrl: './event-detail.component.html',
 })
-export class EventDetailComponent implements OnInit, OnDestroy {
-  decoratedEvent: DecoratedEvent;
-  private subscription: Subscription;
+export class EventDetailComponent {
+  decoratedEvent$: Observable<DecoratedEvent>;
+
 
   constructor(private route: ActivatedRoute, private store: Store<fromRoot.State>) {
 
+    this.decoratedEvent$ = this.store.select(fromRoot.selectedEvent).map((event: Event) => (event) ? new DecoratedEvent(event) : null);
     this.route.params.subscribe(
       params => {
         this.store.dispatch(new DetailActions.Select(params['id']));
       }
     );
-
   }
 
-  ngOnInit() {
-    this.subscription = this.store.select(fromRoot.selectedEvent).subscribe((event: Event) => {
-      if (event) {
-        this.decoratedEvent = new DecoratedEvent(event)
+  onClickLocation(): void {
+    let subscription = this.decoratedEvent$.subscribe((decoratedEvent: DecoratedEvent) => {
+      if (decoratedEvent) {
+        this.store.dispatch(new SearchActions.Search({'query': decoratedEvent.location}));
       }
+      subscription.unsubscribe();
     });
-  }
-
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
-  }
-
-  onClickLocation() {
-    this.store.dispatch(new SearchActions.Search({'query': this.decoratedEvent.location}));
   }
 }

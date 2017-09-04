@@ -1,4 +1,4 @@
-<ng-container *ngIf="decoratedEvent">
+<ng-container *ngIf="(decoratedEvent$ | async); let decoratedEvent">
     <div class="container arena-event-detail">
         <div class="row">
             <div class="col-sm-7">
