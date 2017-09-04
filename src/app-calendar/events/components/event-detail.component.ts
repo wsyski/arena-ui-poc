@@ -16,7 +16,6 @@ import Event = gapi.client.calendar.Event;
 export class EventDetailComponent {
   decoratedEvent$: Observable<DecoratedEvent>;
 
-
   constructor(private route: ActivatedRoute, private store: Store<fromRoot.State>) {
 
     this.decoratedEvent$ = this.store.select(fromRoot.selectedEvent).map((event: Event) => (event) ? new DecoratedEvent(event) : null);
