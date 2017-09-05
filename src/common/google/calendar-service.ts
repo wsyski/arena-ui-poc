@@ -2,7 +2,7 @@ import {Observable} from 'rxjs/Rx';
 import {Injectable, NgZone} from '@angular/core';
 import {GoogleApiClientService} from './client-service';
 import {Observer} from 'rxjs/Observer';
-import {AppCalendarConfig} from '../../app-calendar/app-calendar-config';
+import {AppCalendarEventListConfig} from '../../app-calendar-event-list/app-calendar-event-list-config';
 import Event = gapi.client.calendar.Event;
 import Events = gapi.client.calendar.Events;
 import EventsListParameters = gapi.client.calendar.EventsListParameters;
@@ -11,7 +11,7 @@ import EventsGetParameters = gapi.client.calendar.EventsGetParameters;
 @Injectable()
 export class GoogleApiCalendarService {
 
-  constructor(private googleApiClientService: GoogleApiClientService, private ngZone: NgZone, private appCalendarConfig: AppCalendarConfig) {
+  constructor(private googleApiClientService: GoogleApiClientService, private ngZone: NgZone, private appCalendarConfig: AppCalendarEventListConfig) {
   }
 
   private eventsList(eventsListParameters: EventsListParameters): Observable<Events> {

@@ -1,8 +1,9 @@
 <%@ page import="com.axiell.arena_ui_poc.AbstractPortlet" %>
+<%@ page import="com.axiell.arena_ui_poc.ArenaUIPortletKeys" %>
 <%@ include file="./init.jsp" %>
 
-<app-<%= portletDisplay.getPortletName().replaceAll("[_\\.]", "-") %> id="<portlet:namespace/>">Loading...
-</app-<%= portletDisplay.getPortletName().replaceAll("[_\\.]","-") %>>
+<app-<%= ArenaUIPortletKeys.toTagName(portletDisplay.getPortletName()) %> id="<portlet:namespace/>">Loading...
+</app-<%= ArenaUIPortletKeys.toTagName(portletDisplay.getPortletName()) %>>
 
 <script type="text/javascript">
   AxBootstrap.scriptLoader.loadAll(["<%=request.getContextPath()%>/shim.js", "<%=request.getContextPath()%>/zone.js",
@@ -13,7 +14,7 @@
     var portletName = '<%= portletDisplay.getPortletName()%>';
     var portletNamespace = '<portlet:namespace/>';
     var runMain = function() {
-      window["AxMain_" + bundleSymbolicName.replace(/[-\.]/g, '_')].run(portletName, portletNamespace, configurationUrl, translationsUrl);
+      window["AxMain_" + AxBootstrap.scriptLoader.toSymbolName(bundleSymbolicName)].run(portletName, portletNamespace, configurationUrl, translationsUrl);
     };
 
     switch (document.readyState) {

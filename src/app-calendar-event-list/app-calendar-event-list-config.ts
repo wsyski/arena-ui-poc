@@ -7,7 +7,7 @@ const KEY_CALENDAR_ID = 'calendarId';
 const KEY_PAGE_SIZE = 'pageSize';
 
 @Injectable()
-export class AppCalendarConfig implements AppConfig {
+export class AppCalendarEventListConfig implements AppConfig {
 
   constructor(private appConfigService: AppConfigService) {
   }

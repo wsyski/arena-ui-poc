@@ -1,6 +1,6 @@
 import {ApplicationRef, ComponentFactoryResolver, NgModule} from '@angular/core';
 import {RouterModule} from '@angular/router';
-import {rootRouterConfig} from './app-calendar.routing';
+import {rootRouterConfig} from './app-calendar-event-list.routing';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {BrowserModule} from '@angular/platform-browser';
 
@@ -21,19 +21,19 @@ import {reducers} from './events/reducers/event-reducers';
 import {EffectsModule} from '@ngrx/effects';
 import {EventDetailEffects} from './events/effects/event-detail-effects';
 import {EventSearchEffects} from './events/effects/event-search-effects';
-import {AppCalendarComponent} from './app-calendar.component';
+import {AppCalendarEventListComponent} from './app-calendar-event-list.component';
 import {EventSearchComponent} from './events/components/event-search.component';
 import {EventSearchQueryComponent} from './events/components/event-search-query.component';
 import {EventSearchResultCountComponent} from './events/components/event-search-result-count.component';
 import {EventSearchResultComponent} from './events/components/event-search-result.component';
 import {EventSearchMoreComponent} from './events/components/event-search-more.component';
-import {AppCalendarConfig} from './app-calendar-config';
+import {AppCalendarEventListConfig} from './app-calendar-event-list-config';
 import {APP_CONFIG, AppConfigGuard} from '../common/app-config.guard';
 
-export const getAppCalendarModule = (portletName: string, portletNamespace: string, portletConfigurationUrl: string, translationsUrl: string) => {
+export const getAppCalendarEventListModule = (portletName: string, portletNamespace: string, portletConfigurationUrl: string, translationsUrl: string) => {
   @NgModule({
     declarations: [
-      AppCalendarComponent,
+      AppCalendarEventListComponent,
       EventSearchComponent,
       EventSearchQueryComponent,
       EventDetailComponent,
@@ -61,26 +61,26 @@ export const getAppCalendarModule = (portletName: string, portletNamespace: stri
       EffectsModule.forRoot([EventDetailEffects, EventSearchEffects]),
     ],
     providers: [
-      AppCalendarConfig,
-      {provide: APP_CONFIG, useExisting: AppCalendarConfig},
+      AppCalendarEventListConfig,
+      {provide: APP_CONFIG, useExisting: AppCalendarEventListConfig},
       {provide: DISCOVERY_DOCS, useValue: ['https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest']},
       GoogleApiClientService,
       GoogleApiCalendarService,
       AppConfigGuard,
       AlwaysDenyGuard
     ],
-    entryComponents: [AppCalendarComponent]
+    entryComponents: [AppCalendarEventListComponent]
   })
-  class AppCalendarModule {
+  class AppCalendarEventListModule {
     constructor(private resolver: ComponentFactoryResolver, private appConfigService: AppConfigService) {
     }
 
     ngDoBootstrap(appRef: ApplicationRef) {
-      const factory = this.resolver.resolveComponentFactory(AppCalendarComponent);
+      const factory = this.resolver.resolveComponentFactory(AppCalendarEventListComponent);
       (<any>factory).factory.selector = this.appConfigService.getAppSelector();
       appRef.bootstrap(factory);
     }
   }
 
-  return AppCalendarModule;
+  return AppCalendarEventListModule;
 };

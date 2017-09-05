@@ -112,10 +112,24 @@
       }
     }
 
+    function toTagName(value) {
+      if (value) {
+        return  value.replace(/[_\.]/g, '-');
+      }
+    }
+
+    function toSymbolName(value) {
+      if (value) {
+        return  value.replace(/[-\.]/g, '_');
+      }
+    }
+
     // ScriptLoader API
     return {
       load: load,
-      loadAll: loadAll
+      loadAll: loadAll,
+      toTagName: toTagName,
+      toSymbolName: toSymbolName
     };
   }
 

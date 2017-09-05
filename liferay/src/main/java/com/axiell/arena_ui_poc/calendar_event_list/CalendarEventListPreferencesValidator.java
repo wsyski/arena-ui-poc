@@ -1,4 +1,4 @@
-package com.axiell.arena_ui_poc.calendar;
+package com.axiell.arena_ui_poc.calendar_event_list;
 
 import com.axiell.arena_ui_poc.ArenaUIPortletKeys;
 import org.osgi.service.component.annotations.Component;
@@ -12,10 +12,10 @@ import java.util.List;
 @Component(
 	immediate = true,
 	property = {
-		"javax.portlet.name=" + ArenaUIPortletKeys.CALENDAR_PORTLET_NAME
+		"javax.portlet.name=" + ArenaUIPortletKeys.CALENDAR_EVENT_LIST_PORTLET_NAME
 	}
 )
-public class CalendarPreferencesValidator implements PreferencesValidator {
+public class CalendarEventListPreferencesValidator implements PreferencesValidator {
 
 	@Override
 	public void validate(PortletPreferences portletPreferences) throws ValidatorException {

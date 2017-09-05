@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+
+<portlet-preferences>
+	<preference>
+		<name>googleApiKey</name>
+		<value>AIzaSyDPWrheGl3eMGZpssQ51F9HNkbpTHTWYqM</value>
+	</preference>
+	<preference>
+		<name>calendarId</name>
+		<value>axiell.arenaevents@gmail.com</value>
+	</preference>
+	<preference>
+		<name>pageSize</name>
+		<value>10</value>
+	</preference>
+</portlet-preferences>

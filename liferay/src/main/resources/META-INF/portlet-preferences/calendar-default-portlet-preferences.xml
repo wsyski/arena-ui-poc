@@ -1,8 +1,0 @@
-<?xml version="1.0"?>
-
-<portlet-preferences>
-	<preference>
-		<name>pageSize</name>
-		<value>10</value>
-	</preference>
-</portlet-preferences>

@@ -1,6 +1,6 @@
 import {Observable} from 'rxjs/Rx';
 import {Inject, Injectable, InjectionToken, NgZone} from '@angular/core';
-import {AppCalendarConfig} from '../../app-calendar/app-calendar-config';
+import {AppCalendarEventListConfig} from '../../app-calendar-event-list/app-calendar-event-list-config';
 
 export const DISCOVERY_DOCS = new InjectionToken('discoveryDocs');
 
@@ -8,13 +8,13 @@ export const DISCOVERY_DOCS = new InjectionToken('discoveryDocs');
 export class GoogleApiClientService {
   private discoveryDocs: string[];
 
-  constructor(@Inject(DISCOVERY_DOCS) discoveryDocs: string[], private appCalendarConfig: AppCalendarConfig, private ngZone: NgZone) {
+  constructor(@Inject(DISCOVERY_DOCS) discoveryDocs: string[], private appCalendarEventListConfig: AppCalendarEventListConfig, private ngZone: NgZone) {
     this.discoveryDocs = discoveryDocs;
   }
 
   initClient(): Observable<any> {
     return Observable.create((observer: any) => {
-      let googleApiKey = this.appCalendarConfig.getGoogleApiKey();
+      let googleApiKey = this.appCalendarEventListConfig.getGoogleApiKey();
       let discoveryDocs = this.discoveryDocs;
       this.ngZone.runOutsideAngular(() => {
 

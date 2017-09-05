@@ -1,14 +1,14 @@
-package com.axiell.arena_ui_poc.calendar;
+package com.axiell.arena_ui_poc.calendar_event_list;
 
 import aQute.bnd.annotation.metatype.Meta;
 import com.axiell.arena_ui_poc.ArenaUIPortletKeys;
 
 @Meta.OCD(
-        id = ArenaUIPortletKeys.CALENDAR_PORTLET_CONFIGURATION,
+        id = ArenaUIPortletKeys.CALENDAR_EVENT_LIST_PORTLET_CONFIGURATION,
         localization = "content/Language",
-        name = ArenaUIPortletKeys.CALENDAR_PORTLET_CONFIGURATION + "-configuration-name"
+        name = ArenaUIPortletKeys.CALENDAR_EVENT_LIST_PORTLET_CONFIGURATION + "-configuration-name"
 )
-public interface CalendarPortletConfiguration {
+public interface CalendarEventListPortletConfiguration {
     public static final String KEY_GOOGLE_API_KEY = "googleApiKey";
     public static final String KEY_CALENDAR_ID = "calendarId";
     public static final String KEY_PAGE_SIZE = "pageSize";

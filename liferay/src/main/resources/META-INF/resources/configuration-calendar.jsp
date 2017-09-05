@@ -1,21 +1,21 @@
-<%@ page import="com.axiell.arena_ui_poc.calendar.CalendarPortletConfiguration" %>
+<%@ page import="com.axiell.arena_ui_poc.calendar_event_list.CalendarEventListPortletConfiguration" %>
 
 <%@ include file="./init.jsp" %>
 
 <%@page import="com.liferay.portal.kernel.util.Constants" %>
 
 <%
-    CalendarPortletConfiguration portletConfiguration =
-            (CalendarPortletConfiguration) renderRequest.getAttribute(CalendarPortletConfiguration.class.getName());
+    com.axiell.arena_ui_poc.calendar_event_list.CalendarEventListPortletConfiguration portletConfiguration =
+            (com.axiell.arena_ui_poc.calendar_event_list.CalendarEventListPortletConfiguration) renderRequest.getAttribute(com.axiell.arena_ui_poc.calendar_event_list.CalendarEventListPortletConfiguration.class.getName());
 
     String googleApiKey = StringPool.BLANK;
     String calendarId = StringPool.BLANK;
     String pageSize = StringPool.BLANK;
 
     if (Validator.isNotNull(portletConfiguration)) {
-        googleApiKey = portletPreferences.getValue(CalendarPortletConfiguration.KEY_GOOGLE_API_KEY, portletConfiguration.googleApiKey());
-        calendarId = portletPreferences.getValue(CalendarPortletConfiguration.KEY_CALENDAR_ID, portletConfiguration.calendarId());
-        pageSize = portletPreferences.getValue(CalendarPortletConfiguration.KEY_PAGE_SIZE, String.valueOf(portletConfiguration.pageSize()));
+        googleApiKey = portletPreferences.getValue(com.axiell.arena_ui_poc.calendar_event_list.CalendarEventListPortletConfiguration.KEY_GOOGLE_API_KEY, portletConfiguration.googleApiKey());
+        calendarId = portletPreferences.getValue(com.axiell.arena_ui_poc.calendar_event_list.CalendarEventListPortletConfiguration.KEY_CALENDAR_ID, portletConfiguration.calendarId());
+        pageSize = portletPreferences.getValue(com.axiell.arena_ui_poc.calendar_event_list.CalendarEventListPortletConfiguration.KEY_PAGE_SIZE, String.valueOf(portletConfiguration.pageSize()));
     }
 %>
 
@@ -37,15 +37,15 @@
     />
 
     <aui:fieldset>
-        <aui:input name="<%=CalendarPortletConfiguration.KEY_GOOGLE_API_KEY%>" label="Google Key API"
+        <aui:input name="<%=com.axiell.arena_ui_poc.calendar_event_list.CalendarEventListPortletConfiguration.KEY_GOOGLE_API_KEY%>" label="Google Key API"
                    value="<%= googleApiKey %>" required="true"></aui:input>
 
 
-        <aui:input name="<%=CalendarPortletConfiguration.KEY_CALENDAR_ID%>" label="Calendar Id"
+        <aui:input name="<%=com.axiell.arena_ui_poc.calendar_event_list.CalendarEventListPortletConfiguration.KEY_CALENDAR_ID%>" label="Calendar Id"
                    value="<%= calendarId %>" required="true"></aui:input>
 
 
-        <aui:select name="<%=CalendarPortletConfiguration.KEY_PAGE_SIZE%>" label="Page Size" value="<%= pageSize %>"
+        <aui:select name="<%=com.axiell.arena_ui_poc.calendar_event_list.CalendarEventListPortletConfiguration.KEY_PAGE_SIZE%>" label="Page Size" value="<%= pageSize %>"
                     required="true">
             <aui:option value="5">10</aui:option>
             <aui:option value="10">10</aui:option>
