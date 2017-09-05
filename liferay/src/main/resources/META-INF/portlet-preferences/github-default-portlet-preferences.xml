@@ -1,11 +1,15 @@
 <?xml version="1.0"?>
-
 <portlet-preferences>
 	<preference>
-		<name>isbns</name>
-		<value>0066620996</value>
-		<value>0131412752</value>
-		<value>0201633612</value>
-		<value>0310241448</value>
+		<name>fontColor</name>
+		<value>red</value>
+	</preference>
+	<preference>
+		<name>fontFamily</name>
+		<value>Verdana</value>
+	</preference>
+	<preference>
+		<name>fontSize</name>
+		<value>20</value>
 	</preference>
 </portlet-preferences>

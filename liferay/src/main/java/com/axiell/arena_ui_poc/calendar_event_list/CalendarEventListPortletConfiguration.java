@@ -6,7 +6,7 @@ import com.axiell.arena_ui_poc.ArenaUIPortletKeys;
 @Meta.OCD(
         id = ArenaUIPortletKeys.CALENDAR_EVENT_LIST_PORTLET_CONFIGURATION,
         localization = "content/Language",
-        name = ArenaUIPortletKeys.CALENDAR_EVENT_LIST_PORTLET_CONFIGURATION + "-configuration-name"
+        name = ArenaUIPortletKeys.CALENDAR_EVENT_LIST_PORTLET_CONFIGURATION
 )
 public interface CalendarEventListPortletConfiguration {
     public static final String KEY_GOOGLE_API_KEY = "googleApiKey";

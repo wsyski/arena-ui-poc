@@ -23,7 +23,7 @@ import java.util.Map;
                 "javax.portlet.init-param.template-path=/",
                 "javax.portlet.name=" + ArenaUIPortletKeys.GITHUB_PORTLET_NAME,
                 "javax.portlet.resource-bundle=" + ArenaUIPortletKeys.RESOURCE_BUNDLE,
-                "javax.portlet.preferences=classpath" + ArenaUIPortletKeys.GITHUB_DEFAULT_PORTLET_CONFIGURATION,
+                "javax.portlet.preferences=" + ArenaUIPortletKeys.GITHUB_DEFAULT_PORTLET_CONFIGURATION,
                 "javax.portlet.security-role-ref=power-user,user"
         },
         service = Portlet.class

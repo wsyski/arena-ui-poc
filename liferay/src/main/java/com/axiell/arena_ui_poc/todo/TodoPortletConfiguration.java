@@ -6,7 +6,7 @@ import com.axiell.arena_ui_poc.ArenaUIPortletKeys;
 @Meta.OCD(
         id = ArenaUIPortletKeys.TODO_PORTLET_CONFIGURATION,
         localization = "content/Language",
-        name = ArenaUIPortletKeys.TODO_PORTLET_CONFIGURATION+"-configuration-name"
+        name = ArenaUIPortletKeys.TODO_PORTLET_CONFIGURATION
 )
 public interface TodoPortletConfiguration {
 
