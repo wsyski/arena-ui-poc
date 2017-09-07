@@ -46,12 +46,13 @@
         <!-- end row -->
         <div class="row">
             <div class="col-sm-12">
-                <h4>
-                    Share with your friends
-                </h4>
-                <i class="icon-email">EMAIL</i>
-                <i class="icon-facebook">FB</i>
-                <i class="icon-twitter">TW</i>
+                <share-container
+                        direction="horizontal"
+                        addedText="your creation"
+                        [expandable]="true"
+                        [textEnabled]="true"
+                        [platforms]="['twitter','facebook','mail']">
+                </share-container>
             </div>
         </div>
     </div>

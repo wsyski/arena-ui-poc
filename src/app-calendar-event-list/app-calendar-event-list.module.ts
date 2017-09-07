@@ -3,6 +3,7 @@ import {RouterModule} from '@angular/router';
 import {rootRouterConfig} from './app-calendar-event-list.routing';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {BrowserModule} from '@angular/platform-browser';
+import {ShareModule} from 'ng2share/share.module';
 
 import {AppConfigService} from '../core/app-config-service';
 import {NotFoundComponent} from '../common/not-found.component';
@@ -47,6 +48,7 @@ export const getAppCalendarEventListModule = (portletName: string, portletNamesp
       BrowserModule,
       FormsModule,
       ReactiveFormsModule,
+      ShareModule,
       SharedModule,
       CoreModule.forRoot(portletName, portletNamespace, portletConfigurationUrl),
       TranslateModule.forRoot({

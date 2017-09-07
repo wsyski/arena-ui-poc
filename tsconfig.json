@@ -19,7 +19,8 @@
   },
   "compileOnSave": true,
   "exclude": [
-    "node_modules/*",
+    "node_modules/**/*.ts",
+    "**/*.spec.ts",
     "**/*-aot.ts"
   ],
   "files": [
