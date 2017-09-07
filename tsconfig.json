@@ -23,6 +23,9 @@
     "**/*.spec.ts",
     "**/*-aot.ts"
   ],
+  "awesomeTypeScriptLoaderOptions": {
+    "useWebpackText": true
+  },
   "files": [
     "src/main.ts"
   ]
