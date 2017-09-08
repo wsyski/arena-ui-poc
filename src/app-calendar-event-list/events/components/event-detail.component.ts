@@ -7,6 +7,7 @@ import * as SearchActions from '../actions/event-search-actions';
 import {DecoratedEvent} from '../models/decorated-event';
 import {Observable} from 'rxjs/Observable';
 import Event = gapi.client.calendar.Event;
+import { Meta } from '@angular/platform-browser';
 
 @Component({
   selector: 'event-detail',
@@ -16,7 +17,7 @@ import Event = gapi.client.calendar.Event;
 export class EventDetailComponent {
   decoratedEvent$: Observable<DecoratedEvent>;
 
-  constructor(private route: ActivatedRoute, private store: Store<fromRoot.State>) {
+  constructor(private route: ActivatedRoute, private store: Store<fromRoot.State>, private meta: Meta) {
 
     this.decoratedEvent$ = this.store.select(fromRoot.selectedEvent).map((event: Event) => (event) ? new DecoratedEvent(event) : null);
     this.route.params.subscribe(
@@ -24,6 +25,8 @@ export class EventDetailComponent {
         this.store.dispatch(new DetailActions.Select(params['id']));
       }
     );
+    this.meta.updateTag({ property: 'og:title', content: 'Og Title' });
+    this.meta.updateTag({ property: 'og:description', content: 'Og Description' });
   }
 
   onClickLocation(): void {

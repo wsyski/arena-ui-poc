@@ -3,8 +3,6 @@ import {RouterModule} from '@angular/router';
 import {rootRouterConfig} from './app-calendar-event-list.routing';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {BrowserModule} from '@angular/platform-browser';
-import {ShareModule} from 'ng2share/share.module';
-
 import {AppConfigService} from '../core/app-config-service';
 import {NotFoundComponent} from '../common/not-found.component';
 import {AlwaysDenyGuard} from '../common/always-deny.guard';
@@ -30,6 +28,8 @@ import {EventSearchResultComponent} from './events/components/event-search-resul
 import {EventSearchMoreComponent} from './events/components/event-search-more.component';
 import {AppCalendarEventListConfig} from './app-calendar-event-list-config';
 import {APP_CONFIG, AppConfigGuard} from '../common/app-config.guard';
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {SocialShareModule} from "../common/social-share/social-share.module";
 
 export const getAppCalendarEventListModule = (portletName: string, portletNamespace: string, portletConfigurationUrl: string, translationsUrl: string) => {
   @NgModule({
@@ -46,9 +46,10 @@ export const getAppCalendarEventListModule = (portletName: string, portletNamesp
     ],
     imports: [
       BrowserModule,
+      BrowserAnimationsModule,
       FormsModule,
       ReactiveFormsModule,
-      ShareModule,
+      SocialShareModule,
       SharedModule,
       CoreModule.forRoot(portletName, portletNamespace, portletConfigurationUrl),
       TranslateModule.forRoot({
