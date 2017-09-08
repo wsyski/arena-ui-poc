@@ -4,7 +4,6 @@ import {FormsModule} from '@angular/forms';
 import {ShareContainerComponent} from "./share-container.component";
 import {ShareButtonComponent} from "./share-button.component";
 
-
 @NgModule({
   imports: [CommonModule, FormsModule],
   declarations: [ShareContainerComponent, ShareButtonComponent],
