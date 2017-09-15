@@ -28,8 +28,10 @@ import {EventSearchResultComponent} from './events/components/event-search-resul
 import {EventSearchMoreComponent} from './events/components/event-search-more.component';
 import {AppCalendarEventListConfig} from './app-calendar-event-list-config';
 import {APP_CONFIG, AppConfigGuard} from '../common/app-config.guard';
-import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import {SocialShareModule} from "../common/social-share/social-share.module";
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {SocialShareModule} from '../common/social-share/social-share.module';
+import {EventRegisterModalComponent} from './events/components/event-register-modal.component';
+import {BsModalService, ComponentLoaderFactory, ModalModule, PositioningService} from 'ngx-bootstrap';
 
 export const getAppCalendarEventListModule = (portletName: string, portletNamespace: string, portletConfigurationUrl: string, translationsUrl: string) => {
   @NgModule({
@@ -42,12 +44,14 @@ export const getAppCalendarEventListModule = (portletName: string, portletNamesp
       EventSearchMoreComponent,
       EventSearchResultComponent,
       EventSearchResultCountComponent,
+      EventRegisterModalComponent,
       NotFoundComponent
     ],
     imports: [
       BrowserModule,
       BrowserAnimationsModule,
       FormsModule,
+      ModalModule.forRoot(),
       ReactiveFormsModule,
       SocialShareModule,
       SharedModule,
@@ -72,7 +76,7 @@ export const getAppCalendarEventListModule = (portletName: string, portletNamesp
       AppConfigGuard,
       AlwaysDenyGuard
     ],
-    entryComponents: [AppCalendarEventListComponent]
+    entryComponents: [AppCalendarEventListComponent, EventRegisterModalComponent]
   })
   class AppCalendarEventListModule {
     constructor(private resolver: ComponentFactoryResolver, private appConfigService: AppConfigService) {
