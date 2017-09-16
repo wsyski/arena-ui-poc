@@ -8,7 +8,7 @@ import {DecoratedEvent} from '../models/decorated-event';
 import {Observable} from 'rxjs/Observable';
 import {Title} from '@angular/platform-browser';
 import {BsModalRef, BsModalService} from 'ngx-bootstrap';
-import {EventRegisterModalComponent} from './event-register-modal.component';
+import {RegisterAttendeeModalComponent} from './register-attendee-modal.component';
 import {Subscription} from 'rxjs/Subscription';
 import Event = gapi.client.calendar.Event;
 
@@ -59,7 +59,7 @@ export class EventDetailComponent implements OnInit {
       'Do something else',
       '...'
     ];
-    this.bsModalRef = this.modalService.show(EventRegisterModalComponent);
+    this.bsModalRef = this.modalService.show(RegisterAttendeeModalComponent);
     this.bsModalRef.content.title = 'Modal with component';
     this.bsModalRef.content.list = list;
     setTimeout(() => {

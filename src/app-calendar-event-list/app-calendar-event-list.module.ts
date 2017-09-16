@@ -30,7 +30,7 @@ import {AppCalendarEventListConfig} from './app-calendar-event-list-config';
 import {APP_CONFIG, AppConfigGuard} from '../common/app-config.guard';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {SocialShareModule} from '../common/social-share/social-share.module';
-import {EventRegisterModalComponent} from './events/components/event-register-modal.component';
+import {RegisterAttendeeModalComponent} from './events/components/register-attendee-modal.component';
 import {ModalModule} from 'ngx-bootstrap';
 
 export const getAppCalendarEventListModule = (portletName: string, portletNamespace: string, portletConfigurationUrl: string, translationsUrl: string) => {
@@ -44,7 +44,7 @@ export const getAppCalendarEventListModule = (portletName: string, portletNamesp
       EventSearchMoreComponent,
       EventSearchResultComponent,
       EventSearchResultCountComponent,
-      EventRegisterModalComponent,
+      RegisterAttendeeModalComponent,
       NotFoundComponent
     ],
     imports: [
@@ -76,7 +76,7 @@ export const getAppCalendarEventListModule = (portletName: string, portletNamesp
       AppConfigGuard,
       AlwaysDenyGuard
     ],
-    entryComponents: [AppCalendarEventListComponent, EventRegisterModalComponent]
+    entryComponents: [AppCalendarEventListComponent, RegisterAttendeeModalComponent]
   })
   class AppCalendarEventListModule {
     constructor(private resolver: ComponentFactoryResolver, private appConfigService: AppConfigService) {
