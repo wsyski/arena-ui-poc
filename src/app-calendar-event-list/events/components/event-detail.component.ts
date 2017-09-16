@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import * as DetailActions from '../actions/event-detail-actions';
 import {Store} from '@ngrx/store';
@@ -6,43 +6,54 @@ import * as fromRoot from '../reducers/event-reducers';
 import * as SearchActions from '../actions/event-search-actions';
 import {DecoratedEvent} from '../models/decorated-event';
 import {Observable} from 'rxjs/Observable';
-import {Meta} from '@angular/platform-browser';
-import Event = gapi.client.calendar.Event;
+import {Title} from '@angular/platform-browser';
 import {BsModalRef, BsModalService} from 'ngx-bootstrap';
 import {EventRegisterModalComponent} from './event-register-modal.component';
+import {Subscription} from 'rxjs/Subscription';
+import Event = gapi.client.calendar.Event;
 
 @Component({
   selector: 'event-detail',
   styleUrls: ['./event-detail.component.scss'],
   templateUrl: './event-detail.component.html',
 })
-export class EventDetailComponent {
+export class EventDetailComponent implements OnInit {
+
   bsModalRef: BsModalRef;
   decoratedEvent$: Observable<DecoratedEvent>;
+  location: string;
 
-  constructor(private route: ActivatedRoute, private store: Store<fromRoot.State>, private meta: Meta, private modalService: BsModalService) {
+  constructor(private route: ActivatedRoute, private store: Store<fromRoot.State>, private title: Title, private modalService: BsModalService) {
 
-    this.decoratedEvent$ = this.store.select(fromRoot.selectedEvent).map((event: Event) => (event) ? new DecoratedEvent(event) : null);
-    this.route.params.subscribe(
+    this.decoratedEvent$ = this.store.select(fromRoot.selectedEvent).map((event: Event) => (event) ? new DecoratedEvent(event) : null).share();
+    let subscription: Subscription = this.route.params.subscribe(
       params => {
         this.store.dispatch(new DetailActions.Select(params['id']));
-      }
-    );
-    this.meta.updateTag({property: 'og:title', content: 'Og Title'});
-    this.meta.updateTag({property: 'og:description', content: 'Og Description'});
+      },
+      error => console.error(error),
+      () => subscription.unsubscribe());
+  }
+
+  ngOnInit(): void {
+    let subscription: Subscription = this.decoratedEvent$.subscribe((decoratedEvent: DecoratedEvent) => {
+        if (decoratedEvent) {
+          this.title.setTitle(decoratedEvent.summary);
+          this.location = decoratedEvent.location;
+        }
+      },
+      error => console.error(error),
+      () => subscription.unsubscribe());
   }
 
   onClickLocation(): void {
-    let subscription = this.decoratedEvent$.subscribe((decoratedEvent: DecoratedEvent) => {
-      if (decoratedEvent) {
-        this.store.dispatch(new SearchActions.Search({'query': decoratedEvent.location}));
-      }
-      subscription.unsubscribe();
-    });
+    if (this.location) {
+      this.store.dispatch(new SearchActions.Search({'query': this.location}));
+    }
+
   }
 
   openEventRegisterModalComponent(): void {
-     let list = [
+    let list = [
       'Open a modal with component',
       'Pass your data',
       'Do something else',

@@ -31,7 +31,7 @@ import {APP_CONFIG, AppConfigGuard} from '../common/app-config.guard';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {SocialShareModule} from '../common/social-share/social-share.module';
 import {EventRegisterModalComponent} from './events/components/event-register-modal.component';
-import {BsModalService, ComponentLoaderFactory, ModalModule, PositioningService} from 'ngx-bootstrap';
+import {ModalModule} from 'ngx-bootstrap';
 
 export const getAppCalendarEventListModule = (portletName: string, portletNamespace: string, portletConfigurationUrl: string, translationsUrl: string) => {
   @NgModule({
