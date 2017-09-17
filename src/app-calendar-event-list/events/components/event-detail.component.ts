@@ -21,7 +21,7 @@ export class EventDetailComponent implements OnInit {
 
   bsModalRef: BsModalRef;
   decoratedEvent$: Observable<DecoratedEvent>;
-  location: string;
+  decoratedEvent: DecoratedEvent;
 
   constructor(private route: ActivatedRoute, private store: Store<fromRoot.State>, private title: Title, private modalService: BsModalService) {
 
@@ -38,7 +38,7 @@ export class EventDetailComponent implements OnInit {
     let subscription: Subscription = this.decoratedEvent$.subscribe((decoratedEvent: DecoratedEvent) => {
         if (decoratedEvent) {
           this.title.setTitle(decoratedEvent.summary);
-          this.location = decoratedEvent.location;
+          this.decoratedEvent = decoratedEvent;
         }
       },
       error => console.error(error),
@@ -46,24 +46,16 @@ export class EventDetailComponent implements OnInit {
   }
 
   onClickLocation(): void {
-    if (this.location) {
-      this.store.dispatch(new SearchActions.Search({'query': this.location}));
+    if (this.decoratedEvent && this.decoratedEvent.location) {
+      this.store.dispatch(new SearchActions.Search({'query': this.decoratedEvent.location}));
     }
 
   }
 
   openEventRegisterModalComponent(): void {
-    let list = [
-      'Open a modal with component',
-      'Pass your data',
-      'Do something else',
-      '...'
-    ];
-    this.bsModalRef = this.modalService.show(RegisterAttendeeModalComponent);
-    this.bsModalRef.content.title = 'Modal with component';
-    this.bsModalRef.content.list = list;
-    setTimeout(() => {
-      list.push('PROFIT!!!');
-    }, 2000);
+    if (this.decoratedEvent) {
+      this.bsModalRef = this.modalService.show(RegisterAttendeeModalComponent);
+      this.bsModalRef.content.decoratedEvent = this.decoratedEvent;
+    }
   }
 }
