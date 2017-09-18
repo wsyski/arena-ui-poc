@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {BsModalRef} from 'ngx-bootstrap';
 import {DecoratedEvent} from '../models/decorated-event';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {Attendee} from '../models/attendee';
 
 @Component({
   selector: 'register-attendee-modal',
@@ -27,7 +26,6 @@ export class RegisterAttendeeModalComponent implements OnInit {
 
   onSubmit() {
     console.log(this.attendee);
-    this.bsModalRef.hide();
   }
 
   reset() {
