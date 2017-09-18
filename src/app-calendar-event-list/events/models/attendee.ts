@@ -1,5 +1,5 @@
-export class Attendee {
-  email = '';
-  firstName = '';
-  familyName = '';
+export interface Attendee {
+  firstName: string;
+  familyName: string;
+  email: string;
 }

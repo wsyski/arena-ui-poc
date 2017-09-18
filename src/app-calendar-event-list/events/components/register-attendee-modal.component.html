@@ -1,36 +1,42 @@
 <div class="modal-header">
-    <h4 class="modal-title pull-left">Register to: {{decoratedEvent?.summary}}</h4>
+    <h4 class="modal-title pull-left">Register to event: {{decoratedEvent?.summary}}</h4>
     <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
         <span aria-hidden="true">&times;</span>
     </button>
 </div>
-<form [formGroup]="attendeeForm" (ngSubmit)="onSubmit()" novalidate>
-    <div style="margin-bottom: 1em">
-        <label class="center-block">First Name:
-            <input class="form-control" formControlName="firstName">
-        </label>
+<form [formGroup]="attendee" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+        <label for="firstName">First Name:</label>
+        <input id="firstName" class="form-control" formControlName="firstName">
+        <div *ngIf="attendee.get('firstName').invalid && (attendee.get('firstName').dirty || attendee.get('firstName').touched)"
+             class="alert alert-danger">
+            <div *ngIf="attendee.get('firstName').hasError('required')">First Name is mandatory</div>
+        </div>
     </div>
 
     <div class="form-group">
-        <label class="center-block">Family Name:
-            <input class="form-control" formControlName="familyName">
-        </label>
+        <label for="familyName">Family Name:</label>
+        <input id="familyName" class="form-control" formControlName="familyName">
+        <div *ngIf="attendee.get('familyName').invalid && (attendee.get('familyName').dirty || attendee.get('familyName').touched)"
+             class="alert alert-danger">
+            <div *ngIf="attendee.get('familyName').hasError('required')">Family Name is mandatory</div>
+        </div>
     </div>
 
     <div class="form-group">
-        <label class="center-block">Email:
-            <input class="form-control" formControlName="email">
-        </label>
+        <label for="email">Email:</label>
+        <input id="email" class="form-control" formControlName="email">
+        <div *ngIf="attendee.get('email').invalid && (attendee.get('email').dirty || attendee.get('email').touched)"
+             class="alert alert-danger">
+            <div *ngIf="attendee.get('email').hasError('required')">First Name is mandatory</div>
+            <div *ngIf="attendee.get('email').hasError('email')">Invalid email</div>
+        </div>
     </div>
 
-    <div style="margin-bottom: 1em">
-        <button type="submit" [disabled]="attendeeForm.pristine" class="btn btn-success">Save</button> &nbsp;
-        <button type="reset" (click)="revert()" [disabled]="attendeeForm.pristine" class="btn btn-danger">Revert</button>
+    <div class="modal-footer">
+        <button type="submit" [disabled]="attendee.invalid" class="btn btn-default">Save</button>
+        <button type="reset" (click)="reset()" [disabled]="attendee.pristine" class="btn btn-danger">Reset</button>
     </div>
 </form>
 
-<p>attendeeForm value: {{ attendeeForm.value | json}}</p>
 
-<div class="modal-footer">
-    <button type="button" class="btn btn-default" (click)="bsModalRef.hide()">Close</button>
-</div>

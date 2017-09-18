@@ -1,59 +1,40 @@
-import {Component, OnChanges} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {BsModalRef} from 'ngx-bootstrap';
 import {DecoratedEvent} from '../models/decorated-event';
-import {FormBuilder, FormGroup} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {Attendee} from '../models/attendee';
 
 @Component({
   selector: 'register-attendee-modal',
-  styleUrls: ['./register-attendee-modal.component.scss'],
+  styleUrls: ['./register-attendee-modal.component.scss', '../../../common/forms/forms.css'],
   templateUrl: './register-attendee-modal.component.html',
 })
 
-export class RegisterAttendeeModalComponent implements OnChanges {
-  attendee: Attendee = new Attendee();
+export class RegisterAttendeeModalComponent implements OnInit {
+  attendee: FormGroup;
   decoratedEvent: DecoratedEvent;
-  attendeeForm: FormGroup;
 
   constructor(private fb: FormBuilder, public bsModalRef: BsModalRef) {
-    this.createForm();
   }
 
-  private createForm() {
-    this.attendeeForm = this.fb.group({
+  ngOnInit(): void {
+    this.attendee = this.fb.group({
+      firstName: new FormControl('', [Validators.required]),
+      familyName: new FormControl('', [Validators.required]),
+      email: new FormControl('', [Validators.required, Validators.email])
+    });
+  }
+
+  onSubmit() {
+    console.log(this.attendee);
+    this.bsModalRef.hide();
+  }
+
+  reset() {
+    this.attendee.reset({
       firstName: '',
       familyName: '',
       email: ''
     });
-  }
-
-  ngOnChanges() {
-    this.attendeeForm.reset({
-      firstName: this.attendee.firstName,
-      familyName: this.attendee.familyName,
-      email: this.attendee.email
-    });
-  }
-
-
-  onSubmit() {
-    this.attendee = this.prepareSaveAttendee();
-    console.log(this.attendee);
-    this.ngOnChanges();
-  }
-
-  private prepareSaveAttendee(): Attendee {
-    const formModel = this.attendeeForm.value;
-
-    const saveAttendee: Attendee = {
-      email: formModel.email as string,
-      firstName: formModel.firstName as string,
-      familyName: formModel.familyName as string,
-    };
-    return saveAttendee;
-  }
-
-  revert() {
-    this.ngOnChanges();
   }
 }
