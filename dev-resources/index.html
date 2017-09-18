@@ -5,10 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta property="og:type" content="article" />
     <title>Arena UI POC</title>
-    <link rel="stylesheet" href="aui/aui.css">
-    <base href="/">
-    <script src="ax-bootstrap.js"></script>
+    <link rel="stylesheet" href="lexicon/css/site/site-atlas-font-awesome.css" />
+    <link rel="stylesheet" href="lexicon/css/site/site-main.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.js"></script>
+    <script src="lexicon/js/collapsible-search.js"></script>
+    <script src="lexicon/js/side-navigation.js"></script>
     <script src="https://apis.google.com/js/api.js"></script>
+    <script src="ax-bootstrap.js"></script>
     <script type="text/javascript">
       var bundleSymbolicName = "com.axiell.arena-ui-poc";
       var translationsUrl = location.origin + "/json/translations.json";
@@ -41,7 +46,7 @@
       case 'interactive':
       case 'complete':
       default:
-          runMain();
+        runMain();
     }
 
     function domReadyHandler() {
