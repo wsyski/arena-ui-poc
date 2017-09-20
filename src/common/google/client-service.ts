@@ -3,6 +3,7 @@ import {Inject, Injectable, InjectionToken, NgZone} from '@angular/core';
 import {AppCalendarEventListConfig} from '../../app-calendar-event-list/app-calendar-event-list-config';
 
 export const DISCOVERY_DOCS = new InjectionToken('discoveryDocs');
+const SCOPE = 'https://www.googleapis.com/auth/calendar';
 
 @Injectable()
 export class GoogleApiClientService {
@@ -21,7 +22,8 @@ export class GoogleApiClientService {
         function gapiClientInit(callback: () => void): void {
           gapi.client.init({
             'apiKey': googleApiKey,
-            'discoveryDocs': discoveryDocs
+            'discoveryDocs': discoveryDocs,
+            'scope': SCOPE
           }).then(() => {
             callback();
           }, (reason) => {

@@ -4,8 +4,9 @@
         <span aria-hidden="true">&times;</span>
     </button>
 </div>
-<form [formGroup]="attendee" (ngSubmit)="onSubmit()" #formDir="ngForm">
-    <div [hidden]="formDir.submitted">
+
+<div class="modal-body" [hidden]="formDir.submitted">
+    <form [formGroup]="attendee" (ngSubmit)="onSubmit()" #formDir="ngForm">
         <div class="form-group">
             <label for="firstName">First Name:</label>
             <input id="firstName" class="form-control" formControlName="firstName">
@@ -33,18 +34,17 @@
                 <div *ngIf="attendee.get('email').hasError('email')">Invalid email</div>
             </div>
         </div>
-
-        <div class="modal-footer">
+        <div class="form-row">
             <button type="submit" [disabled]="attendee.invalid" class="btn btn-default">Save</button>
-            <button type="reset" (click)="reset()" [disabled]="attendee.pristine" class="btn btn-danger">Reset</button>
+            <button type="reset" (click)="reset()" [disabled]="attendee.pristine" class="btn btn-warning">Reset</button>
         </div>
-    </div>
-</form>
-<div [hidden]="!formDir.submitted">
+    </form>
+</div>
+<div class="modal-body" [hidden]="!formDir.submitted">
     <div class="alert alert-info">You have been successfully registred to event: {{decoratedEvent?.summary}}</div>
-    <div class="modal-footer">
-        <button type="button" class="btn btn-default" (click)="bsModalRef.hide()">Close</button>
-    </div>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn" (click)="bsModalRef.hide()">Close</button>
 </div>
 
 
