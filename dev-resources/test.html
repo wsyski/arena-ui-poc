@@ -27,7 +27,7 @@
             }).then(function () {
               listUpcomingEvents();
             }, function (reason) {
-              console.error('gapi.client can not be initialized: ' + reason.result.error.message);
+              console.error('gapi.client can not be initialized error: ' + reason.error + ' details: ' + reason.details);
             });
           },
           'onerror': function () {
@@ -90,6 +90,8 @@
         };
         gapi.client.calendar.events.patch(eventsPatchParameters).then(function (response) {
           console.log(response);
+        }, function (reason) {
+          console.error('gapi.client.calendar.events.patch error status: ' + reason.status);
         });
       }
     </script>
