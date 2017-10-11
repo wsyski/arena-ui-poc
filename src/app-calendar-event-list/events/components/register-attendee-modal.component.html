@@ -41,8 +41,9 @@
     </form>
 </div>
 <div class="modal-body" [hidden]="!formDir.submitted">
+    <span>{{detailError?.message}}</span>
     <ng-container *ngIf="(detailError$ | async); let detailError">
-       <div class="alert alert-error">Failed to register to event: {{decoratedEvent?.summary}}. Error: {{detailError.message}} </div>
+       <div class="alert alert-error">Failed to register to event: {{detailError.message}} </div>
     </ng-container>
 </div>
 <div class="modal-footer">

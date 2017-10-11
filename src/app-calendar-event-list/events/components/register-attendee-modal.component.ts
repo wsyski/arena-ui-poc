@@ -7,6 +7,7 @@ import {Store} from '@ngrx/store';
 import * as fromRoot from '../reducers/event-reducers';
 import {Attendee} from '../../../common/google/attendee';
 import {Observable} from 'rxjs/Observable';
+import {Subscription} from "rxjs/Subscription";
 
 @Component({
   selector: 'register-attendee-modal',
@@ -18,17 +19,22 @@ export class RegisterAttendeeModalComponent implements OnInit {
   attendee: FormGroup;
   decoratedEvent: DecoratedEvent;
   detailError$: Observable<Error>;
+  detailError: Error;
 
   constructor(private fb: FormBuilder, private store: Store<fromRoot.State>, public bsModalRef: BsModalRef) {
-    this.detailError$ = this.store.select(fromRoot.detailError).share();
   }
 
   ngOnInit(): void {
+    this.detailError$ = this.store.select(fromRoot.detailError).share();
     this.attendee = this.fb.group({
       firstName: new FormControl('Wojciech', [Validators.required]),
       familyName: new FormControl('Syski', [Validators.required]),
       email: new FormControl('wsyski@gmail.com', [Validators.required, Validators.email])
     });
+    let subscription: Subscription = this.detailError$.subscribe(
+      error => console.log(error == null ? null : error.message),
+      error => console.error(error),
+      () => subscription.unsubscribe());
   }
 
   onSubmit() {

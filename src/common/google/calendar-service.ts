@@ -21,13 +21,14 @@ export class GoogleApiCalendarService {
       let subscription = this.googleApiClientService.initClient().subscribe(() => {
         this.ngZone.runOutsideAngular(() => {
           gapi.client.calendar.events.list(eventsListParameters).then((response) => {
-              this.ngZone.run(() => {
-                observer.next(response.result);
-                observer.complete();
-                subscription.unsubscribe();
-              });
-            }
-          );
+            this.ngZone.run(() => {
+              observer.next(response.result);
+              observer.complete();
+              subscription.unsubscribe();
+            });
+          }, function (reason) {
+            observer.error(new Error(reason.result.error.message));
+          });
         });
       });
     });
@@ -38,13 +39,14 @@ export class GoogleApiCalendarService {
       let subscription = this.googleApiClientService.initClient().subscribe(() => {
         this.ngZone.runOutsideAngular(() => {
           gapi.client.calendar.events.get(eventsGetParameters).then((response) => {
-              this.ngZone.run(() => {
-                observer.next(response.result);
-                observer.complete();
-                subscription.unsubscribe();
-              });
-            }
-          );
+            this.ngZone.run(() => {
+              observer.next(response.result);
+              observer.complete();
+              subscription.unsubscribe();
+            });
+          }, function (reason) {
+            observer.error(new Error(reason.result.error.message));
+          });
         });
       });
     });
@@ -55,14 +57,14 @@ export class GoogleApiCalendarService {
       let subscription = this.googleApiClientService.initClient().subscribe(() => {
         this.ngZone.runOutsideAngular(() => {
           gapi.client.calendar.events.update(eventsUpdateParameters).then((response) => {
-              this.ngZone.run(() => {
-                observer.next(response.result);
-                observer.complete();
-                subscription.unsubscribe();
-              });
-            }, function (reason) {
-              throw new Error(reason.result.error.message);
+            this.ngZone.run(() => {
+              observer.next(response.result);
+              observer.complete();
+              subscription.unsubscribe();
             });
+          }, function (reason) {
+            observer.error(new Error(reason.result.error.message));
+          });
         });
       });
     });
