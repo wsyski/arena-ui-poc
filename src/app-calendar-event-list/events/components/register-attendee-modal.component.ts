@@ -6,6 +6,7 @@ import * as DetailActions from '../actions/event-detail-actions';
 import {Store} from '@ngrx/store';
 import * as fromRoot from '../reducers/event-reducers';
 import {Attendee} from '../../../common/google/attendee';
+import {Observable} from 'rxjs/Observable';
 
 @Component({
   selector: 'register-attendee-modal',
@@ -16,8 +17,10 @@ import {Attendee} from '../../../common/google/attendee';
 export class RegisterAttendeeModalComponent implements OnInit {
   attendee: FormGroup;
   decoratedEvent: DecoratedEvent;
+  detailError$: Observable<Error>;
 
   constructor(private fb: FormBuilder, private store: Store<fromRoot.State>, public bsModalRef: BsModalRef) {
+    this.detailError$ = this.store.select(fromRoot.detailError).share();
   }
 
   ngOnInit(): void {

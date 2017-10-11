@@ -6,9 +6,10 @@ import {Observable} from 'rxjs/Observable';
 import {Action, Store} from '@ngrx/store';
 import * as DetailActions from '../actions/event-detail-actions';
 import {GoogleApiCalendarService} from '../../../common/google/calendar-service';
-import Event = gapi.client.calendar.Event;
 import * as fromRoot from '../reducers/event-reducers';
 import {Attendee} from '../../../common/google/attendee';
+import {of} from 'rxjs/observable/of';
+import Event = gapi.client.calendar.Event;
 
 @Injectable()
 export class EventDetailEffects {
@@ -22,8 +23,21 @@ export class EventDetailEffects {
   addAttendee$: Observable<Action> = this.actions$.ofType(DetailActions.ADD_ATTENDEE)
     .withLatestFrom(this.store$.select(state => [state.detail.selectedEvent]))
     .map((value: [DetailActions.AddAttendee, [Event]]) => [value[0].payload, value[1][0]])
-    .switchMap((request: [Attendee, Event]) => this.googleApiCalendarService.addAttendee(request[0], request[1]))
-    .map(event => new DetailActions.SelectSuccess(event));
+    .switchMap((request: [Attendee, Event]) => {
+      const disposableStream$ = of(request);
+      return disposableStream$
+        .switchMap(args => this.googleApiCalendarService.addAttendee(args[0], args[1]))
+        .catch(error => {
+          return of(error);
+        })
+    })
+    .map(result => {
+      if (result instanceof Error) {
+        return new DetailActions.AddAttendeeError(result);
+      } else {
+        return new DetailActions.SelectSuccess(result);
+      }
+    });
 
   constructor(private actions$: Actions, private store$: Store<fromRoot.State>, private googleApiCalendarService: GoogleApiCalendarService) {
   }

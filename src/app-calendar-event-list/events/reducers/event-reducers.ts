@@ -34,3 +34,8 @@ export function selectedEventId(state: State) {
 export function selectedEvent(state: State) {
   return state.detail.selectedEvent;
 }
+
+export function detailError(state: State) {
+  return state.detail.error;
+}
+

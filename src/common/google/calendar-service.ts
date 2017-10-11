@@ -60,8 +60,9 @@ export class GoogleApiCalendarService {
                 observer.complete();
                 subscription.unsubscribe();
               });
-            }
-          );
+            }, function (reason) {
+              throw new Error(reason.result.error.message);
+            });
         });
       });
     });
