@@ -41,10 +41,12 @@
     </form>
 </div>
 <div class="modal-body" [hidden]="!formDir.submitted">
-    <span>{{detailError?.message}}</span>
-    <ng-container *ngIf="(detailError$ | async); let detailError">
+    <ng-container *ngIf="(detailError$ | async) as detailError else registerSuccess">
        <div class="alert alert-error">Failed to register to event: {{detailError.message}} </div>
     </ng-container>
+    <ng-template #registerSuccess>
+        <div class="alert alert-info">Successfully registered to the event</div>
+    </ng-template>
 </div>
 <div class="modal-footer">
     <button type="button" class="btn" (click)="bsModalRef.hide()">Close</button>

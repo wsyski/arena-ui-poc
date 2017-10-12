@@ -26,8 +26,10 @@ export class GoogleApiCalendarService {
               observer.complete();
               subscription.unsubscribe();
             });
-          }, function (reason) {
-            observer.error(new Error(reason.result.error.message));
+          }, (reason) => {
+            this.ngZone.run(() => {
+              observer.error(new Error(reason.result.error.message));
+            });
           });
         });
       });
@@ -44,8 +46,10 @@ export class GoogleApiCalendarService {
               observer.complete();
               subscription.unsubscribe();
             });
-          }, function (reason) {
-            observer.error(new Error(reason.result.error.message));
+          }, (reason) => {
+            this.ngZone.run(() => {
+              observer.error(new Error(reason.result.error.message));
+            });
           });
         });
       });
@@ -62,8 +66,10 @@ export class GoogleApiCalendarService {
               observer.complete();
               subscription.unsubscribe();
             });
-          }, function (reason) {
-            observer.error(new Error(reason.result.error.message));
+          }, (reason) => {
+            this.ngZone.run(() => {
+              observer.error(new Error(reason.result.error.message));
+            });
           });
         });
       });

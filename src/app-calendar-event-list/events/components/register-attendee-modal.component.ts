@@ -17,9 +17,7 @@ import {Subscription} from "rxjs/Subscription";
 
 export class RegisterAttendeeModalComponent implements OnInit {
   attendee: FormGroup;
-  decoratedEvent: DecoratedEvent;
   detailError$: Observable<Error>;
-  detailError: Error;
 
   constructor(private fb: FormBuilder, private store: Store<fromRoot.State>, public bsModalRef: BsModalRef) {
   }
@@ -31,10 +29,6 @@ export class RegisterAttendeeModalComponent implements OnInit {
       familyName: new FormControl('Syski', [Validators.required]),
       email: new FormControl('wsyski@gmail.com', [Validators.required, Validators.email])
     });
-    let subscription: Subscription = this.detailError$.subscribe(
-      error => console.log(error == null ? null : error.message),
-      error => console.error(error),
-      () => subscription.unsubscribe());
   }
 
   onSubmit() {
