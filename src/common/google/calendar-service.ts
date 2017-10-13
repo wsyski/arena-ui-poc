@@ -9,6 +9,8 @@ import Events = gapi.client.calendar.Events;
 import EventsListParameters = gapi.client.calendar.EventsListParameters;
 import EventsGetParameters = gapi.client.calendar.EventsGetParameters;
 import EventsUpdateParameters = gapi.client.calendar.EventsUpdateParameters;
+import HttpRequestFulfilled = gapi.client.HttpRequestFulfilled;
+import HttpRequestRejected = gapi.client.HttpRequestRejected;
 
 @Injectable()
 export class GoogleApiCalendarService {
@@ -20,13 +22,13 @@ export class GoogleApiCalendarService {
     return Observable.create((observer: Observer<Events>) => {
       let subscription = this.googleApiClientService.initClient().subscribe(() => {
         this.ngZone.runOutsideAngular(() => {
-          gapi.client.calendar.events.list(eventsListParameters).then((response) => {
+          gapi.client.calendar.events.list(eventsListParameters).then((response: HttpRequestFulfilled<Events>) => {
             this.ngZone.run(() => {
               observer.next(response.result);
               observer.complete();
               subscription.unsubscribe();
             });
-          }, (reason) => {
+          }, (reason: HttpRequestRejected) => {
             this.ngZone.run(() => {
               observer.error(new Error(reason.result.error.message));
             });
@@ -40,13 +42,13 @@ export class GoogleApiCalendarService {
     return Observable.create((observer: Observer<Event>) => {
       let subscription = this.googleApiClientService.initClient().subscribe(() => {
         this.ngZone.runOutsideAngular(() => {
-          gapi.client.calendar.events.get(eventsGetParameters).then((response) => {
+          gapi.client.calendar.events.get(eventsGetParameters).then((response: HttpRequestFulfilled<Event>) => {
             this.ngZone.run(() => {
               observer.next(response.result);
               observer.complete();
               subscription.unsubscribe();
             });
-          }, (reason) => {
+          }, (reason: HttpRequestRejected) => {
             this.ngZone.run(() => {
               observer.error(new Error(reason.result.error.message));
             });
@@ -60,13 +62,13 @@ export class GoogleApiCalendarService {
     return Observable.create((observer: Observer<Event>) => {
       let subscription = this.googleApiClientService.initClient().subscribe(() => {
         this.ngZone.runOutsideAngular(() => {
-          gapi.client.calendar.events.update(eventsUpdateParameters).then((response) => {
+          gapi.client.calendar.events.update(eventsUpdateParameters).then((response: HttpRequestFulfilled<Event>) => {
             this.ngZone.run(() => {
               observer.next(response.result);
               observer.complete();
               subscription.unsubscribe();
             });
-          }, (reason) => {
+          }, (reason: HttpRequestRejected) => {
             this.ngZone.run(() => {
               observer.error(new Error(reason.result.error.message));
             });
